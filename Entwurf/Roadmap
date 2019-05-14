@@ -1,0 +1,36 @@
+Roadmap Programmierpraktikum Projekt 1:
+
+
+12.05.2019: Fertigstellung des Entwurfs, Datenbankschema und Roadmap und GIT Erstellung
+
+13.05.2019: Besprechung des Entwurfs mit zuständigem Tutor
+→ Endgültiger Entwurf
+
+13.05.2019: Aufteilung der GUI innerhalb der Gruppe, und Designabstimmung
+
+Ab 13.05.2019: GUI Erstellung mit HTML und CSS
+
+→ GUI Fertigstellung
+
+Ab 22.05.2019: Datenbankanbindung (MySQL) mit Java/PHP(noch unklar)
+
+22.05.2019: Tabellen werden aufgeteilt zwischen Gruppenmitgliedern und es werden die Funktionen zum Schreiben(INSERT) und Lesen(SELECT) geschrieben
+
+→ Datenbankanbindung fertiggestellt
+
+→ Grundgerüst für einzelne Funktionen/Module gesetzt
+
+Ab 27.05.2019:
+
+→ Rechteverteilung und Zugriffskontrolle ermöglichen (Für Mieter, Vermieter etc.)
+
+Ab 28.05.2019: Programmierung der Funktionen/Module
+
+→ Module werden unter Projektmitgliedern aufgeteilt
+
+10.06.2019: Gruppensitzung um Präsentation und Software nochmal komplett zu besprechen (Ausweichtermin wird vereinbart)
+
+Module/Funktionen können nun unabhängig voneinander erstellt werden, sodass jedes Mitglied der Gruppe weniger auf andere angewiesen ist, und seine zugeteilten Funktionen programmieren kann
+
+
+14.06.2019: Präsentation der Software
