@@ -1,1 +1,4 @@
-##empty##
+Aufgeteilt in header, index(Main) und footer -> Index required header zu Beginn und em ende Footer
+signup ist dann anstelle index, wenn aufgerufen
+includes ordner für php dateien die nicht auf der benutzeroberfläche zu sehen sind, wie z.B. databasehandler, der für die connection zu datenbank zuständig ist
+CSS und JS ordner sind von bootstrap 
