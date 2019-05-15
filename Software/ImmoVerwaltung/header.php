@@ -8,23 +8,27 @@
 	<body>
 	
 		<header>
-			<nav>
-				<ul>
-					<li><a href="#">ImmoVerwaltung</a></li>
-					<li><a href="#">Übersicht</a></li>
-					<li><a href="#">Mein Konto</a></li>
-					<li><a href="#">Einstellungen</a></li>
+			<nav class="navbar navbar-expand-lg navbar-dark bg-dark nav-fill">
+			  <a class="navbar-brand" href="#">ImmoVerwaltung</a>
+ 			   <div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item"><a href="#" class="nav-link">Übersicht</a></li>
+					<li class="nav-item"><a href="#" class="nav-link">Mein Konto</a></li>
+					<li class="nav-item"><a href="#" class="nav-link">Einstellungen</a></li>
+					<li>
+						<form class="form-inline" action="includes/login.inc.php" method="post">
+						<input class="form-control mr-sm-2" type="text" name="userid" placeholder="ID...">
+						<input class="form-control mr-sm-2" type="password" name="pwd" placeholder="Passwort...">
+						<button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="login-submit">Login</button>
+						</form>
+					</li>
+					<li class="nav-item"><a class="nav-link" href="signup.php">Signup</a></li>
+					<li class="nav-item">
+						<form class="form-inline" action="includes/logout.inc.php" method="post">
+							<button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="logout-submit">Logout</button>
+						</form>
+					</li>
 				</ul>
-				<div>
-					<form action="includes/login.inc.php" method="post">
-						<input type="text" name="userid" placeholder="ID...">
-						<input type="password" name="pwd" placeholder="Passwort...">
-						<button type="submit" name="login-submit">Login</button>
-					</form>
-					<a href="signup.php">Signup</a>
-					<form action="includes/logout.inc.php" method="post">
-						<button type="submit" name="logout-submit">Logout</button>
-					</form>
 				</div>
 			</nav>
 		</header>
