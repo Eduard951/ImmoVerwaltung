@@ -9,7 +9,7 @@
 	
 		<header>
 			<nav class="navbar navbar-expand-lg navbar-dark bg-dark nav-fill">
-			  <a class="navbar-brand" href="#">ImmoVerwaltung</a>
+			  <a class="navbar-brand" href="header.php">ImmoVerwaltung</a>
  			   <div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav mr-auto">
 					<li class="nav-item"><a href="#" class="nav-link">Übersicht</a></li>
@@ -22,7 +22,7 @@
 						<button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="login-submit">Login</button>
 						</form>
 					</li>
-					<li class="nav-item"><a class="nav-link" href="signup.php">Signup</a></li>
+					<li class="nav-item"><a class="nav-link" href="signup.php">Registrieren</a></li>
 					<li class="nav-item">
 						<form class="form-inline" action="includes/logout.inc.php" method="post">
 							<button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="logout-submit">Logout</button>
