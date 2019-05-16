@@ -20,7 +20,11 @@
 					<li class="nav-item"><a href="#" class="nav-link">Einstellungen</a></li>
 					<?php 
 					if(isset($_SESSION['sessionname'])){
-					    echo '					<li class="nav-item">
+					    echo '
+                            <li class="nav-item"><button class="btn btn-primary" type="button">
+                                Postfach <span class="badge"></span>
+                            </button></li>
+					<li class="nav-item">
 						<form class="form-inline" action="includes/logout.inc.php" method="post">
 							<button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="logout-submit">Logout</button>
 						</form>
