@@ -4,7 +4,7 @@
 <html>
 	<head>
 	<meta charset="utf-8">
-	<meta name=viewport content="width-device-width, initial-scale=1">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title></title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	</head>
@@ -21,8 +21,8 @@
 					<?php 
 					if(isset($_SESSION['sessionname'])){
 					    echo '
-                            <li class="nav-item"><button class="btn btn-primary" type="button">
-                                Postfach <span class="badge"></span>
+                            <li class="nav-item"><a class="btn btn-primary" href="postfach.php" role="button">Postfach</a>
+                                <span class="badge"></span>
                             </button></li>
 					<li class="nav-item">
 						<form class="form-inline" action="includes/logout.inc.php" method="post">

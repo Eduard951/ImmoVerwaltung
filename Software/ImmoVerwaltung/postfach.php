@@ -4,7 +4,7 @@
 
 
 	<main>
-	<p>Hier is das Postfach</p>
+	<p>Hier ist das Postfach</p>
 	</main>
 	
 <?php 

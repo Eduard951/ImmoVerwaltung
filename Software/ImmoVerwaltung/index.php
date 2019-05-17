@@ -6,9 +6,9 @@
 	<main>
 	<?php 
 	if(isset($_SESSION['sessionname'])){
-	    echo '<p>You are logged in!</p>';
+	    echo '<br><a href="gruesse.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="gruesse_submit">Gruesse</button>';
 	}else {
-	   echo' <p>You are logged out!</p>';
+	   echo' <p></p>';
 	}
 	?>	
 	</main>
