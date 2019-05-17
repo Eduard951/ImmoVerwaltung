@@ -29,7 +29,7 @@ if(isset($_POST['login-submit'])){
                     session_start();
                     $_SESSION['sessionname'] = $row['BenutzerName'];
                     
-                    header("Location: ../index.php?login=success");
+                    header("Location: ../baumstruktur.php?login=success");
                     exit();
                     
                 }else{
