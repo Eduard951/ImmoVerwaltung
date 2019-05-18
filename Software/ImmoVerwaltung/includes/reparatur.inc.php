@@ -45,6 +45,8 @@ if(isset($_POST['reparatur_submit'])){
                 $pdf->Ln(5);
                 $pdf->Cell(10,10,"Stadt Empfaenger",0,0);
                 
+                $pdf->Ln(5);
+                $pdf->Cell(10,10,"________________________________________________________________________________",0,0);
                 
                 $pdf->Ln(25);
                 $pdf->SetFont("Arial","B",16);
@@ -52,7 +54,7 @@ if(isset($_POST['reparatur_submit'])){
                 $pdf->Ln(12);
                 $pdf->SetFont("Arial","",14);
                 $pdf->Cell(10,10,$text,0,0);
-               // $pdf->Image();
+                $pdf->Image($file);
                 $pdf->Output();
                 
             }else{

@@ -32,7 +32,7 @@
 					}else {
 					    echo'					<li>
 						<form class="form-inline" action="includes/login.inc.php" method="post">
-						<input class="form-control mr-sm-2" type="text" name="userid" placeholder="ID...">
+						<input class="form-control mr-sm-2" type="text" name="mail" placeholder="E-Mail...">
 						<input class="form-control mr-sm-2" type="password" name="pwd" placeholder="Passwort...">
 						<button class="btn btn-outline-success my-2 my-sm-0" type="submit" name="login-submit">Login</button>
 						</form>
