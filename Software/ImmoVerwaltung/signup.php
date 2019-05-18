@@ -3,7 +3,6 @@
     //include ('server.php');
 ?>
 
-
 	<main>
 		<h2>Registrierung<span class="badge badge-secondary"></span></h2>
 		<form action="includes/signup.inc.php" method="post">
