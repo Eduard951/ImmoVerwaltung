@@ -63,7 +63,7 @@ if(isset($_POST['signup_submit'])){
                 }else{
                     
                    // $hashed_pwd= $password_hash($password,PASSWORD_DEFAULT);
-                    mysqli_stmt_bind_param($stmt, "sssS", $name,$nachname,$email,$password);
+                    mysqli_stmt_bind_param($stmt, "ssss", $name,$nachname,$email,$password);
                     mysqli_stmt_execute($stmt);
                     
                     header("Location: ../index.php?signup=success");
