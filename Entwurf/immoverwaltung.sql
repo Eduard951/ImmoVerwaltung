@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Erstellungszeit: 17. Mai 2019 um 18:03
+-- Erstellungszeit: 18. Mai 2019 um 12:34
 -- Server-Version: 10.1.39-MariaDB
 -- PHP-Version: 7.3.5
 
@@ -55,7 +55,8 @@ CREATE TABLE `benutzer` (
 --
 
 INSERT INTO `benutzer` (`BenutzerID`, `Vorname`, `Name`, `Email`, `Passwort`) VALUES
-(9, '', 'test', 'test@test.com', 'test');
+(9, '', 'test', 'test@test.com', 'test'),
+(10, '', '1234', '1234@1234.de', '1234');
 
 -- --------------------------------------------------------
 
@@ -391,32 +392,6 @@ CREATE TABLE `zimmer` (
   `Bezeichnung` varchar(64) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- --------------------------------------------------------
-
---
--- Tabellenstruktur für Tabelle `zuordnungobjekt`
---
-
-CREATE TABLE `zuordnungobjekt` (
-  `ObjektZuordnungID` int(11) NOT NULL,
-  `BenutzerID` int(11) DEFAULT NULL,
-  `ObjektID` int(11) DEFAULT NULL,
-  `Rolle` varchar(32) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
--- --------------------------------------------------------
-
---
--- Tabellenstruktur für Tabelle `zuordnungverw`
---
-
-CREATE TABLE `zuordnungverw` (
-  `VerwZuordnungID` int(11) NOT NULL,
-  `VerwID` int(11) DEFAULT NULL,
-  `BenutzerID` int(11) DEFAULT NULL,
-  `Rolle` varchar(32) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
 --
 -- Indizes der exportierten Tabellen
 --
@@ -639,22 +614,6 @@ ALTER TABLE `zimmer`
   ADD KEY `Verw` (`VerwID`);
 
 --
--- Indizes für die Tabelle `zuordnungobjekt`
---
-ALTER TABLE `zuordnungobjekt`
-  ADD PRIMARY KEY (`ObjektZuordnungID`),
-  ADD KEY `Benutzer` (`BenutzerID`) USING BTREE,
-  ADD KEY `Objekt` (`ObjektID`) USING BTREE;
-
---
--- Indizes für die Tabelle `zuordnungverw`
---
-ALTER TABLE `zuordnungverw`
-  ADD PRIMARY KEY (`VerwZuordnungID`),
-  ADD KEY `Benutzer` (`BenutzerID`),
-  ADD KEY `Verw` (`VerwID`);
-
---
 -- AUTO_INCREMENT für exportierte Tabellen
 --
 
@@ -668,7 +627,7 @@ ALTER TABLE `adresse`
 -- AUTO_INCREMENT für Tabelle `benutzer`
 --
 ALTER TABLE `benutzer`
-  MODIFY `BenutzerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `BenutzerID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT für Tabelle `beschwerde`
@@ -795,18 +754,6 @@ ALTER TABLE `zahlungskonto`
 --
 ALTER TABLE `zimmer`
   MODIFY `ZimmerID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT für Tabelle `zuordnungobjekt`
---
-ALTER TABLE `zuordnungobjekt`
-  MODIFY `ObjektZuordnungID` int(11) NOT NULL AUTO_INCREMENT;
-
---
--- AUTO_INCREMENT für Tabelle `zuordnungverw`
---
-ALTER TABLE `zuordnungverw`
-  MODIFY `VerwZuordnungID` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints der exportierten Tabellen
@@ -992,13 +939,6 @@ ALTER TABLE `zahlungskonto`
 ALTER TABLE `zimmer`
   ADD CONSTRAINT `FK_ZM_ObjektID` FOREIGN KEY (`ObjektID`) REFERENCES `hausobjekt` (`ObjektID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_ZM_VerwID` FOREIGN KEY (`VerwID`) REFERENCES `verwaltungseinheit` (`VerwID`) ON DELETE CASCADE ON UPDATE CASCADE;
-
---
--- Constraints der Tabelle `zuordnungobjekt`
---
-ALTER TABLE `zuordnungobjekt`
-  ADD CONSTRAINT `FK_ZUOB_BenutzerID` FOREIGN KEY (`BenutzerID`) REFERENCES `benutzer` (`BenutzerID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_ZUOB_ObjektID` FOREIGN KEY (`ObjektID`) REFERENCES `hausobjekt` (`ObjektID`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
