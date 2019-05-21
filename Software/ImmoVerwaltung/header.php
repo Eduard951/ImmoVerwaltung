@@ -15,12 +15,13 @@
 			  <a class="navbar-brand" href="baumstruktur.php">ImmoVerwaltung</a>
  			   <div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav mr-auto">
-					<li class="nav-item"><a href="#" class="nav-link">Übersicht</a></li>
-					<li class="nav-item"><a href="#" class="nav-link">Mein Konto</a></li>
+					<li class="nav-item"><a href="index.php" class="nav-link">Übersicht</a></li>
 					<li class="nav-item"><a href="#" class="nav-link">Einstellungen</a></li>
+					
 					<?php 
 					if(isset($_SESSION['sessionname'])){
 					    echo '
+
                             <li class="nav-item"><a class="btn btn-primary" href="postfach.php" role="button">Postfach</a>
                                 <span class="badge"></span>
                             </button></li>

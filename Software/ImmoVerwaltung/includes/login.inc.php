@@ -27,6 +27,8 @@ if(isset($_POST['login-submit'])){
                 
                 if($pwd==$row['Passwort']){
                     session_start();
+                    
+                    //email raus und userid rein
                     $_SESSION['sessionname'] = $row['Email'];
                     
                     header("Location: ../baumstruktur.php?login=success");
