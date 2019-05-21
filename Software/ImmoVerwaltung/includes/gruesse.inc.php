@@ -10,6 +10,13 @@ if(isset($_POST['gruesse_submit'])){
     $text = $_POST['text'];
     $ende = $_POST['ende'];
     
+    
+    foreach( $_POST['empfaenger'] as $value) {
+        $pieces = explode(" ", $value);
+        $empfaenger_vorname = $pieces[0];
+        $empfaenger_nachname = $pieces[1];
+    }
+    
     //gucken, ob variablen leer sind, wenn ja dann emptyfield error
     if(empty($text) || empty($ende)){
         header("Location: ../gruesse.php?error=emptyfields");
@@ -44,9 +51,9 @@ if(isset($_POST['gruesse_submit'])){
                 
                 $pdf->Ln(10);
                 $pdf->SetFont("Arial","",12);
-                $pdf->Cell(10,10,"Nachname Empfaenger",0,0);
+                $pdf->Cell(10,10,$empfaenger_nachname,0,0);
                 $pdf->Ln(5);
-                $pdf->Cell(10,10,"Vorname Empfaenger",0,0);
+                $pdf->Cell(10,10,$empfaenger_vorname,0,0);
                 $pdf->Ln(5);
                 $pdf->Cell(10,10,"Strasse Empfaenger",0,0);
                 $pdf->Ln(5);
@@ -59,14 +66,14 @@ if(isset($_POST['gruesse_submit'])){
                 
                 $pdf->Ln(15);
                 $pdf->SetFont("Arial","B",16);
-                $pdf->Cell(10,10,"Sehr geehrte/r Frau/Herr XYZ,",0,0);
+                $pdf->Cell(10,10,"Sehr geehrte/r Frau/Herr ".$empfaenger_nachname.", ",0,0);
                 $pdf->Ln(12);
                 $pdf->SetFont("Arial","",14);
                 $pdf->MultiCell(0,10,$text, 1);
                 
                 $pdf->Ln(25);
                 $pdf->SetFont("Arial","",12);
-                $pdf->Cell(10,10,"Mit freundlichen Gruessen",0,0);
+                $pdf->Cell(10,10,"Mit freundlichen Gruessen ",0,0);
                 $pdf->Ln(10);
                 $pdf->MultiCell(0,10,$ende,0);
                 $pdf->Output();
