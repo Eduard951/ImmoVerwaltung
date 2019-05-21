@@ -7,21 +7,28 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title></title>
 	<link href="css/bootstrap.min.css" rel="stylesheet">
+	 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+	
 	</head>
 	<body>
 	
-		<header>
-			<nav class="navbar navbar-expand-lg navbar-dark bg-dark nav-fill">
+	
+			<nav class="navbar navbar-expand-md navbar-dark bg-dark ">
 			  <a class="navbar-brand" href="baumstruktur.php">ImmoVerwaltung</a>
- 			   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-				<ul class="navbar-nav mr-auto">
-					<li class="nav-item"><a href="index.php" class="nav-link">Übersicht</a></li>
+			  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+             <span class="navbar-toggler-icon"></span>
+             </button>
+             
+ 			   <div class="collapse navbar-collapse" id="collapsibleNavbar">
+				<ul class="navbar-nav ">
+					<li class="nav-item"><a href="#" class="nav-link">Übersicht</a></li>
+					<li class="nav-item"><a href="#" class="nav-link">Mein Konto</a></li>
 					<li class="nav-item"><a href="#" class="nav-link">Einstellungen</a></li>
-					
 					<?php 
-					if(isset($_SESSION['sessionmail'])){
+					if(isset($_SESSION['sessionname'])){
 					    echo '
-
                             <li class="nav-item"><a class="btn btn-primary" href="postfach.php" role="button">Postfach</a>
                                 <span class="badge"></span>
                             </button></li>
@@ -44,8 +51,7 @@
 				</ul>
 				</div>
 			</nav>
-		</header>
+		
 </body>
 </html>
-
 
