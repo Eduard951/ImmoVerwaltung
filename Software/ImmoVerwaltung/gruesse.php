@@ -6,6 +6,9 @@
 	<main>
 	<?php 
 	if(isset($_SESSION['sessionid'])){
+	    
+	    $sql = "SELECT ";
+	    
 	    echo '
 		<h2>Gruesse verschicken<span class="badge badge-secondary"></span></h2>
         <br>
@@ -21,7 +24,10 @@
             <textarea class="form-control" rows="1" type="text" name="ende"></textarea>
 			<br>
 			<button class="btn btn-success btn-lg" type="submit" name="gruesse_submit">Versenden</button>
-		</form>
+		      
+            <input type="checkbox" name="empfaenger[]"><br> 
+
+        </form>
 ';
 	}else {
 	   echo'';
