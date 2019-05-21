@@ -5,7 +5,7 @@
 
 	<main>
 	<?php 
-	if(isset($_SESSION['sessionname'])){
+	if(isset($_SESSION['sessionid'])){
 	    echo '
 		<h2>Beschwerdeeinrichtung<span class="badge badge-secondary"></span></h2>
         
