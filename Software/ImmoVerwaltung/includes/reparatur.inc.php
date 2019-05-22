@@ -41,16 +41,19 @@ if(isset($_POST['reparatur_submit'])){
             $result_empfaenger = mysqli_stmt_get_result($stmt_empfaenger);
             
             
-            if(($row=mysqli_fetch_assoc($result)) && ($row2=mysqli_fetch_assoc($result_empfaenger))){
+            if(($row=mysqli_fetch_assoc($result))){
                 
                 $vorname = $row['Vorname'];
                 $nachname = $row['Name'];
                 
-                $vorname_empfaenger = $row2['Vorname'];
-                $nachname_empfaenger = $row2['Name'];
+               // $vorname_empfaenger = $row2['Vorname'];
+               // $nachname_empfaenger = $row2['Name'];
         
         $pdf = new FPDF();
         $pdf->AddPage();
+        $pdf->SetFont("Arial","",16);
+        $pdf->Cell(10,10,"Beschwerde/Reparatur",0,0);
+        $pdf->Ln(10);
         $pdf->SetFont("Arial","",12);
         $pdf->Cell(10,10,$nachname,0,0);
         $pdf->Ln(5);
@@ -63,9 +66,9 @@ if(isset($_POST['reparatur_submit'])){
         
         $pdf->Ln(10);
         $pdf->SetFont("Arial","",12);
-        $pdf->Cell(10,10,$nachname_empfaenger,0,0);
+        $pdf->Cell(10,10,$nachname,0,0);
         $pdf->Ln(5);
-        $pdf->Cell(10,10,$vorname_empfaenger,0,0);
+        $pdf->Cell(10,10,$vorname,0,0);
         $pdf->Ln(5);
         $pdf->Cell(10,10,"Strasse Empfaenger",0,0);
         $pdf->Ln(5);
@@ -73,8 +76,15 @@ if(isset($_POST['reparatur_submit'])){
         
         $pdf->Ln(5);
         $pdf->Cell(10,10,"________________________________________________________________________________",0,0);
-        
-        
+        $pdf->ln(10);
+        $pdf->Cell(10,10,"Beschreibung: ",0,0);
+        $pdf->ln(10);
+        $pdf->MultiCell(0,10,$text,1);
+        $pdf->Ln(25);
+        $pdf->SetFont("Arial","",12);
+        $pdf->Cell(10,10,"Mit freundlichen Gruessen ",0,0);
+        $pdf->Ln(10);
+        $pdf->MultiCell(0,10,$vorname." ".$nachname,1);
         
         
         $pdf->AddPage();
