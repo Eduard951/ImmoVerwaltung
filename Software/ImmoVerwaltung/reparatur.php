@@ -9,14 +9,15 @@
 	    echo '
 		<h2>Beschwerdeeinrichtung<span class="badge badge-secondary"></span></h2>
         
-		<form action="includes/reparatur.inc.php" method="post" enctype="multipart/form-data">	
+		<form action="includes/reparatur.inc.php" method="post" enctype="multipart/form-data" target="_blank">	
             <textarea class="form-control" rows="3" type="text" name="text"></textarea>
 			<br>
             <h3>Bild hinzufuegen:</h3>
-            <input type="file" name="file">
+            <input type="file" name="image">
             <br>
             <br>
             <button class="btn btn-success btn-lg" type="submit" name="reparatur_submit">Beschwerde versenden</button>
+            
 		</form>
 ';
 	}else {
