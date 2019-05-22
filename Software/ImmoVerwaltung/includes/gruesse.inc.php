@@ -15,7 +15,7 @@ if(isset($_POST['gruesse_submit'])){
         $pieces = explode(" ", $value);
         $empfaenger_vorname = $pieces[0];
         $empfaenger_nachname = $pieces[1];
-    }
+    
     
     //gucken, ob variablen leer sind, wenn ja dann emptyfield error
     if(empty($text) || empty($ende)){
@@ -84,5 +84,6 @@ if(isset($_POST['gruesse_submit'])){
                 exit();
             }
         }
+    }
     }
 }

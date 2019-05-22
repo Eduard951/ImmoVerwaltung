@@ -10,8 +10,10 @@
 	    
 	    $sql = "SELECT benutzer.Vorname, benutzer.Name 
                 FROM benutzer 
-                JOIN mieter 
-                ON benutzer.BenutzerID = mieter.BenutzerID";
+                JOIN mietverhaeltnis
+                ON benutzer.BenutzerID = mietverhaeltnis.Mieter
+                OR benutzer.BenutzerID = mietverhaeltnis.Vermieter
+                ";
 	    
                // JOIN mieter
               //  ON benutzer.BenutzerID= mieter.BenutzerID
@@ -31,7 +33,7 @@
         <h4>"Sehr geehrte/r Frau/Herr: ..."
         <br>
         <br>
-		<form action="includes/gruesse.inc.php" method="post">
+		<form action="includes/gruesse.inc.php" method="post" target="_blank">
 			
             <textarea class="form-control" rows="3" type="text" name="text"></textarea>
 			<br>
@@ -44,11 +46,13 @@
 		  if(!empty($result)){
 		      while($row = $result->fetch_assoc()){
 		          echo '<br><input type="checkbox" name="empfaenger[]" value="'.$row['Name']," ", $row['Vorname'].'">'.$row['Name']," ", $row['Vorname'].'<br>
-                <br><button class="btn btn-success btn-lg" type="submit" name="gruesse_submit">Versenden</button>
+   
                     ';
 		      }
 		  }
             echo'
+        
+        <br><button class="btn btn-success btn-lg" type="submit" name="gruesse_submit">Versenden</button>
 
         </form>
 ';

@@ -27,7 +27,7 @@
 					<li class="nav-item"><a href="#" class="nav-link">Mein Konto</a></li>
 					<li class="nav-item"><a href="#" class="nav-link">Einstellungen</a></li>
 					<?php 
-					if(isset($_SESSION['sessionname'])){
+					if(isset($_SESSION['sessionid'])){
 					    echo '
                             <li class="nav-item"><a class="btn btn-primary" href="postfach.php" role="button">Postfach</a>
                                 <span class="badge"></span>
