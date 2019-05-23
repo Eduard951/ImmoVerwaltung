@@ -25,7 +25,7 @@
 	        while($row = $result_ort_plz->fetch_assoc()){
 	            echo '
 	            <ul class="orte">
-	            <li>'.$row['PLZ']," ", $row['Ort'].'</li>
+	            <li><a href="index.php">'.$row['PLZ']," ", $row['Ort'].'</li>
 	            </ul>
                 ';
 	        }

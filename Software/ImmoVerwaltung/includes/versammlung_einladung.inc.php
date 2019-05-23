@@ -11,7 +11,8 @@ if(isset($_POST['versammlung_einladung_submit'])){
     $uhrzeit = $_POST['uhrzeit'];
     $ort= $_POST['Ort'];
     $text = $_POST['text'];
-    
+    $tagesordnung= $_POST['tagesordnung'];
+    $punkte = explode(",", $tagesordnung);
     
     //gucken, ob variablen leer sind, wenn ja dann emptyfield error
     if(!empty($datum)&& !empty($uhrzeit)&& !empty($ort) && !empty($text)){
@@ -58,6 +59,17 @@ if(isset($_POST['versammlung_einladung_submit'])){
                 $pdf->Cell(10, 10, "Ort: ".$ort);
                 $pdf->Ln(20);
                 $pdf->MultiCell(0, 10,$text,1);
+                $pdf->Ln(20);
+                $pdf->SetFont("Arial","B",12);
+                $pdf->Cell(0, 10,"Tagesordnung:");
+                $pdf->Ln(5);
+                $pdf->SetFont("Arial","",12);
+                for($i=0; $i<count($punkte);$i++){
+                $j=$i+1;
+                $pdf->Ln(5);
+                $pdf->Cell(0, 10,"TOP ".$j." : ".$punkte[$i]);
+                }
+                
                 $pdf->Ln(20);
                 $pdf->Cell(10, 10, "Mit freundlichen Gruessen");
                 $pdf->Ln(5);
