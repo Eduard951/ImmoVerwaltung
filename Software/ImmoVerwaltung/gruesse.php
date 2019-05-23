@@ -55,6 +55,7 @@
         <br><button class="btn btn-success btn-lg" type="submit" name="gruesse_submit">Versenden</button>
 
         </form>
+        <br><a href="index.php"><button class="btn btn-primary btn-lg">Zurueck</button>
 ';
 	}else {
 	   echo'';

@@ -19,6 +19,7 @@
             <button class="btn btn-success btn-lg" type="submit" name="reparatur_submit">Beschwerde versenden</button>
             
 		</form>
+        <br><a href="index.php"><button class="btn btn-primary btn-lg">Zurueck</button>
 ';
 	}else {
 	   echo'';
