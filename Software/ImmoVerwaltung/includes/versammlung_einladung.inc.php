@@ -97,13 +97,13 @@ if(isset($_POST['versammlung_einladung_submit'])){
                 
                 
     }else{
-        header("Location: ../versammlung_einladung.php?error=emptyfields");
+        header("Location: ../versammlung_einladung.php?error=sqlerror");
         exit();
     }
         }
                 
 }else{
-header("Location: ../versammlung_einladung.php?error=error");
+header("Location: ../versammlung_einladung.php?error=emeptyfieldserror");
 exit();
 }
 

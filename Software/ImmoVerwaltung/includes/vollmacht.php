@@ -29,6 +29,7 @@ if(!mysqli_stmt_prepare($stmt, $sql)){
         $pdf->Cell(10,10,"Telefon: 000",0,0);
         $pdf->Ln(5);
         $pdf->Cell(10,10,"Strasse Verwaltung",0,0);
+        $pdf->Image("../images/icon.png",150,5,40,40);
         $pdf->Ln(5);
         $pdf->Cell(10,10,"Stadt Verwaltung",0,0);
         $pdf->Ln(10);
