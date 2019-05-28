@@ -12,7 +12,7 @@
                 FROM benutzer 
                 JOIN mietverhaeltnis
                 ON benutzer.BenutzerID = mietverhaeltnis.Mieter
-                OR benutzer.BenutzerID = mietverhaeltnis.Vermieter
+                WHERE mietverhaeltnis.Vermieter = ?
                 ";
 	    
                // JOIN mieter
@@ -24,8 +24,17 @@
                // JOIN hausobjekt
                // ON hausobjekt.ObjektID= mietverhaeltnis.ObjektID
                // ";
+	    $stmt = mysqli_stmt_init($conn);
 	    
-	    $result = $conn->query($sql);
+	    
+	    if(!mysqli_stmt_prepare($stmt, $sql)){
+	        header("Location: ../index.php?error=sqlerror");
+	        exit();
+	    }else{
+	        
+	        mysqli_stmt_bind_param($stmt, "i", $_SESSION['sessionid']);
+	        mysqli_stmt_execute($stmt);
+	        $result = mysqli_stmt_get_result($stmt);
 	    
 	    echo '
 		<h2>Gruesse verschicken<span class="badge badge-secondary"></span></h2>
@@ -36,12 +45,6 @@
 		<form action="includes/gruesse.inc.php" method="post" target="_blank">
 			
             <textarea class="form-control" rows="3" type="text" name="text"></textarea>
-			<br>
-            <h5>Mit freundlichen Gruessen: ..</h5>
-            
-            <textarea class="form-control" rows="1" type="text" name="ende"></textarea>
-			<br>
-			
 		  ';    
 		  if(!empty($result)){
 		      while($row = $result->fetch_assoc()){
@@ -57,6 +60,7 @@
         </form>
         <br><a href="index.php"><button class="btn btn-primary btn-lg">Zurueck</button>
 ';
+	    }
 	}else {
 	   echo'';
 	}

@@ -37,8 +37,9 @@
 
             <br>
            
-            <h5>Vorlage: </h5>
+            <h5>Vorlage für Tagesordnung (Pflicht): </h5>
                 <select id="cardtype" class="form-control" name="tagesordnung">
+                  <option></option>
                   <option>Begruessung,Feststellung der Ordnungsmaessigkeit der Einladung,Beschlussfaehigkeit der Versammlung,Tagesordnung,Wahlen,Verwaltungsberat,Verschiedenes</option>
                   <option>(Neu)</option>
                 </select>
@@ -56,7 +57,7 @@
               
 
         </form>
-        <button onclick="tagesordnung_bearbeitung()" class="btn btn-primary btn-lg">Vorlage auswaehlen</button>
+        <button onclick="tagesordnung_bearbeitung()" class="btn btn-primary btn-lg">Vorlage auswaehlen und fuer Protokoll fuellen</button>
         <br>
         <br><a href="versammlung_uebersicht.php"><button id="zurueck_btn" class="btn btn-primary btn-lg">Zurueck</button>
 ';
@@ -98,7 +99,7 @@
 	    }
 	    begruessung_input.setAttribute("class","form-control");
 	    begruessung_input.setAttribute("rows","3");
-	    begruessung_input.setAttribute("type","text");
+	    begruessung_input.setAttribute("type","text2");
 	    begruessung_input.setAttribute("name",split_auswahl[i]+"_input");
 	    a.setAttribute("href","versammlung_uebersicht.php");
 	    btn.setAttribute("class","btn btn-primary btn-lg");

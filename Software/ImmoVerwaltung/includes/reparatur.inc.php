@@ -4,7 +4,7 @@ session_start();
 if(isset($_POST['reparatur_submit'])){
     
     require 'dbh.inc.php';
-    require "../lib/fpdf181/fpdf.php";
+    
     
     $text = $_POST['text'];
     $file = "../uploads/".basename($_FILES['image']['name']);
@@ -14,8 +14,8 @@ if(isset($_POST['reparatur_submit'])){
     if(move_uploaded_file($_FILES['image']['tmp_name'], $file)){
         $msg = "Success";
         
-        $sql_empfaenger = "SELECT Name, Vorname FROM benutzer JOIN mietverhaeltnis ON benutzer.BenutzerID=mietverhaeltnis.vermieter WHERE mietverhaeltnis.mieter=?;";
-        $sql = "SELECT * FROM benutzer WHERE BenutzerID=?;";
+        $sql_empfaenger = "SELECT Name, Vorname FROM benutzer JOIN mietverhaeltnis ON benutzer.BenutzerID=mietverhaeltnis.Vermieter WHERE mietverhaeltnis.mieter=?;";
+        $sql = "SELECT Name,Vorname FROM benutzer WHERE BenutzerID=?;";
         
         $stmt_empfaenger = mysqli_stmt_init($conn);
         $stmt = mysqli_stmt_init($conn);
@@ -46,53 +46,34 @@ if(isset($_POST['reparatur_submit'])){
                 $vorname = $row['Vorname'];
                 $nachname = $row['Name'];
                 
-               // $vorname_empfaenger = $row2['Vorname'];
-               // $nachname_empfaenger = $row2['Name'];
+                $row2=mysqli_fetch_assoc($result_empfaenger);
+                
+                $empfaenger_vorname = $row2['Vorname'];
+                $empfaenger_nachname = $row2['Name'];
         
-        $pdf = new FPDF();
-        $pdf->AddPage();
-        $pdf->SetFont("Arial","",16);
+        require './pdf_templates/basic_pdf/pdf_start.php';
+                
+        
         $pdf->Cell(10,10,"Beschwerde/Reparatur",0,0);
         $pdf->Ln(10);
-        $pdf->SetFont("Arial","",12);
-        $pdf->Cell(10,10,$nachname,0,0);
-        $pdf->Ln(5);
-        $pdf->Cell(10,10,$vorname,0,0);
-        $pdf->Ln(5);
-        $pdf->Cell(10,10,"Strasse Versender",0,0);
-        $pdf->Ln(5);
-        $pdf->Cell(10,10,"Stadt Versender",0,0);
         
+        require './pdf_templates/basic_pdf/pdf_header.php';
+       
+        require './pdf_templates/basic_pdf/pdf_icon.php';
         
-        $pdf->Ln(10);
-        $pdf->SetFont("Arial","",12);
-        $pdf->Cell(10,10,$nachname,0,0);
-        $pdf->Ln(5);
-        $pdf->Cell(10,10,$vorname,0,0);
-        $pdf->Ln(5);
-        $pdf->Cell(10,10,"Strasse Empfaenger",0,0);
-        $pdf->Ln(5);
-        $pdf->Cell(10,10,"Stadt Empfaenger",0,0);
+        $topic="Beschreibung:";
         
-        $pdf->Ln(5);
-        $pdf->Cell(10,10,"________________________________________________________________________________",0,0);
-        $pdf->ln(10);
-        $pdf->Cell(10,10,"Beschreibung: ",0,0);
-        $pdf->ln(10);
-        $pdf->MultiCell(0,10,$text,1);
-        $pdf->Ln(25);
-        $pdf->SetFont("Arial","",12);
-        $pdf->Cell(10,10,"Mit freundlichen Gruessen ",0,0);
-        $pdf->Ln(10);
-        $pdf->MultiCell(0,10,$vorname." ".$nachname,1);
+        require './pdf_templates/basic_pdf/topic.php';
+
+        require './pdf_templates/basic_pdf/pdf_freitext.php';
+       
+        require './pdf_templates/basic_pdf/pdf_mfg.php';
         
+        require './pdf_templates/basic_pdf/pdf_anhang.php';
         
-        $pdf->AddPage();
-        $pdf->Cell(10,10,"Anhang: ",0,0);
-        $pdf->Ln(20);
-        $pdf->Image($file);
+        require './pdf_templates/basic_pdf/pdf_image.php';
         
-        $pdf->Output();
+        require './pdf_templates/basic_pdf/pdf_ende.php';
             }
             
         }

@@ -81,10 +81,13 @@ if(isset($_POST['versammlung_einladung_submit'])){
                 $pdf->Cell(0, 10,"Tagesordnung:");
                 $pdf->Ln(5);
                 $pdf->SetFont("Arial","",12);
+                
+                if(!empty($tagesordnung)){
                 for($i=0; $i<count($punkte);$i++){
                 $j=$i+1;
                 $pdf->Ln(5);
                 $pdf->Cell(0, 10,"TOP ".$j." : ".$punkte[$i]);
+                }
                 }
                 
                 $pdf->Ln(20);
