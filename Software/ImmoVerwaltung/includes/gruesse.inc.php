@@ -13,8 +13,8 @@ if(isset($_POST['gruesse_submit'])){
     
     foreach( $_POST['empfaenger'] as $value) {
         $pieces = explode(" ", $value);
-        $empfaenger_vorname = $pieces[0];
-        $empfaenger_nachname = $pieces[1];
+        $empfaenger_vorname = $pieces[1];
+        $empfaenger_nachname = $pieces[0];
     
     
     //gucken, ob variablen leer sind, wenn ja dann emptyfield error

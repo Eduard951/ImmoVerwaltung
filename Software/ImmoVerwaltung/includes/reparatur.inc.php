@@ -14,7 +14,7 @@ if(isset($_POST['reparatur_submit'])){
     if(move_uploaded_file($_FILES['image']['tmp_name'], $file)){
         $msg = "Success";
         
-        $sql_empfaenger = "SELECT Name, Vorname FROM benutzer JOIN mietverhaeltnis ON benutzer.BenutzerID=mietverhaeltnis.Vermieter WHERE mietverhaeltnis.mieter=?;";
+        $sql_empfaenger = "SELECT benutzer.Name, benutzer.Vorname FROM benutzer JOIN mietverhaeltnis ON benutzer.BenutzerID=mietverhaeltnis.Vermieter WHERE mietverhaeltnis.Mieter=?";
         $sql = "SELECT Name,Vorname FROM benutzer WHERE BenutzerID=?;";
         
         $stmt_empfaenger = mysqli_stmt_init($conn);
