@@ -10,7 +10,7 @@
 	    
 	    echo'<ul class="alle_orte">';
 	    
-	    $sql_orte="SELECT DISTINCT Ort,PLZ FROM hausobjekt GROUP BY Ort";
+	    $sql_orte="SELECT DISTINCT Ort,PLZ FROM hausobjekt";
 	    $sql_objekte ="SELECT Strasse, Hausnr, ObjektID FROM hausobjekt WHERE Ort=?;";
 	    $sql_VEs ="SELECT verwaltungseinheit.VerwID,verwaltungseinheit.Typ,verwaltungseinheit.Kommentar FROM hausobjekt JOIN verwaltungseinheit ON verwaltungseinheit.ObjektID=hausobjekt.ObjektID WHERE hausobjekt.Strasse=? AND hausobjekt.Hausnr=?";
 	    
