@@ -8,50 +8,56 @@
 	<?php 
 	if(isset($_SESSION['sessionid'])){
 	    
-	    $strasse_nummer = "SELECT Strasse,Hausnummer FROM adresse WHERE Ort = ? AND Plz = ?;";
-	    $ort_plz = "SELECT Ort,Plz FROM adresse GROUP BY Ort;";
-	    $sql = "SELECT adresse.Ort,adresse.PLZ,adresse.Strasse, adresse.Hausnummer,hausobjekt.Typ, hausobjekt.ObjektID FROM hausobjekt JOIN adresse ON hausobjekt.Adresse=adresse.AdresseID;";
-	    $result = $conn->query($sql);
-	    $result_ort_plz = $conn->query($sql);
+	    echo'<ul class="alle_orte">';
 	    
+	    $sql_orte="SELECT DISTINCT Ort,PLZ FROM hausobjekt GROUP BY Ort";
+	    $sql_objekte ="SELECT Strasse, Hausnr, ObjektID FROM hausobjekt WHERE Ort=?;";
+	    $sql_VEs ="SELECT verwaltungseinheit.VerwID,verwaltungseinheit.Typ,verwaltungseinheit.Kommentar FROM hausobjekt JOIN verwaltungseinheit ON verwaltungseinheit.ObjektID=hausobjekt.ObjektID WHERE hausobjekt.Strasse=? AND hausobjekt.Hausnr=?";
 	    
+	    $result = $conn->query($sql_orte);
 	    
 	    $stmt_strasse_nummer = mysqli_stmt_init($conn);
+	    $stmt_VEs = mysqli_stmt_init($conn);
 	    
-	    if(!mysqli_stmt_prepare($stmt_strasse_nummer, $strasse_nummer)){
+	    if(!mysqli_stmt_prepare($stmt_strasse_nummer, $sql_objekte)||!mysqli_stmt_prepare($stmt_VEs, $sql_VEs)){
 	        header("Location: ../index.php?error=sqlerror");
 	        exit();
 	    }else{
-	        
-	           //if (!empty($result)) {
-	           // while($row = $result->fetch_assoc()) {
-	                
-	               // echo '
-                   // <br><h3><a href="index.php">'.$row['Ort']," " ,$row['PLZ']," ",$row['Strasse']," ",$row['Hausnummer']," ",$row['Typ'].'</h3>';
-	               // $_SESSION['hausobjektid']= $row['ObjektID'];
-	           // }
-	            
-	    if(!empty($result_ort_plz)){
-	        while($row = $result_ort_plz->fetch_assoc()){
-	            
-	            mysqli_stmt_bind_param($stmt_strasse_nummer, "ss",$row['Ort'], $row['PLZ']);
-	            mysqli_stmt_execute($stmt_strasse_nummer);
-	            $result_strasse_nummer = mysqli_stmt_get_result($stmt_strasse_nummer);
-	            
-	            echo '
-	            <ul class="orte">
-	               <ul><a href="">'.$row['PLZ']," ", $row['Ort'].'</ul>';
-	                
-	               if(!empty($result_strasse_nummer)){
-	                   while($row2 = $result_strasse_nummer->fetch_assoc()){
-                        echo'<li><a href="index.php">'.$row2['Strasse']." ".$row2['Hausnummer'].'</li>';
-	                   }
-	            }
-	            echo'
-	            </ul>
-                ';
+	    
+	    if(!empty($result)){
+	        while($row= $result->fetch_assoc()){
+	            echo'<li><ul class="alle_objekte">'.$row['PLZ']." ".$row['Ort'];
+                
+                mysqli_stmt_bind_param($stmt_strasse_nummer, "s", $row['Ort']);
+                
+                mysqli_stmt_execute($stmt_strasse_nummer);
+                
+                $result_objekte = mysqli_stmt_get_result($stmt_strasse_nummer);
+                
+                if(!empty($result_objekte)){
+                    while($row2=$result_objekte->fetch_assoc()){
+                        echo'<li><form action="index.php" method="POST"><button type="submit"><input type="hidden" name="objektid" value="'.$row2['ObjektID'].'"/><ul class="VEs">'.$row2['Strasse']." ".$row2['Hausnr'].'</button></form>';
+                        
+                        mysqli_stmt_bind_param($stmt_VEs, "ss", $row2['Strasse'],$row2['Hausnr']);
+                        
+                        mysqli_stmt_execute($stmt_VEs);
+                        
+                        $result_VEs = mysqli_stmt_get_result($stmt_VEs);
+                        
+                        if(!empty($result_VEs)){
+                            while($row3=$result_VEs->fetch_assoc()){
+                                echo'<li><form action="index.php" method="POST"><button type="submit"><input type="hidden" name="objektid" value="'.$row3['VerwID'].'"/>'.$row3['Typ']." ".$row3['Kommentar'].'</button></form></li>';
+                            }
+                        }
+                        echo'</ul></li>';
+                    }
+                }
+
+               echo' </ul></li>';
 	        }
 	    }
+	    
+	    echo'</ul>';
 	    }
 	}else {
 	   echo' <p></p>';
