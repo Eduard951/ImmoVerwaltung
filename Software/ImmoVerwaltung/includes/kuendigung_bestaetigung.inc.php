@@ -63,25 +63,23 @@ if(isset($_POST['kuendigung_bestaetigt_submit'])){
                 $pdf->Ln(36);
                 $pdf->SetFont("times","B",9);
                 $pdf->Cell(14);
-                $pdf->Cell(10,10,"Ihre Kündigung des Mietverhätnisses zum $datum_nutzungsende",0,0);
+                $pdf->Cell(10,10,"Ihre Kï¿½ndigung des Mietverhï¿½tnisses zum $datum_nutzungsende",0,0);
                 $pdf->Ln(20);
                 $pdf->SetFont("times","",9);
                 $pdf->Cell(14);
                 $pdf->Cell(10,10,"Sehr geehrte/r Frau/Herr $empfaenger_nachname,",0,0);
                 $pdf->Ln(12);
                 $pdf->Cell(14);
-                $pdf->MultiCell(0,4,"hiermit bestätige ich Ihre Kündigung des Wohnraummietvertrages der Wohnung in $empfaenger_strasse $empfaenger_hausnr, $empfaenger_plz $empfaenger_ort vom $datum_kuendigung fristgerecht zum $datum_nutzungsende.", 0,"L",false);
+                $pdf->MultiCell(0,4,"hiermit bestï¿½tige ich Ihre Kï¿½ndigung des Wohnraummietvertrages der Wohnung in $empfaenger_strasse $empfaenger_hausnr, $empfaenger_plz $empfaenger_ort vom $datum_kuendigung fristgerecht zum $datum_nutzungsende.", 0,"L",false);
                 $pdf->Ln(4);
                 $pdf->Cell(14);
-                $pdf->MultiCell(0,4,"Ich bitte Sie sich nach dem Auszug zu melden, damit bei einer Begehung ein abschließendes Übergabeprotokoll erstellt und die Schlüsselübergabe geregelt werden kann.", 0,"L",false);
+                $pdf->MultiCell(0,4,"Ich bitte Sie sich nach dem Auszug zu melden, damit bei einer Begehung ein abschlieï¿½endes ï¿½bergabeprotokoll erstellt und die Schlï¿½sselï¿½bergabe geregelt werden kann.", 0,"L",false);
                 $pdf->Ln(12);
                 $pdf->Cell(14);
-                $pdf->Cell(10,10,"Mit freundlichen Grüßen,",0,0);
+                $pdf->Cell(10,10,"Mit freundlichen Grï¿½ï¿½en,",0,0);
                 $pdf->Ln(4);
                 $pdf->Cell(14);
                 $pdf->Cell(10,10,"$sender_vorname $sender_nachname",0,0);
-                $pdf->Ln(8);
-                $pdf->Cell(14);
                 $pdf->Output();
                 
                 

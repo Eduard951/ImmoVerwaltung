@@ -35,7 +35,7 @@ echo '
 
 if(!empty($result)){
     while($row = $result->fetch_assoc()){
-        echo '<br><input type="checkbox" name="empfaenger[]" value="'.$row['Name']," ", $row['Vorname'], " ", $row['Strasse'], " ", $row['Hausnr'], " ", $row['PLZ'], " ", $row['Ort'].'">'.$row['Name']," ", $row['Vorname'], " ", $row['Strasse'], " ", $row['Hausnr'], " ", $row['PLZ'], " ", $row['Ort'].'<br>
+        echo '<br><input type="checkbox" name="empfaenger[]" value="'.$row['Name']," ", $row['Vorname'], " ", $row['Strasse'], " ", $row['Hausnr'], " ", $row['PLZ'], " ", $row['Ort'].'">'.$row['Name'],", ", $row['Vorname'], ": ", $row['Strasse'], " ", $row['Hausnr'], ", ", $row['PLZ'], " ", $row['Ort'].'<br>
         ';
     }
 }
