@@ -31,7 +31,7 @@ if(isset($_POST['wartungsprotokoll_submit'])){
             
             //Anzahl der Zimmer für Größe der Tabelle
             if(!mysqli_stmt_prepare($stmt, $sql2)){
-                header("Location: ../index.php?error=sqlerror");
+                header("Location: ../index.php?error=mieter_error");
                 exit();
             }else{
                 $id = $_SESSION['sessionid'];
@@ -46,7 +46,7 @@ if(isset($_POST['wartungsprotokoll_submit'])){
             }
             
             if(!mysqli_stmt_prepare($stmt, $sql3)){
-                header("Location: ../index.php?error=sqlerror");
+                header("Location: ../index.php?error=zimmercount_error");
                 exit();
             }else{
                 mysqli_stmt_bind_param($stmt, "s", $verw_id);
@@ -60,7 +60,7 @@ if(isset($_POST['wartungsprotokoll_submit'])){
             
 
             if(!mysqli_stmt_prepare($stmt, $sql)){
-                header("Location: ../index.php?error=sqlerror");
+                header("Location: ../index.php?error=vermieter_error");
                 exit();
             }else{
                 $id = $_SESSION['sessionid'];
@@ -118,7 +118,7 @@ if(isset($_POST['wartungsprotokoll_submit'])){
                     
                     $zc = 1; 
                     if(!mysqli_stmt_prepare($stmt, $sql4)){
-                            header("Location: ../index.php?error=sqlerror");
+                            header("Location: ../index.php?error=rauchmelder_error");
                             exit();
                     }else{
                           mysqli_stmt_bind_param($stmt, "s", $verw_id);
