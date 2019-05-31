@@ -24,9 +24,9 @@ if(isset($_POST['wartungsprotokoll_submit'])){
         
         
             $sql = "SELECT * FROM benutzer WHERE BenutzerID=?;";
-            $sql2 = "SELECT Vorname, Name FROM Benutzer JOIN mietverhaeltnis ON benutzer.BenutzerID = mietverhaeltnis.Mieter WHERE Vermieter = ? AND VerwID = ?";
-            $sql3 = "SELECT COUNT(*) FROM Zimmer WHERE VerwID = ?";
-            $sql4 = "SELECT rauchmelder.Modell, rauchmelder.Installiert, zimmer.Bezeichnung FROM Rauchmelder JOIN zimmer ON rauchmelder.ZimmerID = zimmer.ZimmerID WHERE VerwID = ?";
+            $sql2 = "SELECT Vorname, Name FROM benutzer JOIN mietverhaeltnis ON benutzer.BenutzerID = mietverhaeltnis.Mieter WHERE Vermieter = ? AND VerwID = ?";
+            $sql3 = "SELECT COUNT(*) FROM zimmer WHERE VerwID = ?";
+            $sql4 = "SELECT rauchmelder.Modell, rauchmelder.Installiert, zimmer.Bezeichnung FROM rauchmelder JOIN zimmer ON rauchmelder.ZimmerID = zimmer.ZimmerID WHERE VerwID = ?";
             $stmt = mysqli_stmt_init($conn);
             
             //Anzahl der Zimmer für Größe der Tabelle
