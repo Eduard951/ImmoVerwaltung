@@ -17,6 +17,7 @@
               <br><a href="versammlung_uebersicht.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="reparatur_submit">Eigentuemerversammlung</button>
               <br><a href="kuendigung_bestaetigung.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="kuendigung_submit">Kuendigungbestaetigung</button>
               <br><a href="handwerkerverwaltung.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="handwerkerverwaltung_submit">Handwerkerverwaltung</button>
+              <br><a href="rauchmelderprotokoll.php"><button class="btn btn-primary btn-lg">Rauchmelderprotokoll</button>
                 <br><a href="baumstruktur.php"><button class="btn btn-primary btn-lg">Zurueck</button>
                
 '.$_SESSION['objektid'].'
