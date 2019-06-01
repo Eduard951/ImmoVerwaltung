@@ -8,7 +8,7 @@
 	<?php 
 	if(isset($_SESSION['sessionid'])){
 	    
-	    $sql = "SELECT benutzer.Vorname, benutzer.Name 
+	    $sql = "SELECT *
                 FROM benutzer 
                 JOIN mietverhaeltnis
                 ON benutzer.BenutzerID = mietverhaeltnis.Mieter
@@ -48,7 +48,7 @@
 		  ';    
 		  if(!empty($result)){
 		      while($row = $result->fetch_assoc()){
-		          echo '<br><input type="checkbox" name="empfaenger[]" value="'.$row['Name']," ", $row['Vorname'].'">'.$row['Name']," ", $row['Vorname'].'<br>
+		          echo '<br><input type="checkbox" name="empfaenger[]" value="'.$row['Name']," ", $row['Vorname']," ",$row['PLZ']," ",$row['Ort']," ",$row['Strasse']," ",$row['Hausnr'].'">'.$row['Name']," ", $row['Vorname']." ".$row['PLZ']." ".$row['Ort']." ".$row['Strasse']." ".$row['Hausnr'].'</input><br>
    
                     ';
 		      }
