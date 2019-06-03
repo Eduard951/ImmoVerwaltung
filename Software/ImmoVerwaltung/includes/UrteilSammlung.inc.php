@@ -1,28 +1,37 @@
-<?php
+<?php 
 require ('dbh.inc.php');
 ?>
 
 <?php
-if(isset($_POST["submit"])  )
+if(isset($_POST["submit"]))
+
 {
     $name=$_POST["oui"];
     $text=$_POST["beschreibung"];
+    
+    $sql= "INSERT INTO urteilsammlung (Stichwort,Text) VALUES (?,?)";
+    $stmt = mysqli_stmt_init($conn);
+    
     if (empty($name) || empty($text)){
         echo "Bitte fuellen sie die Felder";
-    }else {
         
-    
-    
-    $stmt = $conn->prepare("INSERT INTO 'urteilsammlung' ('Stichwort','Text') VALUES (?,?)");
-    $stmt->bind_param("ss",$name,$text);
-  
-   
-    $stmt->execute();
-    echo 'Urteil  added';}
+    }else {
+        if(!mysqli_stmt_prepare($stmt, $sql)){
+            header("Location: ../index.php?error=sql_error");
+            exit();
+        }
+        else {
+              mysqli_stmt_bind_param($stmt, "ss", $name, $text);
+              mysqli_stmt_execute($stmt);
+              echo 'Urteil  added';
+        }
+        
+    }
 }
 
 
-if(isset($_POST["submitt"]) )
+if(isset($_POST["submitt"]))
+
 {
     $p=$_POST["non"];
     $query=mysqli_query($conn," select * from urteilsammlung where stichwort='$p'");
