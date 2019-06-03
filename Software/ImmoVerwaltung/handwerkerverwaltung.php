@@ -1,13 +1,13 @@
 <?php
 require "header.php";
-require "includes/dbh.inc.php";
+
 ?>
     
     <?php
 
 $servername="localhost";
-$dBusername ="root";
-$dBpassword="";
+$dBusername ="propra1";
+$dBpassword="FelixEduardFrancisOli.123";
 $dBname="immoverwaltung";
 
 $conn = mysqli_connect($servername,$dBusername,$dBpassword,$dBname);
@@ -22,9 +22,9 @@ if(!$conn){
 <?php 
 if(isset($_SESSION['sessionid'])){
     
-    $query=mysqli_query($conn, "select * from kategorie");
+    $query=mysqli_query($conn, "select * from handwerker_kategorie");
     $query1=mysqli_query($conn, "select * from handwerker");
-    $query2=mysqli_query($conn, "select * from kategorie");
+    $query2=mysqli_query($conn, "select * from  handwerker_kategorie");
     $query3=mysqli_query($conn, "select * from hausobjekt");
 echo '
 <html>
@@ -76,7 +76,7 @@ while ($row=mysqli_fetch_array($query1 )  )
        <option> Haus</option>   ';
     while ($row=mysqli_fetch_array($query3 ) )
     {
-        echo '<option value="'.$row["Adresse"].'">'   .$row["Adresse"]     .'</option>';
+        echo '<option value="'.$row["ObjektID"].'">'   .$row["ObjektID"]     .'</option>';
         
         
     }
@@ -137,7 +137,7 @@ echo '</form>';
            while ($row=mysqli_fetch_array($query))
 {
 echo '<tr>';
-echo '<td><input type="checkbox" name="checkbox[]" value="'.$row['KategorieId'].'"></td><td>'.$row["Name"].'</td>';
+echo '<td><input type="checkbox" name="checkbox[]" value="'.$row['KategorieID'].'"></td><td>'.$row["Name"].'</td>';
 echo '</tr>';
 }
 echo '</table>';
@@ -162,7 +162,6 @@ echo '<button type="submit" name="dela"> delate</button>';
  <?php 
     require "footer.php";
 ?>
- 
  
  
  

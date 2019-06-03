@@ -2,8 +2,8 @@
 <?php
 
 $servername="localhost";
-$dBusername ="root";
-$dBpassword="";
+$dBusername ="propra1";
+$dBpassword="FelixEduardFrancisOli.123";
 $dBname="immoverwaltung";
 
 $conn = mysqli_connect($servername,$dBusername,$dBpassword,$dBname);
@@ -14,11 +14,12 @@ if(!$conn){
 ?>
 
 
+
 <?php
 if(isset($_POST["oui"]))
 {
     $oui=$_POST["oui"];
-    $stmt = $conn->prepare("INSERT INTO kategorie (Name) VALUES (?)");
+    $stmt = $conn->prepare("INSERT INTO handwerker_kategorie (Name) VALUES (?)");
     $stmt->bind_param("s",$oui);
   
    
@@ -63,7 +64,7 @@ if(isset($_POST["dela"]))
     $d=$_POST["checkbox"];
     foreach ($d as $id){
        
-        $stmt = $conn->prepare("DELETE FROM kategorie WHERE kategorie.KategorieId = ?;");
+        $stmt = $conn->prepare("DELETE FROM handwerker_kategorie WHERE kategorie.KategorieId = ?;");
         $stmt->bind_param("i",$id);
         
         
@@ -88,21 +89,21 @@ if(isset($_POST["sup"] ))
 {
     $handwerker_name=$_POST["handwerker"];
     $handwerker_kategorie=$_POST["kategorie"];
+    
     $handwerker_kommentar=$_POST["kommentar"];
     $handwerker_beschreibung=$_POST["beschreibung"];
     $handwerker_haus=$_POST["haus"];
     
-    $sql = "insert into handwerkerverwaltung (hv.HandwerkerId,hv.KategorieId ,hv.Aufgabebeschreibung,hv.Kommentar,hv.HausId)
-    SELECT h.HandwerkerID,k.KategorieId,'$handwerker_beschreibung','$handwerker_kommentar',ho.Adresse
+    $sql = "insert into handwerkerverwaltung (hv.HandwerkerID,hv.KategorieID ,hv.ObjektID,hv.Aufgabebeschreibung,hv.Kommentar)
+    SELECT h.HandwerkerID,hk.KategorieId,ho.ObjektID,'$handwerker_beschreibung','$handwerker_kommentar'
     
-     FROM handwerkerverwaltung AS hv INNER JOIN handwerker AS h
-        
-        on hv.HandwerkerId=h.HandwerkerID INNER JOIN kategorie AS k
-        
-        ON hv.KategorieId=k.KategorieId INNER join hausobjekt as ho
- where h.HandwerkerID IN(SELECT h.HandwerkerID FROM handwerker WHERE h.Name='$handwerker_name') and
-    k.KategorieId IN( SELECT k.KategorieId FROM kategorie WHERE k.Name='$handwerker_kategorie')  and
-    ho.Adresse IN ( SELECT ho.Adresse FROM hausobjekt WHERE ho.Adresse=$handwerker_haus )
+     FROM handwerkerverwaltung AS hv 
+     INNER JOIN handwerker AS h on hv.HandwerkerID=h.HandwerkerID 
+     INNER JOIN handwerker_kategorie AS hk ON hv.KategorieID=hk.KategorieID
+     INNER join hausobjekt as ho on hv.ObjektID=ho.ObjektID
+     where h.HandwerkerID IN(SELECT h.HandwerkerID FROM handwerker WHERE h.Name='$handwerker_name') and
+     hk.KategorieID IN( SELECT hk.KategorieID FROM handwerker_kategorie WHERE hk.Name='$handwerker_kategorie')  and
+     ho.ObjektID IN ( SELECT ho.ObjektID FROM hausobjekt WHERE ho.ObjektID=$handwerker_haus )
 
 
 ";
@@ -126,7 +127,3 @@ if(isset($_POST["sup"] ))
     
     
     
-    
-
-
-?>
