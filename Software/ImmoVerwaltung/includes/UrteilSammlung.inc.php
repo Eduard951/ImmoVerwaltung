@@ -1,15 +1,7 @@
 <?php
-$servername="localhost";
-$dBusername ="propra1";
-$dBpassword="FelixEduardFrancisOli.123";
-$dBname="immoverwaltung";
-
-$conn = mysqli_connect($servername,$dBusername,$dBpassword,$dBname);
-
-if(!$conn){
-    die("Connection failed!". mysqli_connect_error());
-}
+require ('dbh.inc.php');
 ?>
+
 <?php
 if(isset($_POST["submit"])  )
 {
@@ -21,7 +13,7 @@ if(isset($_POST["submit"])  )
         
     
     
-    $stmt = $conn->prepare("INSERT INTO urteilsammlung (Name,Text) VALUES (?,?)");
+    $stmt = $conn->prepare("INSERT INTO urteilsammlung (Stichwort,Text) VALUES (?,?)");
     $stmt->bind_param("ss",$name,$text);
   
    
@@ -33,7 +25,7 @@ if(isset($_POST["submit"])  )
 if(isset($_POST["submitt"]) )
 {
     $p=$_POST["non"];
-    $query=mysqli_query($conn," select * from urteilsammlung where Name=' $p'");
+    $query=mysqli_query($conn," select * from urteilsammlung where stichwort='$p'");
     
   //  $sql=" select * from urteilsammlung where Name=' $p' ";
   
