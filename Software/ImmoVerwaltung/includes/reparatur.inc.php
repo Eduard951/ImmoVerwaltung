@@ -32,13 +32,13 @@ if(isset($_POST['reparatur_submit'])){
             $id = $_SESSION['sessionid'];
             
             mysqli_stmt_bind_param($stmt, "i", $id);
-            mysqli_stmt_bind_param($stmt_empfaenger, "i", $id);
+           // mysqli_stmt_bind_param($stmt_empfaenger, "i", $id);
             
             mysqli_stmt_execute($stmt);
-            mysqli_stmt_execute($stmt_empfaenger);
+            //mysqli_stmt_execute($stmt_empfaenger);
             
             $result = mysqli_stmt_get_result($stmt);
-            $result_empfaenger = mysqli_stmt_get_result($stmt_empfaenger);
+            //$result_empfaenger = mysqli_stmt_get_result($stmt_empfaenger);
             
             
             if(($row=mysqli_fetch_assoc($result))){
@@ -46,10 +46,10 @@ if(isset($_POST['reparatur_submit'])){
                 $vorname = $row['Vorname'];
                 $nachname = $row['Name'];
                 
-                $row2=mysqli_fetch_assoc($result_empfaenger);
+               // $row2=mysqli_fetch_assoc($result_empfaenger);
                 
-                $empfaenger_vorname = $row2['Vorname'];
-                $empfaenger_nachname = $row2['Name'];
+                //$empfaenger_vorname = $row2['Vorname'];
+               // $empfaenger_nachname = $row2['Name'];
         
         require './pdf_templates/basic_pdf/pdf_start.php';
                 
@@ -57,7 +57,7 @@ if(isset($_POST['reparatur_submit'])){
         $pdf->Cell(10,10,"Beschwerde/Reparatur",0,0);
         $pdf->Ln(10);
         
-        require './pdf_templates/basic_pdf/pdf_header.php';
+        //require './pdf_templates/basic_pdf/pdf_header.php';
        
         require './pdf_templates/basic_pdf/pdf_icon.php';
         
