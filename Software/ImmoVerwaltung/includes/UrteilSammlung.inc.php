@@ -13,7 +13,7 @@ if(isset($_POST["submit"])  )
         
     
     
-    $stmt = $conn->prepare("INSERT INTO urteilsammlung (Stichwort,Text) VALUES (?,?)");
+    $stmt = $conn->prepare("INSERT INTO 'urteilsammlung' ('Stichwort','Text') VALUES (?,?)");
     $stmt->bind_param("ss",$name,$text);
   
    
