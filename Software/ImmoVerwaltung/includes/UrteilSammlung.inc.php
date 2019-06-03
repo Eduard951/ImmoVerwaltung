@@ -35,17 +35,13 @@ if(isset($_POST["submitt"]))
 
 {
     $p=$_POST["non"];
-    $stmt = $conn->prepare(" select * from urteilsammlung where stichwort= ?;");
-    $stmt->bind_param("s",$p);
-    
-    
-    $stmt->execute();
-  //  $query=mysqli_query($conn," select * from urteilsammlung where stichwort='$p'");
+   
+    $query=mysqli_query($conn," select * from urteilsammlung where stichwort='$p'");
     
   //  $sql=" select * from urteilsammlung where Name=' $p' ";
   
    
-    while ($row=mysqli_fetch_array($stmt ) )
+    while ($row=mysqli_fetch_array($query ) )
     {
         echo $row["Text"]    ;
        
