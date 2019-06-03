@@ -64,7 +64,7 @@ if(isset($_POST["dela"]))
     $d=$_POST["checkbox"];
     foreach ($d as $id){
        
-        $stmt = $conn->prepare("DELETE FROM handwerker_kategorie WHERE kategorie.KategorieId = ?;");
+        $stmt = $conn->prepare("DELETE FROM handwerker_kategorie WHERE handwerker_kategorie.KategorieID = ?;");
         $stmt->bind_param("i",$id);
         
         
@@ -94,7 +94,7 @@ if(isset($_POST["sup"] ))
     $handwerker_beschreibung=$_POST["beschreibung"];
     $handwerker_haus=$_POST["haus"];
     
-    $sql = "insert into handwerkerverwaltung (hv.HandwerkerID,hv.KategorieID ,hv.ObjektID,hv.Aufgabebeschreibung,hv.Kommentar)
+    $sql = "insert into handwerkerverwaltung (HandwerkerID,KategorieID ,ObjektID,Aufgabebeschreibung,Kommentar)
     SELECT h.HandwerkerID,hk.KategorieId,ho.ObjektID,'$handwerker_beschreibung','$handwerker_kommentar'
     
      FROM handwerkerverwaltung AS hv 

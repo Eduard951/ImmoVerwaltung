@@ -13,7 +13,7 @@ if(isset($_POST["submit"]))
     $stmt = mysqli_stmt_init($conn);
     
     if (empty($name) || empty($text)){
-        echo "Bitte fuellen sie die Felder";
+        echo "Bitte fuellen sie alle  Felder";
         
     }else {
         if(!mysqli_stmt_prepare($stmt, $sql)){
@@ -24,6 +24,7 @@ if(isset($_POST["submit"]))
               mysqli_stmt_bind_param($stmt, "ss", $name, $text);
               mysqli_stmt_execute($stmt);
               echo 'Urteil  added';
+             
         }
         
     }
@@ -34,12 +35,17 @@ if(isset($_POST["submitt"]))
 
 {
     $p=$_POST["non"];
-    $query=mysqli_query($conn," select * from urteilsammlung where stichwort='$p'");
+    $stmt = $conn->prepare(" select * from urteilsammlung where stichwort= ?;");
+    $stmt->bind_param("s",$p);
+    
+    
+    $stmt->execute();
+  //  $query=mysqli_query($conn," select * from urteilsammlung where stichwort='$p'");
     
   //  $sql=" select * from urteilsammlung where Name=' $p' ";
   
    
-    while ($row=mysqli_fetch_array($query ) )
+    while ($row=mysqli_fetch_array($stmt ) )
     {
         echo $row["Text"]    ;
        
