@@ -11,7 +11,7 @@ if(isset($_POST['reparatur_submit'])){
     
     
     $text = $_POST['text'];
-    $file = "../uploads".basename($_FILES['image']['name']);
+    $file = "../uploads/".basename($_FILES['image']['name']);
     
     $image = $_FILES['image']['name'];
     
