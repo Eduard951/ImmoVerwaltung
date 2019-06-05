@@ -11,15 +11,16 @@ if(isset($_POST['reparatur_submit'])){
     
     
     $text = $_POST['text'];
-    $file = "../uploads/".basename($_FILES['image']['name']);
+    $file = "../uploads".basename($_FILES['image']['name']);
     
     $image = $_FILES['image']['name'];
     
     if(move_uploaded_file($_FILES['image']['tmp_name'], $file)){
         $msg = "Success";
+    }
         
-        $sql_empfaenger = "SELECT benutzer.Name, benutzer.Vorname FROM benutzer JOIN mietverhaeltnis ON benutzer.BenutzerID=mietverhaeltnis.Vermieter WHERE mietverhaeltnis.Mieter=?";
-        $sql = "SELECT Name,Vorname FROM benutzer WHERE BenutzerID=?;";
+        $sql_empfaenger = "SELECT benutzer.Strasse,benutzer.Ort,benutzer.PLZ,benutzer.Hausnr,benutzer.Name, benutzer.Vorname FROM benutzer JOIN mietverhaeltnis ON benutzer.BenutzerID=mietverhaeltnis.Vermieter WHERE mietverhaeltnis.Mieter=?";
+        $sql = "SELECT * FROM benutzer WHERE BenutzerID=?;";
         
         $stmt_empfaenger = mysqli_stmt_init($conn);
         $stmt = mysqli_stmt_init($conn);
@@ -27,33 +28,59 @@ if(isset($_POST['reparatur_submit'])){
         if(!mysqli_stmt_prepare($stmt, $sql)) {
             header("Location: ../reparatur.php?error=sqlerror");
             exit();
+        }else{
+            
+            $id = $_SESSION['sessionid'];
+            
+            mysqli_stmt_bind_param($stmt, "i", $id);
+            
+            mysqli_stmt_execute($stmt);
+            
+            $result = mysqli_stmt_get_result($stmt);
+            
+            if($row=mysqli_fetch_assoc($result)){
+                
+                $vorname = $row['Vorname'];
+                $nachname = $row['Name'];
+                $strasse = $row['Strasse'];
+                $ort = $row['Ort'];
+                $plz = $row['PLZ'];
+                $hausnummer = $row['Hausnr'];
+            }
+            
         }
-        else if(!mysqli_stmt_prepare($stmt_empfaenger,$sql_empfaenger)){
+        
+        if(!mysqli_stmt_prepare($stmt_empfaenger,$sql_empfaenger)){
             header("Location: ../reparatur.php?error=sqlerror");
             exit();
         }else{
         
             $id = $_SESSION['sessionid'];
             
-            mysqli_stmt_bind_param($stmt, "i", $id);
-           // mysqli_stmt_bind_param($stmt_empfaenger, "i", $id);
+            //mysqli_stmt_bind_param($stmt, "i", $id);
+            mysqli_stmt_bind_param($stmt_empfaenger, "i", $id);
             
-            mysqli_stmt_execute($stmt);
-            //mysqli_stmt_execute($stmt_empfaenger);
+            //mysqli_stmt_execute($stmt);
+            mysqli_stmt_execute($stmt_empfaenger);
             
-            $result = mysqli_stmt_get_result($stmt);
-            //$result_empfaenger = mysqli_stmt_get_result($stmt_empfaenger);
+            //$result = mysqli_stmt_get_result($stmt);
+            $result_empfaenger = mysqli_stmt_get_result($stmt_empfaenger);
             
             
-            if(($row=mysqli_fetch_assoc($result))){
+            //if(($row=mysqli_fetch_assoc($result))){
                 
-                $vorname = $row['Vorname'];
-                $nachname = $row['Name'];
+                //$vorname = $row['Vorname'];
+                //$nachname = $row['Name'];
                 
-               // $row2=mysqli_fetch_assoc($result_empfaenger);
+            if($row2=mysqli_fetch_assoc($result_empfaenger)){
                 
-                //$empfaenger_vorname = $row2['Vorname'];
-               // $empfaenger_nachname = $row2['Name'];
+                $empfaenger_vorname = $row2['Vorname'];
+                $empfaenger_nachname = $row2['Name'];
+                $empfaenger_ort = $row2['Ort'];
+                $empfaenger_strasse = $row2['Strasse'];
+                $empfaenger_plz = $row2['PLZ'];
+                $empfaenger_hausnummer = $row2['Hausnr'];
+            }
         
         require './pdf_templates/basic_pdf/pdf_start.php';
                 
@@ -61,9 +88,11 @@ if(isset($_POST['reparatur_submit'])){
         $pdf->Cell(10,10,"Beschwerde/Reparatur",0,0);
         $pdf->Ln(10);
         
-        //require './pdf_templates/basic_pdf/pdf_header.php';
+        require './pdf_templates/basic_pdf/pdf_header.php';
        
         require './pdf_templates/basic_pdf/pdf_icon.php';
+        
+        
         
         $topic="Beschreibung:";
         
@@ -78,11 +107,11 @@ if(isset($_POST['reparatur_submit'])){
         require './pdf_templates/basic_pdf/pdf_image.php';
         
         require './pdf_templates/basic_pdf/pdf_ende.php';
-            }
+            
             
         }
             
-    }
+    
     
    // $fileName = $_FILES['file']['name']; 
     //$fileTmpName = $_FILES['file']['tmp_name'];
