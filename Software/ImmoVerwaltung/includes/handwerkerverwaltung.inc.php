@@ -141,7 +141,9 @@ if(isset($_POST["sup"] ))
     
     
     echo"done ";
-   echo '$H,$k,$O,$handwerker_beschreibung, $handwerker_kommentar';
+   echo '$H';
+        echo '$O';
+        echo '$K';
     }
     }
    
