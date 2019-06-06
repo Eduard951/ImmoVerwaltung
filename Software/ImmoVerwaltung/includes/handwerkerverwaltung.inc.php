@@ -87,6 +87,7 @@ if(isset($_POST["dela"]))
 
 if(isset($_POST["sup"] ))
 {
+   
     $handwerker_name=$_POST["handwerker"];
     $handwerker_kategorie=$_POST["kategorie"];
     
@@ -94,17 +95,41 @@ if(isset($_POST["sup"] ))
     $handwerker_beschreibung=$_POST["beschreibung"];
     $handwerker_haus=$_POST["haus"];
     
-    $sql = "insert into handwerkerverwaltung (HandwerkerID,KategorieID ,ObjektID,Aufgabebeschreibung,Kommentar)
-    SELECT h.HandwerkerID,hk.KategorieId,ho.ObjektID,'$handwerker_beschreibung','$handwerker_kommentar'
+    if (empty($handwerker_name) || empty( $handwerker_kategorie) || empty( $handwerker_kommentar) || empty( $handwerker_beschreibung) || empty(  $handwerker_haus)){
+        echo "Bitte fuellen sie alle  Felder";
+        
+    }else {
+    $query=mysqli_query($conn," select * from handwerker where Name='$handwerker_name'");
     
-     FROM handwerkerverwaltung AS hv 
-     INNER JOIN handwerker AS h on hv.HandwerkerID=h.HandwerkerID 
-     INNER JOIN handwerker_kategorie AS hk ON hv.KategorieID=hk.KategorieID
-     INNER join hausobjekt as ho on hv.ObjektID=ho.ObjektID
-     where h.HandwerkerID IN(SELECT h.HandwerkerID FROM handwerker WHERE h.Name='$handwerker_name') and
-     hk.KategorieID IN( SELECT hk.KategorieID FROM handwerker_kategorie WHERE hk.Name='$handwerker_kategorie')  and
-     ho.ObjektID IN ( SELECT ho.ObjektID FROM hausobjekt WHERE ho.ObjektID=$handwerker_haus )
+    while ($row=mysqli_fetch_array($query ) )
+    {
+        $H= $row["HandwerkerID"]    ;
+        
+    }
+    
+    $query1=mysqli_query($conn," select * from handwerker_kategorie where Name='$handwerker_kategorie");
+    
+    
+    while ($row=mysqli_fetch_array($query1 ) )
+    {
+        $K= $row["KategorieID"]    ;
+        
+        
+    }
+    
+    $query2=mysqli_query($conn," select * from hausobjekt where ObjektID='$handwerker_haus'");
+    
 
+    while ($row=mysqli_fetch_array($query2 ) )
+    {
+        $O= $row["ObjektID"]    ;
+        
+        
+    }
+    
+    
+    $sql = "insert into handwerkerverwaltung (HandwerkerID,KategorieID ,ObjektID,Aufgabebeschreibung,Kommentar)
+   values($H,$K,$O,$handwerker_beschreibung, $handwerker_kommentar)
 
 ";
    
@@ -116,8 +141,8 @@ if(isset($_POST["sup"] ))
     
     
     echo"done ";
-   
-    
+   echo '<br><a href="handwerkerverwaltung.php"><button class="btn btn-primary">Zurueck</button>';
+    }
     }
    
     //header("Location:..//handwerkerverwaltung.php");
