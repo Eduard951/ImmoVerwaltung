@@ -141,9 +141,9 @@ if(isset($_POST["sup"] ))
     
     
     echo"done ";
-   echo '$H';
-        echo '$O';
-        echo '$K';
+   echo "$H";
+        echo "$O";
+        echo "$K";
     }
     }
    
