@@ -141,7 +141,7 @@ if(isset($_POST["sup"] ))
     
     
     echo"done ";
-   echo '<br><a href="handwerkerverwaltung.php"><button class="btn btn-primary">Zurueck</button>';
+   echo '$H,$k,$O,$handwerker_beschreibung, $handwerker_kommentar';
     }
     }
    
