@@ -107,7 +107,7 @@ if(isset($_POST["sup"] ))
         
     }
     
-    $query1=mysqli_query($conn," select * from handwerker_kategorie where Name='$handwerker_kategorie");
+    $query1=mysqli_query($conn," select * from handwerker_kategorie where Name='$handwerker_kategorie'");
     
     
     while ($row=mysqli_fetch_array($query1 ) )
@@ -144,6 +144,8 @@ if(isset($_POST["sup"] ))
    echo "$H";
         echo "$O";
         echo "$K";
+        echo"$handwerker_beschreibung";
+        echo"$handwerker_kommentar";
     }
     }
    
