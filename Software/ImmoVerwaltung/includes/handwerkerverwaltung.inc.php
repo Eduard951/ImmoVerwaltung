@@ -156,7 +156,7 @@ if(isset($_POST["sup"] ))
     echo"$handwerker_beschreibung";
     echo"$handwerker_kommentar";
     echo $row["VerwID"]    ;
-    echo'    $handwerker_verwaltungseinheit';
+    echo"   $handwerker_verwaltungseinheit";
     
    
     }
