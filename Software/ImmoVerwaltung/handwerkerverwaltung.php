@@ -26,6 +26,7 @@ if(isset($_SESSION['sessionid'])){
     $query1=mysqli_query($conn, "select * from handwerker");
     $query2=mysqli_query($conn, "select * from  handwerker_kategorie");
     $query3=mysqli_query($conn, "select * from hausobjekt");
+    $query4=mysqli_query($conn, "select * from verwaltungseinheit");
 echo '
 <html>
 <head>
@@ -81,6 +82,19 @@ while ($row=mysqli_fetch_array($query1 )  )
         
     }
     echo '</select>';
+    
+    
+    echo ' <select name="verwaltungseinheit">
+       <option> Verwaltungseinheit</option>   ';
+    while ($row=mysqli_fetch_array($query4 ) )
+    {
+        echo '<option value="'.$row["Kommentar"].'">'   .$row["Kommentar"]     .'</option>';
+        
+        
+    }
+    echo '</select>';
+    
+    
     echo '</br>';
     echo '<label for="beschreibung">Beschreibung:</label><textarea class="form-control" rows="2" type="text" id="beschreibung" name="beschreibung">Beschreibung</textarea>';
     echo '<label for="kommentar">kommentar:</label><textarea class="form-control" rows="2" type="text" id="kommentar" name="kommentar">Kommentar</textarea>';

@@ -94,6 +94,7 @@ if(isset($_POST["sup"] ))
     $handwerker_kommentar=$_POST["kommentar"];
     $handwerker_beschreibung=$_POST["beschreibung"];
     $handwerker_haus=$_POST["haus"];
+    $handwerker_verwaltungseinheit=$_POST["verwaltungseinheit"];
     
     if (empty($handwerker_name) || empty( $handwerker_kategorie) || empty( $handwerker_kommentar) || empty( $handwerker_beschreibung) || empty(  $handwerker_haus)){
         echo "Bitte fuellen sie alle  Felder";
@@ -127,25 +128,37 @@ if(isset($_POST["sup"] ))
         
     }
     
+    $query3=mysqli_query($conn," select * from verwaltungseinheit where ObjektID='$handwerker_haus'and Kommentar=' $handwerker_verwaltungseinheit'");
     
-    $sql = "insert into handwerkerverwaltung (HandwerkerID,KategorieID ,ObjektID,Aufgabebeschreibung,Kommentar)
-   values($H,$K,$O,$handwerker_beschreibung, $handwerker_kommentar)
+    
+    while ($row=mysqli_fetch_array($query3 ) )
+    {
+        $E= $row["VerwID"]    ;
+        
+        
+    }
+    
+    
+    $sql = "insert into handwerkerverwaltung (HandwerkerID,KategorieID ,ObjektID,VerwID,Aufgabebeschreibung,Kommentar)
+   values($H,$K,$O, $E,$handwerker_beschreibung, $handwerker_kommentar)
 
 ";
-   
+    
     
    
     mysqli_query($conn, $sql);
     
+    if ($sql){echo'done'  ;
+    echo "$H";
+    echo "$O";
+    echo "$K";
+    echo "$E";
+    echo"$handwerker_beschreibung";
+    echo"$handwerker_kommentar";;}else {echo 'bitte widerhohen' ; header("Location:..//handwerkerverwaltung.php");
+    }
     
     
-    
-    echo"done ";
-   echo "$H";
-        echo "$O";
-        echo "$K";
-        echo"$handwerker_beschreibung";
-        echo"$handwerker_kommentar";
+   
     }
     }
    
