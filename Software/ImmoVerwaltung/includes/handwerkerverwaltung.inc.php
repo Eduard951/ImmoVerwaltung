@@ -128,7 +128,7 @@ if(isset($_POST["sup"] ))
         
     }
     
-    $query3=mysqli_query($conn," select * from verwaltungseinheit where ObjektID='$handwerker_haus' and Kommentar=' $handwerker_verwaltungseinheit'");
+    $query3=mysqli_query($conn," select VerwID from verwaltungseinheit where ObjektID='$handwerker_haus' and Kommentar='$handwerker_verwaltungseinheit'");
     
     
     while ($row=mysqli_fetch_array($query3 ) )
