@@ -128,7 +128,7 @@ if(isset($_POST["sup"] ))
         
     }
     
-    $query3=mysqli_query($conn," select * from verwaltungseinheit where ObjektID='$handwerker_haus'and Kommentar=' $handwerker_verwaltungseinheit'");
+    $query3=mysqli_query($conn," select * from verwaltungseinheit where ObjektID='$O'and Kommentar=' $handwerker_verwaltungseinheit'");
     
     
     while ($row=mysqli_fetch_array($query3 ) )
@@ -140,7 +140,7 @@ if(isset($_POST["sup"] ))
     
     
     $sql = "insert into handwerkerverwaltung (HandwerkerID,KategorieID ,ObjektID,VerwID,Aufgabebeschreibung,Kommentar)
-   values($H,$K,$O, $E,$handwerker_beschreibung, $handwerker_kommentar)
+   values($H,$K,$O,$E,$handwerker_beschreibung, $handwerker_kommentar)
 
 ";
     
