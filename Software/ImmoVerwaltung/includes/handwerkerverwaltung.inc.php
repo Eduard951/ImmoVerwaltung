@@ -96,7 +96,7 @@ if(isset($_POST["sup"] ))
     $handwerker_haus=$_POST["haus"];
     $handwerker_verwaltungseinheit=$_POST["verwaltungseinheit"];
     
-    if (empty($handwerker_name) || empty( $handwerker_kategorie) || empty( $handwerker_kommentar) || empty( $handwerker_beschreibung) || empty(  $handwerker_haus)){
+    if (empty($handwerker_name) || empty( $handwerker_kategorie) || empty( $handwerker_kommentar) || empty( $handwerker_beschreibung) || empty(  $handwerker_haus)|| empty(  $handwerker_verwaltungseinheit)){
         echo "Bitte fuellen sie alle  Felder";
         
     }else {
@@ -148,15 +148,14 @@ if(isset($_POST["sup"] ))
    
     mysqli_query($conn, $sql);
     
-    if ($sql){echo'done'  ;
+   
     echo "$H";
     echo "$O";
     echo "$K";
     echo "$E";
     echo"$handwerker_beschreibung";
-    echo"$handwerker_kommentar";;}else {echo 'bitte widerhohen' ; header("Location:..//handwerkerverwaltung.php");
-    }
-    
+    echo"$handwerker_kommentar";
+    echo $row["VerwID"]    ;
     
    
     }
