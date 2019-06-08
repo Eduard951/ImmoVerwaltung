@@ -155,14 +155,8 @@ if(isset($_POST["sup"] ))
     mysqli_stmt_execute($stmt);
    
    
-    echo "$H";
-    echo "$O";
-    echo "$K";
-    echo "$E";
-    echo"$handwerker_beschreibung";
-    echo"$handwerker_kommentar";
-    echo $row["VerwID"]    ;
-    echo"   $handwerker_verwaltungseinheit";
+    echo "done";
+   
     
    
     }
