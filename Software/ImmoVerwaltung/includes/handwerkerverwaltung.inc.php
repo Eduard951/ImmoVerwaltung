@@ -139,15 +139,21 @@ if(isset($_POST["sup"] ))
     }
     
     
-    $sql = "insert into handwerkerverwaltung (HandwerkerID,KategorieID ,ObjektID,VerwID,Aufgabebeschreibung,Kommentar)
-   values($H,$K,$O,$E,$handwerker_beschreibung, $handwerker_kommentar)
-
-";
+  //  $sql = "insert into handwerkerverwaltung (HandwerkerID,KategorieID ,ObjektID,VerwID,Aufgabebeschreibung,Kommentar)
+  // values($H,$K,$O,$E,$handwerker_beschreibung, $handwerker_kommentar)";
     
     
    
-    mysqli_query($conn, $sql);
+    //mysqli_query($conn, $sql);
     
+    
+    
+    $sql= "INSERT INTO handwerkerverwaltung (HandwerkerID, KategorieID, ObjektID, VerwID, Aufgabenbeschreibung, Kommentar) VALUES (?,?,?,?,?,?)";
+    $stmt = mysqli_stmt_init($conn);
+    mysqli_stmt_prepare($stmt, $sql);
+    mysqli_stmt_bind_param($stmt, "iiiiss", $H,$K,$O,$E,$handwerker_beschreibung, $handwerker_kommentar);
+    mysqli_stmt_execute($stmt);
+   
    
     echo "$H";
     echo "$O";
