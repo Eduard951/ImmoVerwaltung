@@ -91,9 +91,14 @@ if(isset($_POST['hausobjekt_submit'])){
                 }
                 //Mit ObjektID in Verwaltungseinheit einsetzen
                 mysqli_stmt_prepare($stmt, $ho_sql_verw);
-                mysqli_stmt_bind_param($stmt, "isisb", $objektID_temp, $ho_ve_kommentar, $ho_besitzer, $ho_ve_typ, $ho_bauplan);
+                if(empty($ho_eigentuemer)){
+                mysqli_stmt_bind_param($stmt, "isisb", $objektID_temp, $ho_ve_kommentar, $null, $ho_ve_typ, $ho_bauplan);
                 mysqli_stmt_execute($stmt);
-                
+                }else{
+                mysqli_stmt_bind_param($stmt, "isisb", $objektID_temp, $ho_ve_kommentar, $ho_eigentuemer, $ho_ve_typ, $ho_bauplan);
+                mysqli_stmt_execute($stmt);
+                }
+               
             header("Location: ../add_hausobjekt.php?insert=success");
             exit();
         }
