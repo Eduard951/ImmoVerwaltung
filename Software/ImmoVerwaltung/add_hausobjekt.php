@@ -33,7 +33,7 @@
     	<option value="">-kein Eigentümer-</option>
     <?php 
     
-            $sql = 'SELECT BenutzerID, Vorname, Name FROM Benutzer';
+            $sql = 'SELECT BenutzerID, Vorname, Name FROM benutzer';
             $result = mysqli_query($conn, $sql);
             
             if (mysqli_num_rows($result) > 0) {
