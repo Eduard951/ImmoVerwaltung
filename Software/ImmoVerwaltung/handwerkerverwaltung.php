@@ -27,10 +27,10 @@ if(isset($_SESSION['sessionid'])){
     $query2=mysqli_query($conn, "select * from  handwerker_kategorie");
     $query3=mysqli_query($conn, "select * from hausobjekt");
     $query4=mysqli_query($conn, "select * from verwaltungseinheit");
-    $query5=mysqli_query($conn, "select * from hausobjekt");
-    $query6=mysqli_query($conn, "select * from hausobjekt");
-    $query7=mysqli_query($conn, "select * from hausobjekt");
-    $query8=mysqli_query($conn, "select * from hausobjekt");
+    $query5=mysqli_query($conn, "select * from hausobjekt ORDER BY Strasse ASC");
+    $query6=mysqli_query($conn, "select * from hausobjekt ORDER BY Hausnr ASC");
+    $query7=mysqli_query($conn, "select * from hausobjekt ORDER BY PLZ ASC");
+    $query8=mysqli_query($conn, "select * from hausobjekt ORDER BY Ort ASC");
 echo '
 <html>
 <head>
