@@ -26,7 +26,7 @@
 	    
 	    if(!empty($result)){
 	        while($row= $result->fetch_assoc()){
-	            echo'<li><ul class="alle_objekte">'.$row['PLZ']." ".$row['Ort'];
+	            echo'<li><ul class="alle_objekte" style="font-weight: bold;">'.$row['PLZ']." ".$row['Ort'];
                 
                 mysqli_stmt_bind_param($stmt_strasse_nummer, "s", $row['Ort']);
                 
@@ -36,7 +36,7 @@
                 
                 if(!empty($result_objekte)){
                     while($row2=$result_objekte->fetch_assoc()){
-                        echo'<li><ul class="VEs"><form action="index.php" method="POST"><input type="hidden" name="objektid" value="'.$row2['ObjektID'].'"/>'.$row2['Strasse']." ".$row2['Hausnr'].'</form>';
+                        echo'<li><ul class="VEs" style="font-weight: bold;"><form action="index.php" method="POST"><input type="hidden" name="objektid" value="'.$row2['ObjektID'].'"/>'.$row2['Strasse']." ".$row2['Hausnr'].'</form>';
                         
                         mysqli_stmt_bind_param($stmt_VEs, "ss", $row2['Strasse'],$row2['Hausnr']);
                         
