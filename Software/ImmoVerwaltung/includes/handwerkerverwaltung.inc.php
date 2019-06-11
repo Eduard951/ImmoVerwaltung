@@ -105,7 +105,7 @@ if(isset($_POST["sup"] ))
     
     $handwerker_kommentar=$_POST["kommentar"];
     $handwerker_beschreibung=$_POST["beschreibung"];
-    $handwerker_haus=$_POST["haus"];
+   // $handwerker_haus=$_POST["haus"];
     $handwerker_verwaltungseinheit=$_POST["verwaltungseinheit"];
     $hausstrasse=$_POST["strasse"];
     $hausnr=$_POST["hausnr"];
@@ -113,7 +113,7 @@ if(isset($_POST["sup"] ))
     $hausort=$_POST["ort"];
     
     
-    if (empty($handwerker_name) || empty( $handwerker_kategorie) || empty( $handwerker_kommentar) || empty( $handwerker_beschreibung) || empty(  $handwerker_haus)|| empty(  $handwerker_verwaltungseinheit)){
+    if (empty($handwerker_name) || empty( $handwerker_kategorie) || empty( $handwerker_kommentar) || empty( $handwerker_beschreibung) ||  empty(  $handwerker_verwaltungseinheit) ||  empty( $hausstrasse) ||  empty(  $hausnr) ||  empty(  $hausplz) ||  empty(  $hausort)){
         echo "Bitte fuellen sie alle  Felder";
         
     }else {
@@ -135,7 +135,7 @@ if(isset($_POST["sup"] ))
         
     }
     
-    $query2=mysqli_query($conn," select * from hausobjekt where ObjektID='$handwerker_haus'");
+  /*  $query2=mysqli_query($conn," select * from hausobjekt where ObjektID='$handwerker_haus'");
     
 
     while ($row=mysqli_fetch_array($query2 ) )
@@ -143,9 +143,21 @@ if(isset($_POST["sup"] ))
         $O= $row["ObjektID"]    ;
         
         
+    }*/
+        
+        
+        
+         $query4=mysqli_query($conn," select ObjektID from hausobjekt where Strasse='$hausstrasse' and Hausnr='$hausnr' and PLZ='$hausplz' and Ort='$hausort'");
+    
+    
+    while ($row=mysqli_fetch_array($query4 ) )
+    {
+        $OI= $row["ObjektID"]    ;
+        
+        
     }
     
-    $query3=mysqli_query($conn," select VerwID from verwaltungseinheit where ObjektID='$handwerker_haus' and Kommentar='$handwerker_verwaltungseinheit'");
+    $query3=mysqli_query($conn," select VerwID from verwaltungseinheit where ObjektID='$OI' and Kommentar='$handwerker_verwaltungseinheit'");
     
     
     while ($row=mysqli_fetch_array($query3 ) )
@@ -155,15 +167,7 @@ if(isset($_POST["sup"] ))
         
     }
     
-    $query4=mysqli_query($conn," select ObjektID from hausobjekt where Strasse='$hausstrasse' and Hausnr='$hausnr' and PLZ='$hausplz' and Ort='$hausort'");
-    
-    
-    while ($row=mysqli_fetch_array($query4 ) )
-    {
-        $OI= $row["ObjektID"]    ;
-        
-        
-    }
+   
     
   
     
@@ -174,18 +178,18 @@ if(isset($_POST["sup"] ))
     
    
     //mysqli_query($conn, $sql)m;
-    echo"$OI";
     
     
-    /*$sql= "INSERT INTO handwerkerverwaltung (HandwerkerID, KategorieID, ObjektID, VerwID, Aufgabenbeschreibung, Kommentar) VALUES (?,?,?,?,?,?)";
+    
+    $sql= "INSERT INTO handwerkerverwaltung (HandwerkerID, KategorieID, ObjektID, VerwID, Aufgabenbeschreibung, Kommentar) VALUES (?,?,?,?,?,?)";
     $stmt = mysqli_stmt_init($conn);
     mysqli_stmt_prepare($stmt, $sql);
-    mysqli_stmt_bind_param($stmt, "iiiiss", $H,$K,$O,$E,$handwerker_beschreibung, $handwerker_kommentar);
+    mysqli_stmt_bind_param($stmt, "iiiiss", $H,$K,$OI,$E,$handwerker_beschreibung, $handwerker_kommentar);
     mysqli_stmt_execute($stmt);
    
    
     echo "done";
-   */
+   
     
    
     }
