@@ -92,7 +92,7 @@ while ($row=mysqli_fetch_array($query1 )  )
        <option> Strasse</option>   ';
     while ($row=mysqli_fetch_array($query5 ) )
     {
-        echo '<option value="'.$row["Strasse"].'">'   .$row["strasse"]     .'</option>';
+        echo '<option value="'.$row["Strasse"].'">'   .$row["Strasse"]     .'</option>';
         
        
     }
