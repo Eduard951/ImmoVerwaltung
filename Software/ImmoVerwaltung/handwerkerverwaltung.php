@@ -78,7 +78,7 @@ while ($row=mysqli_fetch_array($query1 )  )
     echo '</select>';
     
     
-    echo ' <select name="haus">
+   /* echo ' <select name="haus">
        <option> Haus</option>   ';
     while ($row=mysqli_fetch_array($query3 ) )
     {
@@ -86,7 +86,7 @@ while ($row=mysqli_fetch_array($query1 )  )
         
         
     }
-    echo '</select>';
+    echo '</select>';*/
   
     echo ' <select name="strasse">
        <option> Strasse</option>   ';
