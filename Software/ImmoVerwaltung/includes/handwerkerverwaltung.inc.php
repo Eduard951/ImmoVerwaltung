@@ -44,7 +44,7 @@ if(isset($_POST["sus"]))
     $stmt->execute();
    
     
-    echo "kategorie added";
+    echo "Handwerker added";
     
     
     
