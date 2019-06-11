@@ -24,11 +24,7 @@ if(isset($_POST["oui"]))
   
    
     $stmt->execute();
-   // $sql=" INSERT INTO kategorie (Name) VALUES('$oui ')";
-   //mysqli_query($conn, $sql);
-   
-   
- //  header("Location:..//handwerkerverwaltung.php?add=succes");
+ 
    
     echo "kategorie added";
  
@@ -37,6 +33,25 @@ if(isset($_POST["oui"]))
      
       
 }
+
+if(isset($_POST["sus"]))
+{
+    $oui=$_POST["sus"];
+    $stmt = $conn->prepare("INSERT INTO handwerker (Name) VALUES (?)");
+    $stmt->bind_param("s",$oui);
+    
+    
+    $stmt->execute();
+   
+    
+    echo "kategorie added";
+    
+    
+    
+    
+    
+}
+
 /*if(isset($_POST["del"]))
 {
     
@@ -80,10 +95,7 @@ if(isset($_POST["dela"]))
     
     
 }
-//$sql1= " INSERT INTO handwerkerverwaltung (HandwerkerId,KategorieId ,Aufgabebeschreibung,Kommentar,HausId) VALUES ('2','1','bonjour','handwerker_kommentar','2')";
-//mysqli_query($conn, $sql1);
-//$sql3= " INSERT INTO handwerkerverwaltung (HandwerkerId,KategorieId ,Aufgabebeschreibung,Kommentar,HausId) VALUES ('2','15','nouveau ','kommentar','1')";
-//mysqli_query($conn, $sql3);
+
 
 if(isset($_POST["sup"] ))
 {
@@ -95,6 +107,11 @@ if(isset($_POST["sup"] ))
     $handwerker_beschreibung=$_POST["beschreibung"];
     $handwerker_haus=$_POST["haus"];
     $handwerker_verwaltungseinheit=$_POST["verwaltungseinheit"];
+    $hausstrasse=$_POST["strasse"];
+    $hausnr=$_POST["hausnr"];
+    $hausplz=$_POST["plz"];
+    $hausort=$_POST["ort"];
+    
     
     if (empty($handwerker_name) || empty( $handwerker_kategorie) || empty( $handwerker_kommentar) || empty( $handwerker_beschreibung) || empty(  $handwerker_haus)|| empty(  $handwerker_verwaltungseinheit)){
         echo "Bitte fuellen sie alle  Felder";
@@ -138,6 +155,18 @@ if(isset($_POST["sup"] ))
         
     }
     
+    $query4=mysqli_query($conn," select ObjektID from hausobjekt where Strasse='$hausstrasse' and Hausnr='$hausnr' and PLZ='$hausplz' and Ort='$hausort'");
+    
+    
+    while ($row=mysqli_fetch_array($query4 ) )
+    {
+        $OI= $row["ObjektID"]    ;
+        
+        
+    }
+    
+  
+    
     
   //  $sql = "insert into handwerkerverwaltung (HandwerkerID,KategorieID ,ObjektID,VerwID,Aufgabebeschreibung,Kommentar)
   // values($H,$K,$O,$E,$handwerker_beschreibung, $handwerker_kommentar)";
@@ -145,10 +174,10 @@ if(isset($_POST["sup"] ))
     
    
     //mysqli_query($conn, $sql);
+    echo"$OI";
     
     
-    
-    $sql= "INSERT INTO handwerkerverwaltung (HandwerkerID, KategorieID, ObjektID, VerwID, Aufgabenbeschreibung, Kommentar) VALUES (?,?,?,?,?,?)";
+    /*$sql= "INSERT INTO handwerkerverwaltung (HandwerkerID, KategorieID, ObjektID, VerwID, Aufgabenbeschreibung, Kommentar) VALUES (?,?,?,?,?,?)";
     $stmt = mysqli_stmt_init($conn);
     mysqli_stmt_prepare($stmt, $sql);
     mysqli_stmt_bind_param($stmt, "iiiiss", $H,$K,$O,$E,$handwerker_beschreibung, $handwerker_kommentar);
@@ -156,7 +185,7 @@ if(isset($_POST["sup"] ))
    
    
     echo "done";
-   
+   */
     
    
     }
