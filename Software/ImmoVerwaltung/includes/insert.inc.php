@@ -175,7 +175,7 @@ if(isset($_POST['verwaltungseinheit_submit'])){
 
     if(isset($_POST['mietverhaeltnis_submit'])){
         
-//         require 'dbh.inc.php';
+        require "../lib/fpdf181/mc_table.php";
       
         $mv_verwID =  $_POST['mv_verwaltungseinheit'];
         $mv_vermieterID = $_POST['mv_vermieter'];
@@ -201,10 +201,256 @@ if(isset($_POST['verwaltungseinheit_submit'])){
                 mysqli_stmt_execute($stmt);
             }
 
-            header("Location: ../add_mietverhaeltnis.php?insert=success");
-            exit();
+            
             
         }
+        
+        //Wohnungsgeberbescheinigung im Anschluss erstellen
+        $wg_namen_sql = "SELECT Vorname, Name, Strasse, Hausnr, PLZ, Ort FROM benutzer WHERE BenutzerID = ?";
+        $wg_ho_objektID_sql = "SELECT ObjektID FROM verwaltungseinheit WHERE VerwID = ?";
+        $wg_ho_adresse_sql = "SELECT Strasse, Hausnr, PLZ, Ort FROM hausobjekt WHERE ObjektID = ?";
+        $wg_verw_sql = "SELECT Kommentar, Besitzer FROM verwaltungseinheit WHERE VerwID = ?";
+
+        //Namen und Adresse von Mieter und Vermieter ermitteln
+        if(!mysqli_stmt_prepare($stmt, $wg_namen_sql)){
+            header("Location: ../add_mietverhaeltnis.php?namen=sqlerror");
+            exit();
+        }else{
+            mysqli_stmt_bind_param($stmt, "i", $mv_vermieterID);
+            mysqli_stmt_execute($stmt);
+            $result_vermieter = mysqli_stmt_get_result($stmt);
+            if($row=mysqli_fetch_assoc($result_vermieter)){
+                
+                $wg_vermieter_vorname = $row['Vorname'];
+                $wg_vermieter_name = $row['Name'];
+                $wg_vermieter_strasse = $row['Strasse'];
+                $wg_vermieter_hausnr = $row['Hausnr'];
+                $wg_vermieter_plz = $row['PLZ'];
+                $wg_vermieter_ort = $row['Ort'];
+            }
+            mysqli_stmt_bind_param($stmt, "i", $mv_mieterID);
+            mysqli_stmt_execute($stmt);
+            $result_mieter = mysqli_stmt_get_result($stmt);
+            if($row=mysqli_fetch_assoc($result_mieter)){
+                
+                $wg_mieter_vorname = $row['Vorname'];
+                $wg_mieter_name = $row['Name'];
+                $wg_mieter_strasse = $row['Strasse'];
+                $wg_mieter_hausnr = $row['Hausnr'];
+                $wg_mieter_plz = $row['PLZ'];
+                $wg_mieter_ort = $row['Ort'];
+            }
+        }
+        //ObjektID holen um die Adresse holen zu können
+        if(!mysqli_stmt_prepare($stmt, $wg_ho_objektID_sql)){
+            header("Location: ../add_mietverhaeltnis.php?objektID=sqlerror");
+            exit();
+        }else{
+            mysqli_stmt_bind_param($stmt, "i", $mv_verwID);
+            mysqli_stmt_execute($stmt);
+            $result_objektID = mysqli_stmt_get_result($stmt);
+            if($row=mysqli_fetch_assoc($result_objektID)){
+                
+                $wg_objektID = $row['ObjektID'];
+            }
+            
+        }
+        //Adresse des Hausobjekts
+        if(!mysqli_stmt_prepare($stmt, $wg_ho_adresse_sql)){
+            header("Location: ../add_mietverhaeltnis.php?adresse=sqlerror");
+            exit();
+        }else{
+            mysqli_stmt_bind_param($stmt, "i", $wg_objektID);
+            mysqli_stmt_execute($stmt);
+            $result_adresse = mysqli_stmt_get_result($stmt);
+            if($row=mysqli_fetch_assoc($result_adresse)){
+                
+                $wg_ho_strasse = $row['Strasse'];
+                $wg_ho_hausnr = $row['Hausnr'];
+                $wg_ho_plz = $row['PLZ'];
+                $wg_ho_ort = $row['Ort'];
+            }
+            
+        }
+        //Kommentar aus Verwaltungseinheit
+        if(!mysqli_stmt_prepare($stmt, $wg_verw_sql)){
+            header("Location: ../add_mietverhaeltnis.php?kommentar=sqlerror");
+            exit();
+        }else{
+            mysqli_stmt_bind_param($stmt, "i", $mv_verwID);
+            mysqli_stmt_execute($stmt);
+            $result_kommentar = mysqli_stmt_get_result($stmt);
+            if($row=mysqli_fetch_assoc($result_kommentar)){
+                
+                $wg_kommentar = $row['Kommentar'];
+                $wg_besitzer = $row['Besitzer'];
+            }
+            
+        }
+        //Besitzer der Verwaltungseinheit
+        if(!empty($wg_besitzer)){
+            if(!mysqli_stmt_prepare($stmt, $wg_namen_sql)){
+                header("Location: ../add_mietverhaeltnis.php?kommentar=sqlerror");
+                exit();
+            }else{
+                mysqli_stmt_bind_param($stmt, "i", $wg_besitzer);
+                mysqli_stmt_execute($stmt);
+                $result_besitzer = mysqli_stmt_get_result($stmt);
+                if($row=mysqli_fetch_assoc($result_besitzer)){
+                    
+                    $wg_eigentuemer_vorname = $row['Vorname'];
+                    $wg_eigentuemer_name = $row['Name'];
+                    $wg_eigentuemer_strasse = $row['Strasse'];
+                    $wg_eigentuemer_hausnr = $row['Hausnr'];
+                    $wg_eigentuemer_plz = $row['PLZ'];
+                    $wg_eigentuemer_ort = $row['Ort'];
+                }
+            } 
+        }else{
+            $wg_eigentuemer_vorname = "";
+            $wg_eigentuemer_name = "";
+            $wg_eigentuemer_vorname = "";
+            $wg_eigentuemer_strasse = "";
+            $wg_eigentuemer_hausnr = "";
+            $wg_eigentuemer_plz = "";
+            $wg_eigentuemer_ort = "";
+        }
+        
+        if(empty($wg_besitzer)){ 
+                $kreuz = "";
+                $wg_eigentuemer_vorname = "";
+                $wg_eigentuemer_name = "";
+                $wg_eigentuemer_vorname = "";
+                $wg_eigentuemer_strasse = "";
+                $wg_eigentuemer_hausnr = "";
+                $wg_eigentuemer_plz = "";
+                $wg_eigentuemer_ort = "";
+        }else{
+            $eigentuemer_name = $wg_eigentuemer_name;
+            $eigentuemer_vorname = $wg_eigentuemer_vorname;
+            $eigentuemer_strasse = $wg_eigentuemer_strasse;
+            $eigentuemer_hausnr = $wg_eigentuemer_hausnr;
+            $eigentuemer_plz = $wg_eigentuemer_plz;
+            $eigentuemer_ort = $wg_eigentuemer_ort;
+        }
+        if($wg_besitzer = $mv_vermieterID){
+            $kreuz = "X";
+            $kreuz2 = "";
+        }else{
+            $kreuz = "";
+            $kreuz2 = "X";
+        }
+        
+        //Tabelle erstellen
+        $pdf = new PDF_MC_Table();
+        $pdf->AddPage();
+        $pdf->SetFont('Times','B',12);
+        $pdf->SetWidths(array(85,85));
+        $pdf->Cell(13);
+        $pdf->Cell(10,10,"EINZUG",0,0);
+        $pdf->Ln(4);
+        $pdf->Cell(13);
+        $pdf->Cell(10,10,"Wohnungsgeberbestaetigung zur Vorlage bei der Meldebehoerde",0,0);
+        $pdf->Ln(8);
+        $pdf->SetFont('Times','B',9);
+        $pdf->Cell(13);
+        $pdf->Cell(10,10,"Auszug aus §19 Abs. 1 Satz 1 und 2 BMG Mitwirkung des Wohnungsgebers",0,0);
+        $pdf->Ln(8);
+        $pdf->SetFont('Times','',8);
+        $pdf->Cell(13);
+        $pdf->MultiCell(170,4,"(1) Der Wohnungsgeber ist verpflichtet, bei der An- oder Abmeldung mitzuwirken. Hierzu hat der Wohnungsgeber oder eine von ihm beauftragte Person der meldepflichtigen Person den Einzug oder Auszug schriftlich oder elektronisch innerhalb der in §17 Absatz 1 oder 2 genannten Fristen (2 Wochen) zu bestaetigen", 0,"L",false);
+        $pdf->Ln(4);
+        $pdf->SetFont('Times','B',9);
+        $pdf->Cell(14);
+        $pdf->MultiCell(170,6,"Angaben zum Wohnungsgeber:", 1,"L",false);
+        
+        $pdf->SetFont('Times','',9);
+        $pdf->Cell(14);
+        $pdf->MultiCell(170,4,"Familienname / Vorname oder
+            Bezeichnung bei einer juristischen Person:      [$wg_vermieter_name, $wg_vermieter_vorname]
+            
+            Strasse / Hausnummer /
+            Adressierungszusaetze:                                     [$wg_vermieter_strasse $wg_vermieter_hausnr]
+            
+            PLZ / Ort:                                                         [$wg_vermieter_plz $wg_vermieter_ort]
+            
+            Telefonnummer: (Angabe freiwillig)               [$wg_besitzer                                                ]
+            
+            ", 1,"L",false);
+        
+        $pdf->Ln(2);
+        $pdf->SetFont('times','',9);
+        $pdf->Cell(13);
+        $pdf->Cell(10,10,"[$kreuz] Der Wohnungsgeber ist gleichzeitig Eigentuemer der Wohnung - oder -",0,0);
+        $pdf->Ln(4);
+        $pdf->Cell(13);
+        $pdf->Cell(10,10,"[$kreuz2] Der Wohnungsgeber ist nicht Eigentuemer der Wohnung. Der Name und die Anschrift des Eigentuemers lauten:",0,0);
+        $pdf->Ln(7);
+        
+        $pdf->Cell(14);
+        $pdf->MultiCell(170,4,"Familienname / Vorname oder
+            Bezeichnung bei einer juristischen Person:      [$eigentuemer_name, $eigentuemer_vorname]
+            
+            Strasse / Hausnummer /
+            Adressierungszusaetze:                                     [$eigentuemer_strasse $eigentuemer_hausnr]
+            
+            PLZ / Ort:                                                         [$eigentuemer_plz $eigentuemer_ort]
+            
+            ", 0,"L",false);
+        
+        $pdf->SetFont('Times','B',9);
+        $pdf->Cell(14);
+        $pdf->MultiCell(170,6,"Anschrift der Wohnung in die eingezogen wird:", 1,"L",false);
+        
+        $pdf->SetFont('Times','',9);
+        $pdf->Cell(14);
+        $pdf->MultiCell(170,4,"Strasse / Hausnummer:                                   [$wg_ho_strasse $wg_ho_hausnr]
+            
+            Zusatzangaben (z.B. Stockwerks- oder
+            Wohnungsnummer):                                       [WohnungsID: $mv_verwID / $wg_kommentar]
+            
+            PLZ / Ort:                                                       [$wg_ho_plz $wg_ho_ort]
+            
+            ", 1,"L",false);
+        $pdf->SetFont('times','',9);
+        $pdf->Cell(13);
+        $pdf->Cell(10,10,"In die oben genannte Wohnung ist/sind am [$mv_beginn] folgende Person/en eingezogen:",0,0);
+        $pdf->Ln(6);
+        $pdf->Cell(13);
+        $pdf->Cell(10,10,"Familienname:[$wg_mieter_name] Vorname:[$wg_mieter_vorname] ",0,0);
+        $pdf->Ln(6);
+        $pdf->Cell(13);
+        $pdf->Cell(10,10,"Familienname:[                                         ] Vorname:[                                         ] ",0,0);
+        $pdf->Ln(6);
+        $pdf->Cell(13);
+        $pdf->Cell(10,10,"Familienname:[                                         ] Vorname:[                                         ] ",0,0);
+        $pdf->Ln(6);
+        $pdf->Cell(13);
+        $pdf->Cell(10,10,"Familienname:[                                         ] Vorname:[                                         ] ",0,0);
+        $pdf->Ln(6);
+        $pdf->Cell(13);
+        $pdf->Cell(10,10,"Familienname:[                                         ] Vorname:[                                         ] ",0,0);
+        $pdf->Ln(12);
+        $pdf->SetFont('times','',8);
+        $pdf->Cell(13);
+        $pdf->MultiCell(170,4,"Ich bestaetige mit meiner Unterschrift den Einzug der oben genannten Person(en) in die oben bezeichnete Wohnung und dass ich als Wohnungsgeber oder als beauftragte Person diese Bescheinigung ausstellen darf.", 0,"L",false);
+        $pdf->Ln(4);
+        $pdf->Cell(13);
+        $pdf->MultiCell(170,4,"Ich habe davon Kenntnis genommen, dass ich ordnungswidrig handle, wenn ich hierzu nicht berechtigt bin, und dass es verboten ist, eine Wohnanschrift fuer eine Anmeldung eines Wohnsitzes einem Dritten anzubieten oder zur Verfuegung zu stellen, obwohl ein tatsaechlicher Bezug der Wohnung durch einen Dritten weder stattfindet noch beabsichtigt ist.", 0,"L",false);
+        $pdf->Ln(4);
+        $pdf->Cell(13);
+        $pdf->MultiCell(170,4,"Ein Verstoss gegen dieses Verbot stellt eine Ordnungswidrigkeit dar und kann mit einer Geldbusse bis zu 50.000 Euro geahndet werden. Das Unterlassen einer Bestaetigung des Einzugs sowie die falsche oder nicht rechtzeitige Bestaetigung des Einzugs koennen als Ordnungswidrigkeiten mit Geldbussen bis zu 1.000 Euro geahndet werden.", 0,"L",false);
+        $pdf->Ln(4);
+        $pdf->Cell(13);
+        $pdf->Cell(10,10,"[                  ]         [                             ]",0,0);
+        $pdf->Ln(3);
+        $pdf->SetFont('times','',6);
+        $pdf->Cell(13);
+        $pdf->Cell(10,10,"Datum                                              Unterschrift des Wohnungsgebers oder des Wohnungseigentuemers",0,0);
+        $pdf->Output();
+        
+        
+        
     }
 
     
