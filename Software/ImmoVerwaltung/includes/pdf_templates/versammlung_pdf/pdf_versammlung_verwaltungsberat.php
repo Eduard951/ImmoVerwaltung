@@ -38,7 +38,7 @@ $pdf->SetFont("times","",12);
 
 for($y=0;$y<count($header);$y++){
     $pdf->Cell($width[$y],$height[$y],$header[$y],1,0,'C');
-    $pdf->MultiCell(145,$height[$y],$info[$u],1);
+    $pdf->MultiCell(145,$height[$y],"",1);
     //$pdf->Ln();
 }
 $pdf->Ln(5);
