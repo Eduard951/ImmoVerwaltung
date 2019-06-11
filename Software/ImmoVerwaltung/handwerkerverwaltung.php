@@ -211,7 +211,7 @@ echo '<button type="submit" name="dela"> delate</button>';
   <div class="card">
       <div class="card-header">
         <a class="collapsed card-link" data-toggle="collapse" href="#collapseFour">
-        Neu Handwerker Hinzufuegenu
+        Neu Handwerker Hinzufuegen
       </a>
       </div>
       <div id="collapseFour" class="collapse" data-parent="#accordion">

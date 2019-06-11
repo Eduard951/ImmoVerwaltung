@@ -173,7 +173,7 @@ if(isset($_POST["sup"] ))
     
     
    
-    //mysqli_query($conn, $sql)m;
+    //mysqli_query($conn, $sql);
     echo"$OI";
     
     
