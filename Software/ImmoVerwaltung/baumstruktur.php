@@ -36,7 +36,7 @@
                 
                 if(!empty($result_objekte)){
                     while($row2=$result_objekte->fetch_assoc()){
-                        echo'<li><ul class="VEs"><form action="index.php" method="POST"><button type="submit"><input type="hidden" name="objektid" value="'.$row2['ObjektID'].'"/>'.$row2['Strasse']." ".$row2['Hausnr'].'</button></form>';
+                        echo'<li><ul class="VEs"><form action="index.php" method="POST"><input type="hidden" name="objektid" value="'.$row2['ObjektID'].'"/>'.$row2['Strasse']." ".$row2['Hausnr'].'</form>';
                         
                         mysqli_stmt_bind_param($stmt_VEs, "ss", $row2['Strasse'],$row2['Hausnr']);
                         
