@@ -49,12 +49,13 @@
                                 echo'<li><form action="index.php" method="POST"><button type="submit"><input type="hidden" name="objektid" value="'.$row3['VerwID'].'"/>'.$row3['Typ']." ".$row3['Kommentar'].'</button></form></li>';
                             }
                         }
-                        echo'</ul></li>';
+                        //echo'</ul></li>';
                     }
                 }
 
                echo' </ul></li>';
 	        }
+		 echo'</ul></li>';
 	    }
 	    
 	    echo'</ul>';
