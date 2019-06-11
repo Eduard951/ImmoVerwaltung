@@ -27,6 +27,10 @@ if(isset($_SESSION['sessionid'])){
     $query2=mysqli_query($conn, "select * from  handwerker_kategorie");
     $query3=mysqli_query($conn, "select * from hausobjekt");
     $query4=mysqli_query($conn, "select * from verwaltungseinheit");
+    $query5=mysqli_query($conn, "select * from hausobjekt");
+    $query6=mysqli_query($conn, "select * from hausobjekt");
+    $query7=mysqli_query($conn, "select * from hausobjekt");
+    $query8=mysqli_query($conn, "select * from hausobjekt");
 echo '
 <html>
 <head>
@@ -73,6 +77,7 @@ while ($row=mysqli_fetch_array($query1 )  )
     }
     echo '</select>';
     
+    
     echo ' <select name="haus">
        <option> Haus</option>   ';
     while ($row=mysqli_fetch_array($query3 ) )
@@ -82,6 +87,45 @@ while ($row=mysqli_fetch_array($query1 )  )
         
     }
     echo '</select>';
+  
+    echo ' <select name="strasse">
+       <option> Strasse</option>   ';
+    while ($row=mysqli_fetch_array($query5 ) )
+    {
+        echo '<option value="'.$row["Strasse"].'">'   .$row["strasse"]     .'</option>';
+        
+       
+    }
+    echo '</select>';
+    echo ' <select name="hausnr">
+       <option> Hausnr</option>   ';
+    while ($row=mysqli_fetch_array($query6 ) )
+    {
+        echo '<option value="'.$row["Hausnr"].'">'   .$row["Hausnr"]     .'</option>';
+        
+        
+    }
+    echo '</select>';
+    
+    echo ' <select name="plz">
+       <option> PLZ</option>   ';
+    while ($row=mysqli_fetch_array($query7 ) )
+    {
+        echo '<option value="'.$row["PLZ"].'">'   .$row["PLZ"]     .'</option>';
+        
+        
+    }
+    echo '</select>';
+    echo ' <select name="ort">
+       <option> Ort</option>   ';
+    while ($row=mysqli_fetch_array($query8 ) )
+    {
+        echo '<option value="'.$row["Ort"].'">'   .$row["Ort"]     .'</option>';
+        
+        
+    }
+    echo '</select>';
+    
     
     
     echo ' <select name="verwaltungseinheit">
@@ -161,7 +205,39 @@ echo '<button type="submit" name="dela"> delate</button>';
   echo'     </div>
       </div>
     </div>
-  </div>
+ 
+
+
+  <div class="card">
+      <div class="card-header">
+        <a class="collapsed card-link" data-toggle="collapse" href="#collapseFour">
+        Neu Handwerker Hinzufuegene
+      </a>
+      </div>
+      <div id="collapseFour" class="collapse" data-parent="#accordion">
+        <div class="card-body">
+        
+
+   <form action="includes/handwerkerverwaltung.inc.php" method="POST">
+<input type="text" name="sus">
+<button type="submit" name="suss"> add</button>';
+
+
+
+echo '</form>';
+     
+
+
+
+
+ echo'  </div>
+      </div>
+    </div>
+
+
+
+ </div>
+
 </div>
     
 </body>
@@ -176,7 +252,5 @@ echo '<button type="submit" name="dela"> delate</button>';
  <?php 
     require "footer.php";
 ?>
- 
- 
  
  
