@@ -100,10 +100,10 @@ if(isset($_POST['hausobjekt_submit'])){
                     exit();
                 }else{
                     if(empty($ho_eigentuemer)){
-                        mysqli_stmt_bind_param($stmt, "isisb", mysql_insert_id(), $ho_ve_kommentar, $null, $ho_ve_typ, $ho_bauplan);
+                        mysqli_stmt_bind_param($stmt, "isisb", mysqli_insert_id(), $ho_ve_kommentar, $null, $ho_ve_typ, $ho_bauplan);
                     mysqli_stmt_execute($stmt);
                     }else{
-                        mysqli_stmt_bind_param($stmt, "isisb", mysql_insert_id(), $ho_ve_kommentar, $ho_eigentuemer, $ho_ve_typ, $ho_bauplan);
+                        mysqli_stmt_bind_param($stmt, "isisb", mysqli_insert_id(), $ho_ve_kommentar, $ho_eigentuemer, $ho_ve_typ, $ho_bauplan);
                     mysqli_stmt_execute($stmt);
                     }
                 }
