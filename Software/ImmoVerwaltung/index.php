@@ -80,6 +80,7 @@
                 <br><a href="gruesse.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="gruesse_submit">Gruesse</button>
                 <br><a href="add_hausobjekt.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="ho_submit">Hausobjekt hinzufügen</button>
                 <br><a href="add_verwaltungseinheit.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="ve_submit">Verwaltungseinheit hinzufügen</button>
+                <br><a href="add_zimmer.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="ve_submit">Zimmer und Rauchmelder hinzufügen</button>
                 <br><a href="add_mietverhaeltnis.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="mv_submit">Mietverhältnis hinzufügen</button>
                 <br><a href="nebenkostenabrechnung.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="nka_submit">Nebenkostenabrechnung</button>
                 <br><a href="UrteilSammlung.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="UrteilSammlung_submit">Urteilsammlung</button>
