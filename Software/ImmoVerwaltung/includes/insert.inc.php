@@ -40,6 +40,7 @@ if(isset($_POST['hausobjekt_submit'])){
     $ho_hausnr = $_POST['ho_hausnr'];
     $ho_plz = $_POST['ho_plz'];
     $ho_ort = $_POST['ho_ort'];
+    $objektID_temp = "";
     
     $ho_ve_kommentar = "Hauptverwaltungseinheit";
     $ho_ve_typ = "Hausobjekt";
@@ -89,20 +90,20 @@ if(isset($_POST['hausobjekt_submit'])){
                 }
             }
             //Gerade hinzugefügte ObjektID holen
-            $result_select = mysqli_query($conn, $ho_sql_select);
-            if($row=mysqli_fetch_assoc($result_select)){  
-                    $objektID_temp = 3009; //$row['ObjektID'];
-                }
+//             $result_select = mysqli_query($conn, $ho_sql_select);
+//             if($row=mysqli_fetch_assoc($result_select)){  
+//                     $objektID_temp = $row['ObjektID'];
+//                 }
                 //Mit ObjektID in Verwaltungseinheit einsetzen
                 if(!mysqli_stmt_prepare($stmt, $ho_sql_verw)){
                     header("Location: ../add_hausobjekt.php?error=add_ve_sqlerror");
                     exit();
                 }else{
                     if(empty($ho_eigentuemer)){
-                    mysqli_stmt_bind_param($stmt, "isisb", $objektID_temp, $ho_ve_kommentar, $null, $ho_ve_typ, $ho_bauplan);
+                        mysqli_stmt_bind_param($stmt, "isisb", mysql_insert_id(), $ho_ve_kommentar, $null, $ho_ve_typ, $ho_bauplan);
                     mysqli_stmt_execute($stmt);
                     }else{
-                    mysqli_stmt_bind_param($stmt, "isisb", $objektID_temp, $ho_ve_kommentar, $ho_eigentuemer, $ho_ve_typ, $ho_bauplan);
+                        mysqli_stmt_bind_param($stmt, "isisb", mysql_insert_id(), $ho_ve_kommentar, $ho_eigentuemer, $ho_ve_typ, $ho_bauplan);
                     mysqli_stmt_execute($stmt);
                     }
                 }
