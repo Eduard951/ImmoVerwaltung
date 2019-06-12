@@ -26,7 +26,7 @@
 	    
 	    if(!empty($result)){
 	        while($row= $result->fetch_assoc()){
-	            echo'<li><ul class="alle_objekte">'.$row['PLZ']." ".$row['Ort'];
+	            echo'<li><ul class="alle_objekte" style="font-weight: bold;">'.$row['PLZ']." ".$row['Ort'];
                 
                 mysqli_stmt_bind_param($stmt_strasse_nummer, "s", $row['Ort']);
                 
@@ -36,7 +36,7 @@
                 
                 if(!empty($result_objekte)){
                     while($row2=$result_objekte->fetch_assoc()){
-                        echo'<li><form action="index.php" method="POST"><button type="submit"><input type="hidden" name="objektid" value="'.$row2['ObjektID'].'"/><ul class="VEs">'.$row2['Strasse']." ".$row2['Hausnr'].'</button></form>';
+                        echo'<li><ul class="VEs" style="font-weight: bold;"><form action="index.php" method="POST"><input type="hidden" name="objektid" value="'.$row2['ObjektID'].'"/>'.$row2['Strasse']." ".$row2['Hausnr'].'</form>';
                         
                         mysqli_stmt_bind_param($stmt_VEs, "ss", $row2['Strasse'],$row2['Hausnr']);
                         
@@ -48,15 +48,17 @@
                             while($row3=$result_VEs->fetch_assoc()){
                                 echo'<li><form action="index.php" method="POST"><button type="submit"><input type="hidden" name="objektid" value="'.$row3['VerwID'].'"/>'.$row3['Typ']." ".$row3['Kommentar'].'</button></form></li>';
                             }
+                            echo'</ul>';
                         }
-                        echo'</ul></li>';
+                        echo'</li>';
                     }
-                }
-
-               echo' </ul></li>';
+                    //echo'</li>';
+                }               
+               echo'</ul>';
 	        }
+	        
+	        echo'</li>';
 	    }
-	    
 	    echo'</ul>';
 	    }
 	}else {
@@ -69,3 +71,4 @@
 <?php 
     require "footer.php";
 ?>
+

@@ -27,10 +27,10 @@ if(isset($_SESSION['sessionid'])){
     $query2=mysqli_query($conn, "select * from  handwerker_kategorie");
     $query3=mysqli_query($conn, "select * from hausobjekt");
     $query4=mysqli_query($conn, "select * from verwaltungseinheit");
-    $query5=mysqli_query($conn, "select * from hausobjekt");
-    $query6=mysqli_query($conn, "select * from hausobjekt");
-    $query7=mysqli_query($conn, "select * from hausobjekt");
-    $query8=mysqli_query($conn, "select * from hausobjekt");
+    $query5=mysqli_query($conn, "select * from hausobjekt ORDER BY Strasse ASC");
+    $query6=mysqli_query($conn, "select * from hausobjekt ORDER BY Hausnr ASC");
+    $query7=mysqli_query($conn, "select * from hausobjekt ORDER BY PLZ ASC");
+    $query8=mysqli_query($conn, "select * from hausobjekt ORDER BY Ort ASC");
 echo '
 <html>
 <head>
@@ -78,7 +78,7 @@ while ($row=mysqli_fetch_array($query1 )  )
     echo '</select>';
     
     
-    echo ' <select name="haus">
+   /* echo ' <select name="haus">
        <option> Haus</option>   ';
     while ($row=mysqli_fetch_array($query3 ) )
     {
@@ -86,13 +86,13 @@ while ($row=mysqli_fetch_array($query1 )  )
         
         
     }
-    echo '</select>';
+    echo '</select>';*/
   
     echo ' <select name="strasse">
        <option> Strasse</option>   ';
     while ($row=mysqli_fetch_array($query5 ) )
     {
-        echo '<option value="'.$row["Strasse"].'">'   .$row["strasse"]     .'</option>';
+        echo '<option value="'.$row["Strasse"].'">'   .$row["Strasse"]     .'</option>';
         
        
     }
@@ -252,7 +252,5 @@ echo '</form>';
  <?php 
     require "footer.php";
 ?>
- 
- 
  
  
