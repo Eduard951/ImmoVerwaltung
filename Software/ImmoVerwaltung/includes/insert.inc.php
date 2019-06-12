@@ -91,7 +91,7 @@ if(isset($_POST['hausobjekt_submit'])){
             //Gerade hinzugefügte ObjektID holen
             $result_select = mysqli_query($conn, $ho_sql_select);
             if($row=mysqli_fetch_assoc($result_select)){  
-                    $objektID_temp = $row['ObjektID'];
+                    $objektID_temp = 3009; //$row['ObjektID'];
                 }
                 //Mit ObjektID in Verwaltungseinheit einsetzen
                 if(!mysqli_stmt_prepare($stmt, $ho_sql_verw)){
