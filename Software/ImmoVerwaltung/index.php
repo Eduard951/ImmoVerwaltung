@@ -104,7 +104,7 @@
                             <br><a href="vermieterinformation.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="info_submit">Vermieter Kontaktinformation</button>
                             <br><a href="baumstruktur.php"><button class="btn btn-primary btn-lg">Zurueck</button>
                              <br><a href="Datenschutzauskunft.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="Datenschutzauskunft_submit"> Meine Daten</button>
-'; 
+';  
 	              }else{
 	                  echo'<br><a href="baumstruktur.php"><button class="btn btn-primary btn-lg">Zurueck</button>';
 	              }
