@@ -94,7 +94,7 @@ if(isset($_POST['hausobjekt_submit'])){
 //             if($row=mysqli_fetch_assoc($result_select)){  
 //                     $objektID_temp = $row['ObjektID'];
 //                 }
-            $objektID_temp = mysqli_insert_id();
+            $objektID_temp = mysqli_insert_id($conn);
                 //Mit ObjektID in Verwaltungseinheit einsetzen
                 if(!mysqli_stmt_prepare($stmt, $ho_sql_verw)){
                     header("Location: ../add_hausobjekt.php?error=add_ve_sqlerror");
