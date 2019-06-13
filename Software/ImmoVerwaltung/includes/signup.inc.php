@@ -11,6 +11,10 @@ if(isset($_POST['signup_submit'])){
     $email = $_POST['mail'];
     $password = $_POST['pwd'];
     $password_repeat = $_POST['pwd_repeat'];
+    $strasse = $_POST['strasse'];
+    $hausnr = $_POST['hausnr'];
+    $plz = $_POST['plz'];
+    $ort = $_POST['ort'];
     
     
     //gucken, ob variablen leer sind, wenn ja dann emptyfield error
@@ -55,7 +59,7 @@ if(isset($_POST['signup_submit'])){
             }
             else{
                 
-                $sql="INSERT INTO benutzer (Vorname, Name, Email, Passwort) VALUES (?, ?, ?,?)";
+                $sql="INSERT INTO benutzer (Vorname, Name, Email, Passwort,Strasse,Hausnr,PLZ,Ort) VALUES (?, ?, ?,?,?,?,?,?)";
                 $stmt = mysqli_stmt_init($conn);
                 if(!mysqli_stmt_prepare($stmt,$sql)){
                     header("Location: ../signup.php?error=sqlerror");
@@ -63,7 +67,7 @@ if(isset($_POST['signup_submit'])){
                 }else{
                     
                    // $hashed_pwd= $password_hash($password,PASSWORD_DEFAULT);
-                    mysqli_stmt_bind_param($stmt, "ssss", $name,$nachname,$email,$password);
+                    mysqli_stmt_bind_param($stmt, "ssssssss", $name,$nachname,$email,$password,$strasse,$hausnr,$plz,$ort);
                     mysqli_stmt_execute($stmt);
                     
                     header("Location: ../index.php?signup=success");
