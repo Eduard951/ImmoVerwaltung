@@ -6,6 +6,8 @@
 	<main>
 	<div class=container>
 	<div class=row>	<div class="col-md-offset-6 col-md-4 "><h2>Registrierung<span class="badge badge-secondary"></span></h2></div></div>
+	<br>
+	<br>
 		<form action="includes/signup.inc.php" method="post" class="row">
 			 
 			<input class="col-md-offset-1 col-md-5 form-control" type="text" name="name" placeholder="Name.."> 
@@ -26,7 +28,7 @@
 			
 			<input class="col-md-offset-1 col-md-5 form-control" type="text" name="ort" placeholder="Ort..">
 			
-			<button class="btn btn-secondary form-control" type="submit" name="signup_submit">Registrieren</button>
+			<button class="btn btn-secondary form-control col-md-8" type="submit" name="signup_submit">Registrieren</button>
 		</form>
 		</div>
 	</main>
