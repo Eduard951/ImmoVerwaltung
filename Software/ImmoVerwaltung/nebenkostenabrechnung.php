@@ -97,7 +97,7 @@ echo'
             <tr><td>Hausmeister</td><td><input type ="text" name="hausmeister_kosten_gesamt"></td><td><input name ="hausmeister_kosten_gesamt_key" type ="text"></td></tr>
             <tr><td>Treppenhausreinigung</td><td><input type ="text" name="treppenhaus_kosten_gesamt"></td><td><input name ="treppenhaus_kosten_gesamt_key" type ="text"></td></tr>
             <tr><td>Sonstige Bewirtschaftungskosten</td><td><input type ="text" name="sonstige_kosten_gesamt"></td><td><input name ="sonstige_kosten_gesamt_key" type ="text"></td></tr>
-            <tr><td>Wartun, TUEV Aufzug</td><td><input type ="text" name="aufzugwartung_kosten_gesamt"></td><td><input name ="aufzugwartung_kosten_gesamt_key" type ="text"></td></tr>
+            <tr><td>Wartung, TUEV Aufzug</td><td><input type ="text" name="aufzugwartung_kosten_gesamt"></td><td><input name ="aufzugwartung_kosten_gesamt_key" type ="text"></td></tr>
             <tr><td>Allgemeinstrom</td><td><input type ="text" name="strom_kosten_gesamt"></td><td><input name ="strom_kosten_gesamt_key" type ="text"></td></tr>
             <tr><td>Heizkosten</td><td><input type ="text" name="heiz_kosten_gesamt"></td><td><input name ="heiz_kosten_gesamt_key" type ="text" value="E" readonly></td>';for($k=0;$k<count($schluessel);$k++){echo'<td><input name ="heizkosten[]" type="text"></input></td>';}echo'</tr>
                 
