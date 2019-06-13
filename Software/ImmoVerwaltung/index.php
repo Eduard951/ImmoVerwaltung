@@ -83,7 +83,8 @@
                 <br><a href="add_zimmer.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="ve_submit">Zimmer und Rauchmelder hinzufügen</button>
                 <br><a href="add_mietverhaeltnis.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="mv_submit">Mietverhältnis hinzufügen</button>
                 <br><a href="nebenkostenabrechnung.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="nka_submit">Nebenkostenabrechnung</button>
-                <br><a href="UrteilSammlung.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="UrteilSammlung_submit">Urteilsammlung</button>
+                <br><a href="wirtschaftsplan.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="wp_submit">Wirtschaftsplan</button>
+		<br><a href="UrteilSammlung.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="UrteilSammlung_submit">Urteilsammlung</button>
                 <br><a href="handwerkerverwaltung.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="handwerkerverwaltung_submit">Handwerkerverwaltung</button>
                 <br><a href="Datenschutzauskunft.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="Datenschutzauskunft_submit">Meine Daten</button>
                 <br><a href="baumstruktur.php"><button class="btn btn-primary btn-lg">Zurueck</button>
