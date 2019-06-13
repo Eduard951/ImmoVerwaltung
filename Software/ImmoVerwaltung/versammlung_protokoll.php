@@ -80,30 +80,30 @@
 	        
 	            //ECHOS
 	           echo'
-            <form>
+            <form action="includes/abschlussprotokoll.inc.php" method="post">
                 <div class="form-group">
                     <label for="exampleInputEmail1">Beginn:</label>
-                    <input type="text" class="form-control" id="" aria-describedby="emailHelp" placeholder="'.$datum." ".$start.'" value="'.$datum." ".$start." Uhr".'">
+                    <input name="beginn" type="text" class="form-control" id="" aria-describedby="emailHelp" placeholder="'.$datum." ".$start.'" value="'.$datum." ".$start." Uhr".'">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Ort:</label>
-                    <input type="text" class="form-control" id="" placeholder="" value="'.$ort.'">
+                    <input name="ort" type="text" class="form-control" id="" placeholder="" value="'.$ort.'">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Ende:</label>
-                    <input type="text" class="form-control" id="" placeholder="" value="'.$datum." ".$ende." Uhr".'">
+                    <input name="ende" type="text" class="form-control" id="" placeholder="" value="'.$datum." ".$ende." Uhr".'">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Leiter:</label>
-                    <input type="text" class="form-control" id="" placeholder="" value="'.$verwalterid.'">
+                    <input name="leiter" type="text" class="form-control" id="" placeholder="" value="'.$verwalterid.'">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Protokollfuehrer:</label>
-                    <input type="text" class="form-control" id="" placeholder="" value="'.$verwalterid.'">
+                    <input name="protokollfuehrer" type="text" class="form-control" id="" placeholder="" value="'.$verwalterid.'">
                 </div>
                 <div class="form-group">
                     <label for="exampleInputPassword1">Verwaltungsbeirat:</label>
-                    <input type="text" class="form-control" id="" placeholder="">
+                    <input name="verwaltungsbeirat" type="text" class="form-control" id="" placeholder="">
                 </div>
 <br>';
 	           
@@ -141,9 +141,9 @@
                                       padding: 15px;
                                     }
                                 </style>
-
-                            <div><h4>TOP: '.$nr." ".$topic.'</h4>
-                            <textarea class="form-control" rows="3" type="text" value="'.$text.'">'.$text.'</textarea>
+                            
+                            <div><h4 name="top_freitext" >TOP: '.$nr." ".$topic.'</h4>
+                            <textarea name="freitext" class="form-control" rows="3" type="text" value="'.$text.'">'.$text.'</textarea>
                             </div>';
 	                       }else if($beschlussfk===1 && $beschluesse===0){
 	                           
@@ -175,19 +175,19 @@
 	                                       $kommentar= $row_bfk['Kommentar'];
 	                                       $anwesend= $row_bfk['Anwesend'];
 	                                       echo'<tr>
-                                                    <td>'.$vorname." ".$nachname.'</td>
-                                                    <td><input type="text"></input></td>
-                                                    <td><input type="text" value="'.$anwesend.'"></input></td>
-                                                    <td><input type="text"></input></td>
+                                                    <td><input type="text" name="personen_bfk[] value="'.$vorname." ".$nachname.'">'.$vorname." ".$nachname.'</td>
+                                                    <td><input type="text" name="anteil[]"></td>
+                                                    <td><input name="anwesend[]" type="text" value="'.$anwesend.'"></input></td>
+                                                    <td><input name="stimmenanteile[]" type="text"></input></td>
                                                 </tr>';
 	                                   }
 	                               }
 	                           }
 	                           
 	                       echo'
-                            <tr><td>Summe: </td><td>1000</td><td></td><td><input type="text"></input></td></tr>
+                            <tr><td>Summe: </td><td>1000</td><td></td><td><input name="stimmenanteile_gesamt" type="text"></input></td></tr>
                             </table>
-                            <br><textarea class="form-control" rows="1" type="text" value="'.$text.'">'.$text.'</textarea>
+                            <br><textarea name="text_bfk" class="form-control" rows="1" type="text" value="'.$text.'">'.$text.'</textarea>
 ';
 	                       }else if($beschlussfk===0 && $beschluesse===1){
 	                           
@@ -214,22 +214,22 @@
                          <table style="width:100%">
                               <tr>
                                 <th>Beschluss</th>
-                                <th><textarea class="form-control" rows="2" type="text" value="'.$text_beschluesse.'">'.$text_beschluesse.'</textarea></th> 
+                                <th><textarea name="beschluss" class="form-control" rows="2" type="text" value="'.$text_beschluesse.'">'.$text_beschluesse.'</textarea></th> 
                               </tr>
                               <tr>
                                 <td>Abstimmung</td>
-                                <td><input type="text" value="z.B. offen"></input></td>
+                                <td><input name="abstimmungstyp" type="text" value="z.B. offen"></input></td>
                               </tr>
                               <tr>
                                 <td>Beschlussregel</td>
-                                <td><select><option value="einfache Mehrheit">einfache Mehrheit</option><option value="x% Mehrheit">x% Mehrheit</option></select></td>
+                                <td><select name="beschlussregel" ><option value="einfache Mehrheit">einfache Mehrheit</option><option value="x% Mehrheit">x% Mehrheit</option></select></td>
                               </tr>
                               <tr>
                                 <td>Abstimmungsergebnis</td>
-                                <td>Ja: <input type="text"></input><br>Nein: <input type="text"></input><br>Enthaltungen: <input type="text"></input></td>
+                                <td>Ja: <input name="ja" type="text"></input><br>Nein: <input name="nein" type="text"></input><br>Enthaltungen: <input name="enthaltungen" type="text"></input></td>
                               </tr>                              
                             </table>  
-                            <br><textarea class="form-control" rows="3" type="text" value=""></textarea>
+                            <br><textarea name="beschluss_text" class="form-control" rows="3" type="text" value=""></textarea>
 
 
                             ';
@@ -249,7 +249,7 @@
 
 
 
-                echo'<br><br><button type="submit" class="btn btn-primary">Speichern</button>
+                echo'<br><br><button name="protokoll_submit" type="submit" class="btn btn-primary">Speichern</button>
             </form>
                 ';
 	            
@@ -272,6 +272,9 @@
 <?php 
     require "footer.php";
 ?>
+
+
+
 
 
 
