@@ -146,7 +146,7 @@ if(isset($_POST['nka_submit'])){
     $pdf->SetFont("times","",8);
     $pdf->Cell($w,5,$summe,1,0);
     $pdf->Cell($w,5,"",1,0);
-    for($m=0;$m<count($werte);$m++){
+    for($m=0;$m<count($wohnung_keys);$m++){
         $pdf->Cell($w,5,$werte[$m],1,0);
     }
     $pdf->Output();
