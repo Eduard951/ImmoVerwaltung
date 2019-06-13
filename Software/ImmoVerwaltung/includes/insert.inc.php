@@ -30,8 +30,7 @@ if(isset($_POST['hausobjekt_submit'])){
     }else {
         echo "Beim Hochladen Datei ist ein Fehler ist aufgetreten.";
     }
-    
-    
+
     $ho_kommentar = $_POST['ho_kommentar'];
     $ho_besitzer = $_POST['ho_eigentuemer'];
     $ho_typ = $_POST['ho_typ'];
@@ -40,8 +39,7 @@ if(isset($_POST['hausobjekt_submit'])){
     $ho_hausnr = $_POST['ho_hausnr'];
     $ho_plz = $_POST['ho_plz'];
     $ho_ort = $_POST['ho_ort'];
- 
-    
+
     $ho_ve_kommentar = "Hauptverwaltungseinheit";
     $ho_ve_typ = "Hausobjekt";
     $null = NULL;
@@ -58,7 +56,8 @@ if(isset($_POST['hausobjekt_submit'])){
         //Hole letzte ObjektID
         $ho_sql_select ="SELECT * FROM hausobjekt ORDER BY ObjektID DESC LIMIT 1";
         //Füge zusätzlich in die Tabelle verwaltungseinheit eine übergeordnete VE ein
-        $ho_sql_verw ="INSERT INTO verwaltungseinheit (ObjektID, Kommentar, Besitzer, Typ, Bauplan) VALUES (?, ?, ?, ?, ?)";
+        $ho_sql_verw ="INSERT INTO verwaltungseinheit (ObjektID, Kommentar, Besitzer, Wohnflaeche, Typ, Bauplan, VS_Muell, VS_Aufzug, VS_Eigentumsanteil, VS_Verwaltergebuehr) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        
         $stmt = mysqli_stmt_init($conn);
         
         //TODO: es kommt nie ein SQL-Error (?)
@@ -101,10 +100,10 @@ if(isset($_POST['hausobjekt_submit'])){
                     exit();
                 }else{
                     if(empty($ho_eigentuemer)){
-                        mysqli_stmt_bind_param($stmt, "isisb", $objektID_temp, $ho_ve_kommentar, $null, $ho_ve_typ, $ho_bauplan);
+                        mysqli_stmt_bind_param($stmt, "isidsbiiii", $objektID_temp, $ho_ve_kommentar, $null, $null, $ho_ve_typ, $ho_bauplan, $null, $null, $null, $null,);
                     mysqli_stmt_execute($stmt);
                     }else{
-                        mysqli_stmt_bind_param($stmt, "isisb", $objektID_temp, $ho_ve_kommentar, $ho_eigentuemer, $ho_ve_typ, $ho_bauplan);
+                        mysqli_stmt_bind_param($stmt, "isidsbiiii", $objektID_temp, $ho_ve_kommentar, $ho_eigentuemer, $null, $ho_ve_typ, $ho_bauplan, $null, $null, $null, $null);
                     mysqli_stmt_execute($stmt);
                     }
                 }
@@ -145,8 +144,6 @@ if(isset($_POST['verwaltungseinheit_submit'])){
 //         header("Location: ../insert.php?verwaltungseinheit_error=emptyfields");
 //         exit();
 //     }
-       echo $ve_eigentuemer;
-    
 //     else{
         $ve_sql = "INSERT INTO verwaltungseinheit (ObjektID, Kommentar, Besitzer, Wohnflaeche, Typ, Bauplan, VS_Muell, VS_Aufzug, VS_Eigentumsanteil, VS_Verwaltergebuehr) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = mysqli_stmt_init($conn);
@@ -156,18 +153,18 @@ if(isset($_POST['verwaltungseinheit_submit'])){
         }else{
             if(empty($ve_kommentar)){
                 if(empty($ve_eigentuemer)){
-                    mysqli_stmt_bind_param($stmt, "isidsb", $ve_objektID, $null, $null, $ve_wohnflaeche, $ve_typ, $ve_bauplan, $ve_muell, $ve_aufzug, $ve_eigentumsanteil, $ve_verwaltergebuehr);
+                    mysqli_stmt_bind_param($stmt, "isidsbiiii", $ve_objektID, $null, $null, $ve_wohnflaeche, $ve_typ, $ve_bauplan, $ve_muell, $ve_aufzug, $ve_eigentumsanteil, $ve_verwaltergebuehr);
                 mysqli_stmt_execute($stmt);
                 }else{
-                    mysqli_stmt_bind_param($stmt, "isidsb", $ve_objektID, $null, $ve_eigentuemer, $ve_wohnflaeche, $ve_typ, $ve_bauplan, $ve_muell, $ve_aufzug, $ve_eigentumsanteil, $ve_verwaltergebuehr);
+                    mysqli_stmt_bind_param($stmt, "isidsbiiii", $ve_objektID, $null, $ve_eigentuemer, $ve_wohnflaeche, $ve_typ, $ve_bauplan, $ve_muell, $ve_aufzug, $ve_eigentumsanteil, $ve_verwaltergebuehr);
                 mysqli_stmt_execute($stmt);
                 }
             }else{
                 if(empty($ve_eigentuemer)){
-                    mysqli_stmt_bind_param($stmt, "isidsb", $ve_objektID, $ve_kommentar, $null, $ve_wohnflaeche, $ve_typ, $ve_bauplan, $ve_muell, $ve_aufzug, $ve_eigentumsanteil, $ve_verwaltergebuehr);
+                    mysqli_stmt_bind_param($stmt, "isidsbiiii", $ve_objektID, $ve_kommentar, $null, $ve_wohnflaeche, $ve_typ, $ve_bauplan, $ve_muell, $ve_aufzug, $ve_eigentumsanteil, $ve_verwaltergebuehr);
                 mysqli_stmt_execute($stmt);
                 }else{
-                    mysqli_stmt_bind_param($stmt, "isidsb", $ve_objektID, $ve_kommentar, $ve_eigentuemer, $ve_wohnflaeche, $ve_typ, $ve_bauplan, $ve_muell, $ve_aufzug, $ve_eigentumsanteil, $ve_verwaltergebuehr);
+                    mysqli_stmt_bind_param($stmt, "isidsbiiii", $ve_objektID, $ve_kommentar, $ve_eigentuemer, $ve_wohnflaeche, $ve_typ, $ve_bauplan, $ve_muell, $ve_aufzug, $ve_eigentumsanteil, $ve_verwaltergebuehr);
                 mysqli_stmt_execute($stmt);
                     
                 }
@@ -355,10 +352,7 @@ if(isset($_POST['verwaltungseinheit_submit'])){
         $pdf->Ln(2);
         $pdf->SetFont('times','',9);
         $pdf->Cell(13);
-        $pdf->Cell(10,10,"[$kreuz] Der Wohnungsgeber ist gleichzeitig Eigentuemer der Wohnung - oder -",0,0);
-        $pdf->Ln(4);
-        $pdf->Cell(13);
-        $pdf->Cell(10,10,"[$kreuz2] Der Wohnungsgeber ist nicht Eigentuemer der Wohnung. Der Name und die Anschrift des Eigentuemers lauten:",0,0);
+        $pdf->Cell(10,10,"Der Name und die Anschrift des Eigentuemers lauten:",0,0);
         $pdf->Ln(7);
         
         $pdf->Cell(14);

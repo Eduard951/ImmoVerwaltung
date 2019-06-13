@@ -5,12 +5,30 @@
 
 ?>
 
+<?php $verwID = $_SESSION['objektid'];
+
+$ve_objektID_sql = "SELECT ObjektID FROM verwaltungseinheit WHERE VerwID = ?";
+$stmt = mysqli_stmt_init($conn);
+
+if(!mysqli_stmt_prepare($stmt, $ve_objektID_sql)){
+    header("Location: ../add_verwaltungseinheit.php?error=sqlerror");
+    exit();
+}else{
+    mysqli_stmt_bind_param($stmt, "i", $verwID);
+    mysqli_stmt_execute($stmt);
+    $result_ve_hausobjekt = mysqli_stmt_get_result($stmt);
+    if($row=mysqli_fetch_assoc($result_ve_hausobjekt)){
+        $ve_objektID = $row['ObjektID'];
+        
+    }
+}?>
+
 <!-- Formular für Verwaltungseinheiten  -->
 <h2>Verwaltungseinheit hinzufügen</h2>
 <form enctype="multipart/form-data" action="includes/insert.inc.php" method="post">
 <p>
 <label>Hausobjekt:</label>
-<input type="text" name="ve_hausobjekt" value="<?php echo $_SESSION['objektid'] ?>" readonly>
+<input type="text" name="ve_hausobjekt" value="<?php echo $ve_objektID ?>" readonly>
 <!--  <select name="ve_hausobjekt"> -->
 <?php
 

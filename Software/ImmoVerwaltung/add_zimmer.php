@@ -2,31 +2,46 @@
 require 'header.php';
 require 'includes/dbh.inc.php';
 if(isset($_SESSION['sessionid'])){
+    $objektID_session = $_SESSION['objektid'];
     
     ?>
 <!-- Formular für Zimmer -->
     <h2>Zimmer hinzufügen</h2>
     <form enctype="multipart/form-data" action="includes/insert.inc.php" method="post">
     <p>
-    <label>Hausobjekt:</label>
-    <input type="text" name="zm_hausobjekt" value="<?php echo $_SESSION['objektid'] ?>" readonly>
+    <label>Verwaltungseinheit:</label>
+    <input type="text" name="zm_verwaltungseinheit" value="<?php echo $_SESSION['objektid'] ?>" readonly>
     </p>
-    <p>
-     <label>Verwaltungseinheit auswählen:</label>
+    <!-- <p>
+      <label>Verwaltungseinheit auswählen:</label>
     <select name="zm_verwaltungseinheit">
             <?php 
     
-            $sql7 = 'SELECT VerwID FROM verwaltungseinheit';
-            $result7 = mysqli_query($conn, $sql7);
+//             $sql7 = "SELECT VerwID FROM verwaltungseinheit WHERE ObjektID = ?";
+//             $stmt = mysqli_stmt_init($conn);
             
-            if (mysqli_num_rows($result7) > 0) {
-                while($row = mysqli_fetch_assoc($result7)) {
-                    echo '<option value="'.$row['VerwID'].'">'.$row['VerwID'].'</option>';
-                }
-            }
+//             if(!mysqli_stmt_prepare($stmt, $sql7)){
+//                 header("Location: ../add_zimmer.php?error=sqlerror");
+//                 exit();
+//             }else{
+//                 mysqli_stmt_bind_param($stmt, "i", $objektID_session);
+//                 mysqli_stmt_execute($stmt);
+//                 $result7 = mysqli_stmt_get_result($stmt);
+//                 if($row=mysqli_fetch_assoc($result7) > 0){
+//                     while($row = mysqli_fetch_assoc($result7)) {
+//                        echo '<option value="'.$row['VerwID'].'">'.$row['VerwID'].'</option>';
+//                     }
+//                 }
+//             }
+                
+//                 if (mysqli_num_rows($result7) > 0) {
+//                     while($row = mysqli_fetch_assoc($result7)) {
+//                         echo '<option value="'.$row['VerwID'].'">'.$row['VerwID'].'</option>';
+//                     }
+
             ?>
         </select>
-    </p>
+    </p> -->
     <p>
     	<label>Bezeichnung:</label>
       	<input type="text" name="zm_bezeichnung">
