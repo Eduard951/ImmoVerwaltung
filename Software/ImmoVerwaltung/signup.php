@@ -4,14 +4,15 @@
 ?>
 
 	<main>
-		<h2>Registrierung<span class="badge badge-secondary"></span></h2>
-		<form action="includes/signup.inc.php" method="post">
+	<div class=container>
+	<div class=row>	<div class="col-md-offset-4 col-md-4 "><h2>Registrierung<span class="badge badge-secondary"></span></h2></div></div>
+	<div class=row>	<form action="includes/signup.inc.php" method="post" class=col-md-offset-4 col-md-4>
 			
-			<input class="form-control" type="text" name="name" placeholder="Name..">
+			<input class="form-control " type="text" name="name" placeholder="Name..">
 			<br>
-			<input class="form-control" type="text" name="nachname" placeholder="Nachname..">
+			<input class="form-control  " type="text" name="nachname" placeholder="Nachname..">
 			<br>
-			<input class="form-control" type="text" name="mail" placeholder="E-Mail...">
+			<input class="form-control " type="text" name="mail" placeholder="E-Mail...">
 			<br>
 			<input class="form-control" type="password" name="pwd" placeholder="Passwort...">
 			<br>
@@ -25,8 +26,9 @@
 			<br>
 			<input class="form-control" type="text" name="ort" placeholder="Ort..">
 			<br>
-			<button class="btn btn-secondary btn-lg" type="submit" name="signup_submit">Registrieren</button>
-		</form>
+			<button class="btn btn-secondary btn-lg form-control" type="submit" name="signup_submit">Registrieren</button>
+		</form></div>
+		</div>
 	</main>
 	
 <?php 
