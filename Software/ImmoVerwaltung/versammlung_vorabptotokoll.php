@@ -81,9 +81,9 @@ for($u=0; $u<count($toptypes);$u++){
         }
         
     }else if($toptypes[$u]=== "Beschlussfaehigkeit der Versammlung"){
-        require'includes/pdf_templates/versammlung_pdf/pdf_versammlung_beschlussfaehigkeit.php';
+        require_once'includes/pdf_templates/versammlung_pdf/pdf_versammlung_beschlussfaehigkeit.php';
     }else if($toptypes[$u]=== "Verwaltungsberat"){
-        require'includes/pdf_templates/versammlung_pdf/pdf_versammlung_verwaltungsberat.php';
+        require_once'includes/pdf_templates/versammlung_pdf/pdf_versammlung_verwaltungsberat.php';
     }
     $pdf->Ln(15);
 }
