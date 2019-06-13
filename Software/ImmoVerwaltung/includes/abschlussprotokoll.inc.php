@@ -314,9 +314,9 @@ if(isset($_POST['protokoll_submit'])){
                     mysqli_stmt_execute($stmt_test);
                     //require './pdf_templates/basic_pdf/pdf_ende.php';
                     
-                    header("Location: ../gruesse.php?success");
+                    header("Location: ../versammlung_uebersicht.php?success");
                 }else{
-                    header("Location: ../gruesse.php?errormsg");
+                    header("Location: ../versammlung_uebersicht.php?errormsg");
                 }
             }
             
