@@ -74,6 +74,7 @@ if(!mysqli_stmt_prepare($stmt, $sql)) {
 }
 
 echo'</form>';
+echo '< br><a href="baumstruktur.php"><button class="btn btn-primary btn-lg">Zurueck</button>';
 echo'</div>';
 }
 ?>
