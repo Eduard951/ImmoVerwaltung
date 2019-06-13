@@ -176,7 +176,7 @@
 	                                       $anwesend= $row_bfk['Anwesend'];
 	                                       echo'<tr>
                                                     <td>'.$vorname." ".$nachname.'</td>
-                                                    <td>Anteil</td>
+                                                    <td><input type="text"></input></td>
                                                     <td><input type="text" value="'.$anwesend.'"></input></td>
                                                     <td><input type="text"></input></td>
                                                 </tr>';
