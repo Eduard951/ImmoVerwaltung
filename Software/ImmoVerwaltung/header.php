@@ -24,7 +24,7 @@
  			   <div class="collapse navbar-collapse" id="collapsibleNavbar">
 				<ul class="navbar-nav ">
 					<li class="nav-item"><a href="index.php" class="nav-link">Übersicht</a></li>
-					<li class="nav-item"><a href="#" class="nav-link">Mein Konto</a></li>
+					<li class="nav-item"><a href="konto.php" class="nav-link">Mein Konto</a></li>
 					<li class="nav-item"><a href="#" class="nav-link">Einstellungen</a></li>
 					<?php 
 					if(isset($_SESSION['sessionid'])){
