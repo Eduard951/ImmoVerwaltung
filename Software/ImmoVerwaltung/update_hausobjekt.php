@@ -232,7 +232,7 @@
       	<select name="ho_typ">
             <?php echo $enum_text; ?>
             
-      	</select> 
+      	</select>
     </p>
     <p>
     <!-- Eigentümer auswählen aus Benutzertabelle  -->
