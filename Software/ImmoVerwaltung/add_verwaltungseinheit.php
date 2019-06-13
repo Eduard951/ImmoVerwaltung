@@ -49,16 +49,16 @@ if(!mysqli_stmt_prepare($stmt, $ve_objektID_sql)){
     <p>
     	<label>Typ:</label>
       	<select name="ve_typ">
-            <option selected="selected" value="1">Wohnung</option>
-        	<option value="2">Geschäft</option>
-        	<option value="3">Etage</option>
-        	<option value="4">Loft</option>
-        	<option value="5">Penthouse</option>
-        	<option value="6">Einliegerwohnung</option>
-        	<option value="7">Maisonettewohnung</option>
-        	<option value="8">Etagenwohnung</option>
-        	<option value="9">Souterrainwohnung</option>
-        	<option value="10">andere</option>
+            <option selected="selected" value="0">Wohnung</option>
+        	<option value="1">Geschäft</option>
+        	<option value="2">Etage</option>
+        	<option value="3">Loft</option>
+        	<option value="4">Penthouse</option>
+        	<option value="5">Einliegerwohnung</option>
+        	<option value="6">Maisonettewohnung</option>
+        	<option value="7">Etagenwohnung</option>
+        	<option value="8">Souterrainwohnung</option>
+        	<option value="9">andere</option>
       	</select> 
     </p>
 	<p>

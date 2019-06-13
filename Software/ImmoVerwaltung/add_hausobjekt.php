@@ -16,18 +16,18 @@ error_reporting(E_ALL);
     <p>
     	<label>Typ:</label>
       	<select name="ho_typ">
-            <option selected="selected" value="1">Einfamilienhaus</option>
-        	<option value="2">Zweifamilienhaus</option>
-        	<option value="3">Doppelhaus</option>
-        	<option value="4">Reihenhaus</option>
-        	<option value="5">Mehrfamilienhaus</option>
-        	<option value="6">Wohnhochhaus</option>
-        	<option value="7">Villa</option>
-        	<option value="8">Bungalow</option>
-        	<option value="9">Schloss</option>
-        	<option value="10">Wohn- und Gesch‰ftsgeb√§ude</option>
-        	<option value="11">Gesch‰ftsgeb√§ude</option>
-        	<option value="12">andere</option>
+            <option selected="selected" value="0">Einfamilienhaus</option>
+        	<option value="1">Zweifamilienhaus</option>
+        	<option value="2">Doppelhaus</option>
+        	<option value="3">Reihenhaus</option>
+        	<option value="4">Mehrfamilienhaus</option>
+        	<option value="5">Wohnhochhaus</option>
+        	<option value="6">Villa</option>
+        	<option value="7">Bungalow</option>
+        	<option value="8">Schloss</option>
+        	<option value="9">Wohn- und Gesch‰ftsgeb√§ude</option>
+        	<option value="10">Gesch‰ftsgeb√§ude</option>
+        	<option value="11">andere</option>
       	</select> 
     </p>
     <p>
