@@ -72,7 +72,13 @@ if(isset($_POST['nka_submit'])){
         array_push($spalten, "Wohnung: ".$value);
     }
     
-    require './pdf_templates/basic_pdf/pdf_start.php';
+    //require './pdf_templates/basic_pdf/pdf_start.php';
+        require 'dbh.inc.php';
+    require_once "../lib/fpdf181/fpdf.php";
+    
+    $pdf = new FPDF();
+    $pdf->AddPage("L");
+    $pdf->SetFont("times","",16);
     
     $pdf->ln(10);
     $pdf->Cell(10,10,"Nebenkostenabrechnung",0,0);
