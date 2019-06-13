@@ -41,7 +41,7 @@ if(isset($_POST['hausobjekt_submit'])){
     $ho_ort = $_POST['ho_ort'];
 
     $ho_ve_kommentar = "Hauptverwaltungseinheit";
-    $ho_ve_typ = "Hausobjekt";
+    $ho_ve_typ = 10;
     $null = NULL;
     
     //Adresse muss ausgefüllt sein
