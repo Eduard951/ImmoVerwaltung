@@ -10,8 +10,8 @@ session_start();
 if(isset($_SESSION['sessionid'])){
  echo" <div class='container'>";  
 
-    echo' <form   method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" >
-<div class="row"><h3 col-md-offset-2 col-md-5> Meine Daten Ansehen</h3></br></div>';
+    echo' <form   method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>
+<div class="row"><h3 col-md-offset-2 col-md-5> Meine Daten </h3></br></div>';
 //echo' <button type="submit" class="btn btn-success" name="submi "> </button>';
      
 
@@ -46,9 +46,7 @@ if(!mysqli_stmt_prepare($stmt, $sql)) {
     }
     echo '<div class="row">';
    echo' <table class="table table-bordered table-striped table-condensed col-md-offset-2 col-md-5">';
-  echo' <caption>';
-   echo '<h4>Meine Daten</h4>';
- echo'  </caption>';
+  
    echo '<tbody>';
    echo '<tr>';
    echo "<td>"."Name:" ."</td>". "<td>"."$vorname"." </td>";
