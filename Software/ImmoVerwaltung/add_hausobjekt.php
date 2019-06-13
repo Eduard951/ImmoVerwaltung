@@ -89,6 +89,9 @@ error_reporting(E_ALL);
     <button class="btn btn-secondary btn-lg" type="submit" name="hausobjekt_submit">Hausobjekt hinzufügen</button>
 </form>
 
+<p></p>
+<a href="index.php"><button class="btn btn-primary btn-lg">Zurueck</button>
+
 <?php 
 
     }

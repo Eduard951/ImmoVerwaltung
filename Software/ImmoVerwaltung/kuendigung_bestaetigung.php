@@ -49,7 +49,6 @@
 	}
 	?>
 	</main>
+	<p></p>
+<a href="index.php"><button class="btn btn-primary btn-lg">Zurueck</button>
 	
-<?php 
-    require "footer.php";
-?>

@@ -52,6 +52,8 @@ if(isset($_SESSION['sessionid'])){
     <button class="btn btn-secondary btn-lg" type="submit" name="zimmer_submit">Zimmer hinzuf�gen</button>
 </form>
 
+<p></p>
+<a href="index.php"><button class="btn btn-primary btn-lg">Zurueck</button>
 <?php 
 
     }

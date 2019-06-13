@@ -343,6 +343,8 @@
     <button class="btn btn-secondary btn-lg" type="submit" name="ho_update_submit">Daten aktualisieren</button>
 </form>
 
+<p></p>
+<a href="index.php"><button class="btn btn-primary btn-lg">Zurueck</button>
 <?php 
 
     }

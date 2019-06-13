@@ -54,7 +54,5 @@ echo '<br><button class="btn btn-success btn-lg" type="submit" name="wartungspro
 	}
 	?>
 	</main>
-	
-<?php 
-    require "footer.php";
-?>
+<p></p>
+<a href="index.php"><button class="btn btn-primary btn-lg">Zurueck</button>

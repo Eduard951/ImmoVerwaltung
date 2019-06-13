@@ -265,6 +265,8 @@ if(isset($_SESSION['sessionid'])){
     <button class="btn btn-secondary btn-lg" type="submit" name="ve_update_submit">Verwaltungseinheit aktualisieren</button>
 </form>
 
+<p></p>
+<a href="index.php"><button class="btn btn-primary btn-lg">Zurueck</button>
 <?php 
     
     }
