@@ -17,6 +17,14 @@
 			<br>
 			<input class="form-control" type="password" name="pwd_repeat" placeholder="Wiederhole passwort...">
 			<br>
+			<input class="form-control" type="text" name="strasse">
+			<br>
+			<input class="form-control" type="text" name="hausnr">
+			<br>
+			<input class="form-control" type="text" name="plz">
+			<br>
+			<input class="form-control" type="text" name="ort">
+			<br>
 			<button class="btn btn-secondary btn-lg" type="submit" name="signup_submit">Registrieren</button>
 		</form>
 	</main>
