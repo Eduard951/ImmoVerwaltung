@@ -107,7 +107,8 @@
 	      }else if(!empty($result_mieter)&& mysqli_num_rows($result_mieter)>0){
 	                  echo'<br><a href="reparatur.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="reparatur_submit">Reparatur/Beschwerdeeinrichtung</button>
                             <br><a href="vermieterinformation.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="info_submit">Vermieter Kontaktinformation</button>
-                              <br><a href="Datenschutzauskunft.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="Datenschutzauskunft_submit"> Meine Daten</button>
+                              <br><a href="mietzahlung.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="mietezahlung_submit">Mietzahlung</button>
+			      <br><a href="Datenschutzauskunft.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="Datenschutzauskunft_submit"> Meine Daten</button>
 				<br><a href="baumstruktur.php"><button class="btn btn-primary btn-lg">Zurueck</button>
 ';    
 	              }else{
