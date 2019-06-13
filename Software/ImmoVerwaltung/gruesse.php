@@ -42,7 +42,7 @@
         <h4>"Sehr geehrte/r Frau/Herr: ..."
         <br>
         <br>
-		<form action="includes/gruesse.inc.php" method="post" target="_blank">
+		<form action="includes/gruesse.inc.php" method="post">
 			
             <textarea class="form-control" rows="3" type="text" name="text"></textarea>
 		  ';    
