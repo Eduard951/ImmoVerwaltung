@@ -25,8 +25,8 @@ error_reporting(E_ALL);
         	<option value="6">Villa</option>
         	<option value="7">Bungalow</option>
         	<option value="8">Schloss</option>
-        	<option value="9">Wohn- und Gesch�ftsgebäude</option>
-        	<option value="10">Gesch�ftsgebäude</option>
+        	<option value="9">Wohn- und Geschäftsgebäude</option>
+        	<option value="10">Geschäftsgebäude</option>
         	<option value="11">andere</option>
       	</select> 
     </p>
