@@ -1,5 +1,6 @@
 <?php
 
+session_start();
 if(isset($_POST['nka_submit'])){
     
     $heizkosten = $_POST['heizkosten'];
@@ -73,7 +74,8 @@ if(isset($_POST['nka_submit'])){
     }
     
     //require './pdf_templates/basic_pdf/pdf_start.php';
-        require 'dbh.inc.php';
+    
+    require 'dbh.inc.php';
     require_once "../lib/fpdf181/fpdf.php";
     
     $pdf = new FPDF();
@@ -110,35 +112,38 @@ if(isset($_POST['nka_submit'])){
     
     $werte = array();
     
+    
     $ueberschriften = ["Muellabfuhr","Strassenreinigungsgebuehr","Gebaeudeversicherung","Haftpflichtversicherung","Hausmeister","Treppenhausreinigung","Sonstige Bewirtschaftungsk.","Wartung, TUEV Aufzug","Allgemeinstrom","Heizkosten"];
+    $wohnungswert=0;
     for($r=0;$r<count($ueberschriften);$r++){
     $pdf->Cell($w,5,$ueberschriften[$r],1,0);
     $pdf->Cell($w,5,$array_gesamtkosten[$r],1,0);
     $pdf->Cell($w,5,$array_kosten_keys[$r],1,0);
-    $wohnungswert=0;
+    
     for($q=0;$q<count($wohnung_keys);$q++){
         
         if($array_kosten_keys[$r]==="A"){
             $wert= ($array_gesamtkosten[$r]/$header_array[0])*$wohnung_keys[$q][0];
-            $wohnungswert+=$wert;
+            
             $pdf->Cell($w,5,round($wert,2),1,0);
         }else if($array_kosten_keys[$r]==="B"){
             $wert= ($array_gesamtkosten[$r]/$header_array[1])*$wohnung_keys[$q][1];
-            $wohnungswert+=$wert;
+            
             $pdf->Cell($w,5,round($wert,2),1,0);
         }else if($array_kosten_keys[$r]==="C"){
             $wert= ($array_gesamtkosten[$r]/$header_array[2])*$wohnung_keys[$q][2];
-            $wohnungswert+=$wert;
+            
             $pdf->Cell($w,5,round($wert,2),1,0);
         }else if($array_kosten_keys[$r]==="D"){
             $wert= ($array_gesamtkosten[$r]/$header_array[3])*$wohnung_keys[$q][3];
-            $wohnungswert+=$wert;
+            
             $pdf->Cell($w,5,round($wert,2),1,0);
         }else if($array_kosten_keys[$r]==="E"){
             $pdf->Cell($w,5,round($heizkosten[$q]),1,0);
         }
-        array_push($werte, $wohnungswert);
+        
     }
+    array_push($werte, $wohnungswert);
     $pdf->Ln();
     }
     $pdf->SetFont("times","B",8);
@@ -146,9 +151,65 @@ if(isset($_POST['nka_submit'])){
     $pdf->SetFont("times","",8);
     $pdf->Cell($w,5,$summe,1,0);
     $pdf->Cell($w,5,"",1,0);
-    for($m=0;$m<count($wohnung_keys);$m++){
-        $pdf->Cell($w,5,$werte[$m],1,0);
+    
+    
+    //$pdf->Output();
+    
+    $sql_haus="SELECT verwaltungseinheit.ObjektID FROM verwaltungseinheit WHERE VerwID=?";    
+    $sql_empfaenger = "SELECT DISTINCT mietverhaeltnis.Vermieter FROM mietverhaeltnis JOIN verwaltungseinheit ON mietverhaeltnis.VerwID=verwaltungseinheit.VerwID JOIN hausobjekt ON hausobjekt.ObjektID=verwaltungseinheit.ObjektID WHERE verwaltungseinheit.ObjektID=?";
+    
+    $stmt_haus = mysqli_stmt_init($conn);
+    $stmt_empfaenger = mysqli_stmt_init($conn);
+    
+    if(!mysqli_stmt_prepare($stmt_haus, $sql_haus)){
+        header("Location: ../versammlung_einladung.php?error=sqlerrorversammlung");
+        exit();
+    }else{
+        $id= $_SESSION['objektid'];
+        mysqli_stmt_bind_param($stmt_haus,"i",$id);
+        mysqli_stmt_execute($stmt_haus);
+        $result_haus = mysqli_stmt_get_result($stmt_haus);
+        if($roww = mysqli_fetch_assoc($result_haus)){
+            $objektid= $roww['ObjektID'];
+        }
+        
     }
-    $pdf->Output();
+
+    
+    if(!mysqli_stmt_prepare($stmt_empfaenger, $sql_empfaenger)){
+        header("Location: /baumstruktur.php?error=sqlerroremp");
+        exit();
+    }else{
+        mysqli_stmt_bind_param($stmt_empfaenger, "i", $objektid);
+        mysqli_stmt_execute($stmt_empfaenger);
+        $result_empfaenger = mysqli_stmt_get_result($stmt_empfaenger);
+        
+        if(!empty($result_empfaenger)){
+            while($row_emp =$result_empfaenger->fetch_assoc()){
+                $vermieter = $row_emp['Vermieter'];
+                
+                $sql_msg = "INSERT INTO nachrichten(SenderID,EmpfaengerID,Text,Datei) VALUES(?,?,?,?)";
+                $stmt_test = mysqli_stmt_init($conn);
+                
+                if(mysqli_stmt_prepare($stmt_test, $sql_msg)){
+                    
+                    $content = $pdf->Output("S");
+                    
+                    $gruese = "Nebenkostenabrechnung";
+                    //$l=1001;
+                    
+                    mysqli_stmt_bind_param($stmt_test, "iiss", $_SESSION['sessionid'],$vermieter,$gruese,$content);
+                    
+                    mysqli_stmt_execute($stmt_test);
+                    //require './pdf_templates/basic_pdf/pdf_ende.php';
+                    
+                    header("Location: ../baumstruktur.php?success");
+                }else{
+                    header("Location: ../baumstruktur.php?errormsg");
+                }
+                
+            }
+        }
+    }
     
 }
