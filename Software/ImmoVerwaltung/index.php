@@ -78,9 +78,12 @@
 	          echo'
                 <br><a href="versammlung_uebersicht.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="reparatur_submit">Eigentuemerversammlung</button>
                 <br><a href="add_hausobjekt.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="ho_submit">Hausobjekt hinzufügen</button>
+                <br><a href="update_hausobjekt.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="ho_update_submit">Hausobjekt bearbeiten</button>
                 <br><a href="add_verwaltungseinheit.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="ve_submit">Verwaltungseinheit hinzufügen</button>
+                <br><a href="update_verwaltungseinheit.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="ve__update_submit">Verwaltungseinheit bearbeiten</button>
                 <br><a href="add_zimmer.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="ve_submit">Zimmer und Rauchmelder hinzufügen</button>
                 <br><a href="add_mietverhaeltnis.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="mv_submit">Mietverhältnis hinzufügen</button>
+                <br><a href="update_mietverhaeltnis.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="mv_update_submit">Mietverhältnis bearbeiten</button>
                 <br><a href="nebenkostenabrechnung.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="nka_submit">Nebenkostenabrechnung</button>
                 <br><a href="wirtschaftsplan.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="wp_submit">Wirtschaftsplan</button>
 		<br><a href="UrteilSammlung.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="UrteilSammlung_submit">Urteilsammlung</button>
@@ -93,6 +96,7 @@
                 <br><a href="gruesse.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="gruesse_submit">Gruesse</button>
                 <br><a href="kuendigung_bestaetigung.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="kuendigung_submit">Kuendigungbestaetigung</button>
                 <br><a href="add_mietverhaeltnis.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="mv_submit">Mietverhältnis hinzufügen</button>
+                <br><a href="update_mietverhaeltnis.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="mv_update_submit">Mietverhältnis bearbeiten</button>
                 <br><a href="nebenkostenabrechnung.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="nka_submit">Nebenkostenabrechnung</button>
                 <br><a href="UrteilSammlung.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="UrteilSammlung_submit">Urteilsammlung</button>
                 <br><a href="handwerkerverwaltung.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="handwerkerverwaltung_submit">Handwerkerverwaltung</button>
