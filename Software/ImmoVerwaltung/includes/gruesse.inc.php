@@ -104,6 +104,7 @@ if(isset($_POST['gruesse_submit'])){
                         header("Location: ../gruesse.php?success");
                         }else{
                             header("Location: ../gruesse.php?errormsg");
+                            echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
                         }
                     
                     
