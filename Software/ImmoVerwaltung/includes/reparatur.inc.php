@@ -111,20 +111,26 @@ if(isset($_POST['reparatur_submit'])){
         
         //require './pdf_templates/basic_pdf/pdf_ende.php';
             
+        $sql_msg = "INSERT INTO nachrichten(SenderID,EmpfaengerID,Text,Datei) VALUES(?,?,?,?)";
+        $stmt_msg = mysqli_stmt_init($conn);
         
-        $stmt_msg = $conn->prepare("INSERT INTO nachrichten(SenderID,EmpfaengerID,Text,Datei) VALUES(?,?,?,?)");
+        if (mysqli_stmt_prepare($stmt_msg, $sql_msg)) {
+            //echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
             
-        $content = $pdf->Output("S");
-        
-        $gruese = "Reparatur/Beschwerdeformular ".$nachname;
-        
-        mysqli_stmt_bind_param($stmt_msg, "iiss", $$_SESSION['sessionid'],$empfaenger_id,$gruese,$content);
-        
-        mysqli_stmt_execute($stmt_msg);
-        //require './pdf_templates/basic_pdf/pdf_ende.php';
-        
-        header("Location: ../reparatur.php?success");
-        
+            
+            $content = $pdf->Output("S");
+            
+            $gruese = "Reparatur/Beschwerdeformular ".$nachname;
+            
+            mysqli_stmt_bind_param($stmt_msg, "iiss", $id,$empfaenger_id,$gruese,$content);
+            
+            mysqli_stmt_execute($stmt_msg);
+            //require './pdf_templates/basic_pdf/pdf_ende.php';
+            header("Location: ../reparatur.php?success");
+        }else{
+        header("Location: ../reparatur.php?errormsg");
+        echo "Prepare failed: (" . $conn->errno . ") " . $conn->error;
+        }
         }
             
     
@@ -157,4 +163,6 @@ if(isset($_POST['reparatur_submit'])){
   //  }else{
   //      echo "Datentyp nicht unterstuetzt";
   //  }   
+  
+        
 }
