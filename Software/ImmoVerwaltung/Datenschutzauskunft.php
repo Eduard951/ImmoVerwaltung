@@ -69,7 +69,7 @@ if(!mysqli_stmt_prepare($stmt, $sql)) {
   echo '<tr>';
   echo "<td>"."E-Mail:" ."</td>". "<td>"."$email"." </td>";
   echo '</tr>';
-     echo '</table>';
+     echo '</table>'; 
      echo '</div>';
 }
 

@@ -239,7 +239,7 @@ echo '</form>';
  </div>
 
 </div>
-    
+  < br><a href="baumstruktur.php"><button class="btn btn-primary btn-lg">Zurueck</button>  
 </body>
 </html>';
  
