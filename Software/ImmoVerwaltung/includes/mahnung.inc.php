@@ -97,7 +97,8 @@ if(isset($_POST['mahnung_submit'])){
                         //$gruese = "Gruesse von Vermieter"." ".$nachname;
                         //$l=1001;
                         
-							if (!isset($_POST['deaktivieren'])) {
+							$deaktivieren = $_POST['deaktivieren'];
+							if (!$deaktivieren) {
 						
 								mysqli_stmt_bind_param($stmt_test, "iiss", $id,$empfaenger_id,$mahnung,$content);
                         
