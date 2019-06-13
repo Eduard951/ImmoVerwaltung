@@ -28,7 +28,7 @@ if(isset($_POST["submi"])) {
             $h=$row["Hausnr"];
             $p=$row["PLZ"];
             $o=$row["Ort"]; 
-        
+         
 
         }
         echo "<h4> Name:</h4>".$n." <br>";
