@@ -22,12 +22,12 @@ if(isset($_POST["submit"])) {
         $result = mysqli_stmt_get_result($stmt);
         
         if($row=mysqli_fetch_assoc($result)){
-            $n=row[Name];
-            $v=row[Vorame];
-            $s=row[Strasse];
-            $h=row[Hausnr];
-            $p=row[PLZ];
-            $o=row[Ort];
+            $n=$row["Name"];
+            $v=$row["Vorame"];
+            $s=$row["Strasse"];
+            $h=$row["Hausnr"];
+            $p=$row["PLZ"];
+            $o=$row["Ort"];
         
 
         }
@@ -36,4 +36,4 @@ if(isset($_POST["submit"])) {
         echo "<h4> E-Mail:</h4> ". $_SESSION["sessionmail"]." <br>";
         echo "<h4> Adresse:</h4> ".$s.$h.$p.$o."<br>";
 }
-    } ?>
+    }  echo "meine";?>
