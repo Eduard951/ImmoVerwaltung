@@ -77,7 +77,6 @@
 	      if(!empty($result_verwalter)&& mysqli_num_rows($result_verwalter)>0){
 	          echo'
                 <br><a href="versammlung_uebersicht.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="reparatur_submit">Eigentuemerversammlung</button>
-                <br><a href="gruesse.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="gruesse_submit">Gruesse</button>
                 <br><a href="add_hausobjekt.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="ho_submit">Hausobjekt hinzufügen</button>
                 <br><a href="add_verwaltungseinheit.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="ve_submit">Verwaltungseinheit hinzufügen</button>
                 <br><a href="add_zimmer.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="ve_submit">Zimmer und Rauchmelder hinzufügen</button>
