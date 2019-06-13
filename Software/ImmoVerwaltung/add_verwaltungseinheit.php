@@ -49,16 +49,16 @@ if(!mysqli_stmt_prepare($stmt, $ve_objektID_sql)){
     <p>
     	<label>Typ:</label>
       	<select name="ve_typ">
-            <option selected="selected" value="0">Wohnung</option>
-        	<option value="1">Geschäft</option>
-        	<option value="2">Etage</option>
-        	<option value="3">Loft</option>
-        	<option value="4">Penthouse</option>
-        	<option value="5">Einliegerwohnung</option>
-        	<option value="6">Maisonettewohnung</option>
-        	<option value="7">Etagenwohnung</option>
-        	<option value="8">Souterrainwohnung</option>
-        	<option value="9">andere</option>
+            <option selected="selected" value="1">Wohnung</option>
+        	<option value="2">Geschäft</option>
+        	<option value="3">Etage</option>
+        	<option value="4">Loft</option>
+        	<option value="5">Penthouse</option>
+        	<option value="6">Einliegerwohnung</option>
+        	<option value="7">Maisonettewohnung</option>
+        	<option value="8">Etagenwohnung</option>
+        	<option value="9">Souterrainwohnung</option>
+        	<option value="10">andere</option>
       	</select> 
     </p>
 	<p>
@@ -96,19 +96,19 @@ if(!mysqli_stmt_prepare($stmt, $ve_objektID_sql)){
     <h4>Verteilungsschlüssel</h4>
         <p>
             <label>Müll:</label>
-            <input type="number" name="ve_muell">
+            <input type="number" name="ve_muell" value="0" min="0" max="1000">
         </p>
         <p>
             <label>Aufzug:</label>
-            <input type="number" name="ve_aufzug">
+            <input type="number" name="ve_aufzug" value="0" min="0" max="1000">
         </p>
         <p>
             <label>Eigentumsanteil:</label>
-            <input type="number" name="ve_eigentumsanteil">
+            <input type="number" name="ve_eigentumsanteil" value="0" min="0" max="1000">
         </p>
         <p>
             <label>Verwaltergebühr:</label>
-            <input type="number" name="ve_verwaltergebuehr">
+            <input type="number" name="ve_verwaltergebuehr" value="0" min="0" max="1000">
         </p>
         
     <button class="btn btn-secondary btn-lg" type="submit" name="verwaltungseinheit_submit">Verwaltungseinheit hinzufügen</button>
