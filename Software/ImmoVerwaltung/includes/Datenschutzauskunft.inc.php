@@ -1,10 +1,10 @@
 <?php
 require ('dbh.inc.php');
-session_start();
+
 ?>
 
 <?php
-
+session_start();
 
 
 if(isset($_POST["submi"])) {
@@ -50,7 +50,11 @@ if(isset($_POST["submi"])) {
     echo "meine";
     echo" $id";
     echo "$m";
-}
+    echo "$H";
+} echo "meine";
+    echo" $id";
+    echo "$m";
+    echo "$H";
 //}
      
     ?>
