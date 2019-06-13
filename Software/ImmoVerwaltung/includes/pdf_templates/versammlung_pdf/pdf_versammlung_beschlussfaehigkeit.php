@@ -11,7 +11,7 @@ $sql_list_single = "SELECT *
                     OR (mietverhaeltnis.Vermieter=? AND verwaltungseinheit.VerwID=?)";
 
 
-$sql_insert_beschlussfaehigkeit="INSERT INTO ev_beschlussfaehigkeit(BenutzerID,BausteinID,Kommentar,Anwesend)VALUES(?,(SELECT MAX(ev_protokoll_baustein.BausteinID)FROM ev_protokoll_baustein),?,'Nein')";
+$sql_insert_beschlussfaehigkeit="INSERT INTO ev_beschlussfaehigkeit(BenutzerID,BausteinID,Kommentar,Anwesend,Anteil)VALUES(?,(SELECT MAX(ev_protokoll_baustein.BausteinID)FROM ev_protokoll_baustein),?,'Nein',?)";
 $sql_insert_baustein_beschlussfaehigkeit="INSERT INTO ev_protokoll_baustein(Text,Nr,Ueberschrift, Protokoll_ID,BeschlussfkID,BeschluesseID)VALUES(?,?,?,(SELECT ev_protokoll.Protokoll_ID FROM ev_protokoll JOIN eigen_vers ON ev_protokoll.VersammlungID=eigen_vers.VersammlungID WHERE eigen_vers.ObjektID=?),1,0)";
 
 
@@ -70,20 +70,23 @@ for($p=0;$p<count($list);$p++){
     
 }
 */
-
+$summe=0;
 for($v=0;$v<count($empfaenger);$v++){
+    
+    $tausend = 1000.0;
     $pdf->Cell($w[0],7,$empfaenger[$v][0]." ".$empfaenger[$v][1]." ".$empfaenger[$v][2],1,0);
-    $pdf->Cell($w[1],7,"",1,0);
+    $pdf->Cell($w[1],7,($tausend*$empfaenger[$v][8]),1,0);
     $pdf->Cell($w[2],7,"",1,0);
     $pdf->Cell($w[3],7,"",1,0);
     $pdf->Ln();
-    
+    $summe+= ($tausend*$empfaenger[$v][8]);
     if(!mysqli_stmt_prepare($stmt_insert_beschlussfaehigkeit, $sql_insert_beschlussfaehigkeit)){
         header("Location: ../versammlung_einladung.php?error=sqlerrorinsertbeschlussfk");
         exit();
     }else{
+        $anteil = $tausend*$empfaenger[$v][8];
         $kommentar="";
-        mysqli_stmt_bind_param($stmt_insert_beschlussfaehigkeit,"is",$empfaenger[$v][7],$kommentar);
+        mysqli_stmt_bind_param($stmt_insert_beschlussfaehigkeit,"isd",$empfaenger[$v][7],$kommentar,$anteil);
         mysqli_stmt_execute($stmt_insert_beschlussfaehigkeit);
     }
     
@@ -91,6 +94,7 @@ for($v=0;$v<count($empfaenger);$v++){
 
 $pdf->SetFont("times","I",8);
 $pdf->Cell($w[0],7,"Summe:",1,0,"R");
+$pdf->Cell($w[1],7,$summe,1,0,"L");
 
 
 $pdf->Ln(10);
