@@ -91,7 +91,7 @@ if(isset($_POST['gruesse_submit'])){
                         
                         $content = $pdf->Output("S");
                         
-                        $gruese = "Gruesse";
+                        $gruese = "Gruesse von Vermieter"." ".$nachname;
                         //$l=1001;
                         
                         mysqli_stmt_bind_param($stmt_test, "iiss", $id,$empfaenger_id,$gruese,$content);
@@ -122,4 +122,3 @@ if(isset($_POST['gruesse_submit'])){
     }
 
 }
-
