@@ -17,7 +17,7 @@ if(!mysqli_stmt_prepare($stmt, $sql)){
     $result = mysqli_stmt_get_result($stmt);
     
     if($row=mysqli_fetch_assoc($result)){
-        $n=row[Name];
+        $n=row[Name]; 
         $v=row[Vorame]; 
         $s=row[Strasse];
         $h=row[Hausnr];
