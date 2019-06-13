@@ -2,16 +2,7 @@
 
 require 'dbh.inc.php';
 
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-error_reporting(E_ALL);
-
-?>
-
-<?php
-
 session_start();
-
 //Hausobjekt einfügen
 if(isset($_POST['ho_update_submit'])){
     
@@ -99,7 +90,7 @@ if(isset($_POST['ho_update_submit'])){
 }
 // ##############################################################################################################################
 
-if(isset($_POST['verwaltungseinheit_submit'])){
+if(isset($_POST['ve_update_submit'])){
       
     $uploaddir = '../uploads/';
     $ve_bauplan = $uploaddir.basename($_FILES['ve_bauplan']['name']);
@@ -113,9 +104,8 @@ if(isset($_POST['verwaltungseinheit_submit'])){
             echo "Beim Hochladen der Datei ist ein Fehler ist aufgetreten.";
         }
     }
-    
-    
-    $ve_objektID = $_POST['ve_hausobjekt'];
+ 
+    $ve_verwID = $_POST['ve_verwID'];
     $ve_kommentar = $_POST['ve_kommentar'];
     $ve_eigentuemer = $_POST['ve_eigentuemer'];
     $ve_typ = $_POST['ve_typ'];
@@ -127,36 +117,33 @@ if(isset($_POST['verwaltungseinheit_submit'])){
     
     $null = NULL;
     
-        $ve_sql = "INSERT INTO verwaltungseinheit (ObjektID, Kommentar, Besitzer, Wohnflaeche, Typ, Bauplan, VS_Muell, VS_Aufzug, VS_Eigentumsanteil, VS_Verwaltergebuehr) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $ve_update_sql = "UPDATE verwaltungseinheit SET Kommentar = ?, Besitzer = ?, Wohnflaeche = ?, Typ = ?, Bauplan = ?, VS_Muell = ?, VS_Aufzug = ?, VS_Eigentumsanteil = ?, VS_Verwaltergebuehr = ? WHERE VerwID = ?";
         $stmt = mysqli_stmt_init($conn);
-        if(!mysqli_stmt_prepare($stmt, $ve_sql)){
-            header("Location: ../add_verwaltungseinheit.php?error=sqlerror");
+        if(!mysqli_stmt_prepare($stmt, $ve_update_sql)){
+            header("Location: ../update_verwaltungseinheit.php?update_error=sqlerror");
             exit();
         }else{
             if(empty($ve_kommentar)){
                 if(empty($ve_eigentuemer)){
-                    mysqli_stmt_bind_param($stmt, "isidsbiiii", $ve_objektID, $null, $null, $ve_wohnflaeche, $ve_typ, $ve_bauplan, $ve_muell, $ve_aufzug, $ve_eigentumsanteil, $ve_verwaltergebuehr);
+                    mysqli_stmt_bind_param($stmt, "sidsbiiiii", $null, $null, $ve_wohnflaeche, $ve_typ, $ve_bauplan, $ve_muell, $ve_aufzug, $ve_eigentumsanteil, $ve_verwaltergebuehr, $ve_verwID);
                 mysqli_stmt_execute($stmt);
                 }else{
-                    mysqli_stmt_bind_param($stmt, "isidsbiiii", $ve_objektID, $null, $ve_eigentuemer, $ve_wohnflaeche, $ve_typ, $ve_bauplan, $ve_muell, $ve_aufzug, $ve_eigentumsanteil, $ve_verwaltergebuehr);
+                    mysqli_stmt_bind_param($stmt, "sidsbiiiii", $null, $ve_eigentuemer, $ve_wohnflaeche, $ve_typ, $ve_bauplan, $ve_muell, $ve_aufzug, $ve_eigentumsanteil, $ve_verwaltergebuehr, $ve_verwID);
                 mysqli_stmt_execute($stmt);
                 }
             }else{
                 if(empty($ve_eigentuemer)){
-                    mysqli_stmt_bind_param($stmt, "isidsbiiii", $ve_objektID, $ve_kommentar, $null, $ve_wohnflaeche, $ve_typ, $ve_bauplan, $ve_muell, $ve_aufzug, $ve_eigentumsanteil, $ve_verwaltergebuehr);
+                    mysqli_stmt_bind_param($stmt, "sidsbiiiii", $ve_kommentar, $null, $ve_wohnflaeche, $ve_typ, $ve_bauplan, $ve_muell, $ve_aufzug, $ve_eigentumsanteil, $ve_verwaltergebuehr, $ve_verwID);
                 mysqli_stmt_execute($stmt);
                 }else{
-                    mysqli_stmt_bind_param($stmt, "isidsbiiii", $ve_objektID, $ve_kommentar, $ve_eigentuemer, $ve_wohnflaeche, $ve_typ, $ve_bauplan, $ve_muell, $ve_aufzug, $ve_eigentumsanteil, $ve_verwaltergebuehr);
+                    mysqli_stmt_bind_param($stmt, "sidsbiiiii", $ve_kommentar, $ve_eigentuemer, $ve_wohnflaeche, $ve_typ, $ve_bauplan, $ve_muell, $ve_aufzug, $ve_eigentumsanteil, $ve_verwaltergebuehr, $ve_verwID);
                 mysqli_stmt_execute($stmt);
                     
                 }
             }
-            
-            
-            
-            header("Location: ../add_verwaltungseinheit.php?insert=success");
-            exit();
-            
+
+            header("Location: ../update_verwaltungseinheit.php?insert=success");
+            exit();  
         }
     }
 
@@ -171,6 +158,7 @@ if(isset($_POST['verwaltungseinheit_submit'])){
         $mv_mieterID = $_POST['mv_mieter'];
         $mv_beginn = $_POST['mv_beginn'];
         $mv_ende = $_POST['mv_ende'];
+        
         $null = NULL;
         
         if(empty($mv_verwID) || empty($mv_mieterID) || empty($mv_vermieterID) || empty($mv_beginn) || empty($mv_ende)){
@@ -186,8 +174,7 @@ if(isset($_POST['verwaltungseinheit_submit'])){
                 mysqli_stmt_bind_param($stmt, "iiiss", $mv_verwID, $mv_vermieterID, $mv_mieterID, $mv_beginn, $mv_ende);
                     mysqli_stmt_execute($stmt);
             }
-        }
-        
+        }  
         //Wohnungsgeberbescheinigung im Anschluss erstellen
         $wg_namen_sql = "SELECT Vorname, Name, Strasse, Hausnr, PLZ, Ort FROM benutzer WHERE BenutzerID = ?";
         $wg_ho_objektID_sql = "SELECT ObjektID FROM verwaltungseinheit WHERE VerwID = ?";

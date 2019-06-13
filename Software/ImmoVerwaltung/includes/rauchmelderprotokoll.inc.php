@@ -3,13 +3,9 @@
 session_start();
 if(isset($_POST['wartungsprotokoll_submit'])){
     
-    
     require 'dbh.inc.php';
-    //     require "../lib/fpdf181/fpdf.php";
     require('../lib/fpdf181/mc_table.php');
 
-    
-    
     foreach( $_POST['verwaltungseinheit'] as $value) {
         $pieces = explode("*", $value);
         $objekt_id = $pieces[0];
@@ -21,7 +17,6 @@ if(isset($_POST['wartungsprotokoll_submit'])){
         $verw_kommentar = $pieces[6];
         $verw_besitzer_vorname = $pieces[7];
         $verw_besitzer_name = $pieces[8];
-        
         
             $sql = "SELECT * FROM benutzer WHERE BenutzerID=?;";
             $sql2 = "SELECT Vorname, Name FROM benutzer JOIN mietverhaeltnis ON benutzer.BenutzerID = mietverhaeltnis.Mieter WHERE Vermieter = ? AND VerwID = ?";
@@ -58,7 +53,6 @@ if(isset($_POST['wartungsprotokoll_submit'])){
                 }
             }
             
-
             if(!mysqli_stmt_prepare($stmt, $sql)){
                 header("Location: ../index.php?error=vermieter_error");
                 exit();
@@ -139,8 +133,8 @@ Die neue Batterie ist eine ...
 [] Alkaline-Batterie
 [] Lithium-Batterie", ""));
                                 $zc++;
-                            }        
-                    }    
+                                }        
+                            }    
                     }  
                     
                     //Footer mit Feldern für Datum und Unteschrift
@@ -166,25 +160,3 @@ Die neue Batterie ist eine ...
             }
         }
     }
-    
-    
-//     $pdf->Row(array("Schlafzimmer", "Rauchmelderix Super 201x", "28.05.2005", "[] Melder entstaubt
-// [] Verschmutzungen entfernt
-// [] Melder ueber die Prueftaste geprueft", "[] Batterie ausgetauscht
-// Die neue Batterie ist eine ...
-// [] Alkaline-Batterie
-// [] Lithium-Batterie", ""));
-//     $pdf->Cell(14);
-//     $pdf->Row(array("Kinderzimmer", "Rauchmelderix Super 205x", "29.05.2010", "[]Melder entstaubt
-// []Verschmutzungen entfernt
-// []Melder ueber die Prueftaste geprueft", "[] Batterie ausgetauscht
-// Die neue Batterie ist eine ...
-// [] Alkaline-Batterie
-// [] Lithium-Batterie", ""));
-//     $pdf->Cell(14);
-//     $pdf->Row(array("Flur", "Rauchmelderix Super 201x", "28.05.2005", "[]Melder entstaubt
-// []Verschmutzungen entfernt
-// []Melder ueber die Prueftaste geprueft", "[] Batterie ausgetauscht
-// Die neue Batterie ist eine ...
-// [] Alkaline-Batterie
-// [] Lithium-Batterie", ""));
