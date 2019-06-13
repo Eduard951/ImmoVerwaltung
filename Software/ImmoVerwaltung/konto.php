@@ -23,7 +23,7 @@ if(!mysqli_stmt_prepare($stmt, $sql)){
         $saldo=$row['Betrag'];
         $text =$row['Text'];
         $betrag+=$saldo;
-        echo $text.' +'.$saldo.'';
+        echo $text.' +'.$saldo.'<br>';
     }
     echo'<br><h5>Saldo:</h5><br>'.$betrag.' Euro.<br>';
     echo'<br><a href="baumstruktur.php"><button class="btn btn-primary btn-lg">Zurueck</button>';
