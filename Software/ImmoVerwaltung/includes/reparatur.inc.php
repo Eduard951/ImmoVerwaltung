@@ -19,11 +19,13 @@ if(isset($_POST['reparatur_submit'])){
         $msg = "Success";
     }
         
-        $sql_empfaenger = "SELECT benutzer.Strasse,benutzer.Ort,benutzer.PLZ,benutzer.Hausnr,benutzer.Name, benutzer.Vorname FROM benutzer JOIN mietverhaeltnis ON benutzer.BenutzerID=mietverhaeltnis.Vermieter WHERE mietverhaeltnis.Mieter=?";
+        $sql_empfaenger = "SELECT benutzer.BenutzerID,benutzer.Strasse,benutzer.Ort,benutzer.PLZ,benutzer.Hausnr,benutzer.Name, benutzer.Vorname FROM benutzer JOIN mietverhaeltnis ON benutzer.BenutzerID=mietverhaeltnis.Vermieter WHERE mietverhaeltnis.Mieter=?";
         $sql = "SELECT * FROM benutzer WHERE BenutzerID=?;";
+        $sql_insert_message = "INSERT INTO nachrichten(SenderID,EmpfaengerID,Text,Datei) VALUES(?,?,?,?);";
         
         $stmt_empfaenger = mysqli_stmt_init($conn);
         $stmt = mysqli_stmt_init($conn);
+        
         
         if(!mysqli_stmt_prepare($stmt, $sql)) {
             header("Location: ../reparatur.php?error=sqlerror");
@@ -80,6 +82,7 @@ if(isset($_POST['reparatur_submit'])){
                 $empfaenger_strasse = $row2['Strasse'];
                 $empfaenger_plz = $row2['PLZ'];
                 $empfaenger_hausnummer = $row2['Hausnr'];
+                $empfaenger_id = $row2['BenutzerID'];
             }
         
         require './pdf_templates/basic_pdf/pdf_start.php';
@@ -106,9 +109,22 @@ if(isset($_POST['reparatur_submit'])){
         
         require './pdf_templates/basic_pdf/pdf_image.php';
         
-        require './pdf_templates/basic_pdf/pdf_ende.php';
+        //require './pdf_templates/basic_pdf/pdf_ende.php';
             
+        
+        $stmt_msg = $conn->prepare("INSERT INTO nachrichten(SenderID,EmpfaengerID,Text,Datei) VALUES(?,?,?,?)");
             
+        $content = $pdf->Output("S");
+        
+        $gruese = "Reparatur/Beschwerdeformular ".$nachname;
+        
+        mysqli_stmt_bind_param($stmt_msg, "iiss", $$_SESSION['sessionid'],$empfaenger_id,$gruese,$content);
+        
+        mysqli_stmt_execute($stmt_msg);
+        //require './pdf_templates/basic_pdf/pdf_ende.php';
+        
+        header("Location: ../reparatur.php?success");
+        
         }
             
     
