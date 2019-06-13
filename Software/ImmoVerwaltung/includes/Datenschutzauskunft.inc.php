@@ -40,12 +40,12 @@ if(isset($_POST["submi"])) {
         echo "<h4> Vorname:</h4>".$v." <br>";
         echo "<h4> E-Mail:</h4> ". $_SESSION["sessionmail"]." <br>";
    echo "<h4> Adresse:</h4> ".$s.$h.$p.$o."<br>";*/
-    
+        echo "meine";
+        echo" $id";
+        echo "$m";
+        echo "$H";
    
-} echo "meine";
-    echo" $id";
-    echo "$m";
-    echo "$H";
+} 
 }
      
     ?>
