@@ -58,7 +58,6 @@
 		  }
             echo'
         
-		<br> <input type="checkbox" name="deaktivieren" value="Deaktivieren"> Mahnungen löschen<br>
         <br><button class="btn btn-success btn-lg" type="submit" name="mahnung_submit">Versenden</button>
 	
 
