@@ -28,7 +28,7 @@
 			
 			<input class="col-md-offset-1 col-md-5 form-control" type="text" name="ort" placeholder="Ort..">
 			
-			<button class="btn btn-secondary form-control col-md-8" type="submit" name="signup_submit">Registrieren</button>
+			<button class="btn btn-success form-control col-md-10" type="submit" name="signup_submit">Registrieren</button>
 		</form>
 		</div>
 	</main>
