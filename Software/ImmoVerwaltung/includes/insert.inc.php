@@ -2,6 +2,10 @@
 
 require 'dbh.inc.php';
 
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL);
+
 ?>
 
 <?php
@@ -36,6 +40,7 @@ if(isset($_POST['hausobjekt_submit'])){
     $ho_hausnr = $_POST['ho_hausnr'];
     $ho_plz = $_POST['ho_plz'];
     $ho_ort = $_POST['ho_ort'];
+ 
     
     $ho_ve_kommentar = "Hauptverwaltungseinheit";
     $ho_ve_typ = "Hausobjekt";
@@ -85,20 +90,21 @@ if(isset($_POST['hausobjekt_submit'])){
                 }
             }
             //Gerade hinzugefügte ObjektID holen
-            $result_select = mysqli_query($conn, $ho_sql_select);
-            if($row=mysqli_fetch_assoc($result_select)){  
-                    $objektID_temp = $row['ObjektID'];
-                }
+//             $result_select = mysqli_query($conn, $ho_sql_select);
+//             if($row=mysqli_fetch_assoc($result_select)){  
+//                     $objektID_temp = $row['ObjektID'];
+//                 }
+            $objektID_temp = mysqli_insert_id($conn);
                 //Mit ObjektID in Verwaltungseinheit einsetzen
                 if(!mysqli_stmt_prepare($stmt, $ho_sql_verw)){
                     header("Location: ../add_hausobjekt.php?error=add_ve_sqlerror");
                     exit();
                 }else{
                     if(empty($ho_eigentuemer)){
-                    mysqli_stmt_bind_param($stmt, "isisb", $objektID_temp, $ho_ve_kommentar, $null, $ho_ve_typ, $ho_bauplan);
+                        mysqli_stmt_bind_param($stmt, "isisb", $objektID_temp, $ho_ve_kommentar, $null, $ho_ve_typ, $ho_bauplan);
                     mysqli_stmt_execute($stmt);
                     }else{
-                    mysqli_stmt_bind_param($stmt, "isisb", $objektID_temp, $ho_ve_kommentar, $ho_eigentuemer, $ho_ve_typ, $ho_bauplan);
+                        mysqli_stmt_bind_param($stmt, "isisb", $objektID_temp, $ho_ve_kommentar, $ho_eigentuemer, $ho_ve_typ, $ho_bauplan);
                     mysqli_stmt_execute($stmt);
                     }
                 }
@@ -128,7 +134,11 @@ if(isset($_POST['verwaltungseinheit_submit'])){
     $ve_eigentuemer = $_POST['ve_eigentuemer'];
     $ve_typ = $_POST['ve_typ'];
     $ve_wohnflaeche = ['ve_wohnflaeche'];
-    //     $bauplan =  NULL; //$_POST['bauplan'];
+    $ve_muell = ['ve_muell'];
+    $ve_aufzug = ['ve_aufzug'];
+    $ve_eigentumsanteil = ['ve_eigentumsanteil'];
+    $ve_verwaltergebuehr = ['ve_verwaltergebuehr'];
+    
     $null = NULL;
     
 //     if(empty($ve_kommentar) || empty($ve_wohnflaeche)){
@@ -138,7 +148,7 @@ if(isset($_POST['verwaltungseinheit_submit'])){
        echo $ve_eigentuemer;
     
 //     else{
-        $ve_sql = "INSERT INTO verwaltungseinheit (ObjektID, Kommentar, Besitzer, Wohnflaeche, Typ, Bauplan) VALUES (?, ?, ?, ?, ?, ?)";
+        $ve_sql = "INSERT INTO verwaltungseinheit (ObjektID, Kommentar, Besitzer, Wohnflaeche, Typ, Bauplan, VS_Muell, VS_Aufzug, VS_Eigentumsanteil, VS_Verwaltergebuehr) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = mysqli_stmt_init($conn);
         if(!mysqli_stmt_prepare($stmt, $ve_sql)){
             header("Location: ../add_verwaltungseinheit.php?error=sqlerror");
@@ -146,18 +156,18 @@ if(isset($_POST['verwaltungseinheit_submit'])){
         }else{
             if(empty($ve_kommentar)){
                 if(empty($ve_eigentuemer)){
-                mysqli_stmt_bind_param($stmt, "isidsb", $ve_objektID, $null, $null, $ve_wohnflaeche, $ve_typ, $ve_bauplan);
+                    mysqli_stmt_bind_param($stmt, "isidsb", $ve_objektID, $null, $null, $ve_wohnflaeche, $ve_typ, $ve_bauplan, $ve_muell, $ve_aufzug, $ve_eigentumsanteil, $ve_verwaltergebuehr);
                 mysqli_stmt_execute($stmt);
                 }else{
-                mysqli_stmt_bind_param($stmt, "isidsb", $ve_objektID, $null, $ve_eigentuemer, $ve_wohnflaeche, $ve_typ, $ve_bauplan);
+                    mysqli_stmt_bind_param($stmt, "isidsb", $ve_objektID, $null, $ve_eigentuemer, $ve_wohnflaeche, $ve_typ, $ve_bauplan, $ve_muell, $ve_aufzug, $ve_eigentumsanteil, $ve_verwaltergebuehr);
                 mysqli_stmt_execute($stmt);
                 }
             }else{
                 if(empty($ve_eigentuemer)){
-                mysqli_stmt_bind_param($stmt, "isidsb", $ve_objektID, $ve_kommentar, $null, $ve_wohnflaeche, $ve_typ, $ve_bauplan);
+                    mysqli_stmt_bind_param($stmt, "isidsb", $ve_objektID, $ve_kommentar, $null, $ve_wohnflaeche, $ve_typ, $ve_bauplan, $ve_muell, $ve_aufzug, $ve_eigentumsanteil, $ve_verwaltergebuehr);
                 mysqli_stmt_execute($stmt);
                 }else{
-                mysqli_stmt_bind_param($stmt, "isidsb", $ve_objektID, $ve_kommentar, $ve_eigentuemer, $ve_wohnflaeche, $ve_typ, $ve_bauplan);
+                    mysqli_stmt_bind_param($stmt, "isidsb", $ve_objektID, $ve_kommentar, $ve_eigentuemer, $ve_wohnflaeche, $ve_typ, $ve_bauplan, $ve_muell, $ve_aufzug, $ve_eigentumsanteil, $ve_verwaltergebuehr);
                 mysqli_stmt_execute($stmt);
                     
                 }
@@ -201,8 +211,6 @@ if(isset($_POST['verwaltungseinheit_submit'])){
                 mysqli_stmt_execute($stmt);
             }
 
-            
-            
         }
         
         //Wohnungsgeberbescheinigung im Anschluss erstellen
@@ -288,7 +296,6 @@ if(isset($_POST['verwaltungseinheit_submit'])){
             
         }
         //Besitzer der Verwaltungseinheit
-        if(!empty($wg_besitzer)){
             if(!mysqli_stmt_prepare($stmt, $wg_namen_sql)){
                 header("Location: ../add_mietverhaeltnis.php?kommentar=sqlerror");
                 exit();
@@ -306,40 +313,7 @@ if(isset($_POST['verwaltungseinheit_submit'])){
                     $wg_eigentuemer_ort = $row['Ort'];
                 }
             } 
-        }else{
-            $wg_eigentuemer_vorname = "";
-            $wg_eigentuemer_name = "";
-            $wg_eigentuemer_vorname = "";
-            $wg_eigentuemer_strasse = "";
-            $wg_eigentuemer_hausnr = "";
-            $wg_eigentuemer_plz = "";
-            $wg_eigentuemer_ort = "";
-        }
         
-        if(empty($wg_besitzer)){ 
-                $kreuz = "";
-                $wg_eigentuemer_vorname = "";
-                $wg_eigentuemer_name = "";
-                $wg_eigentuemer_vorname = "";
-                $wg_eigentuemer_strasse = "";
-                $wg_eigentuemer_hausnr = "";
-                $wg_eigentuemer_plz = "";
-                $wg_eigentuemer_ort = "";
-        }else{
-            $eigentuemer_name = $wg_eigentuemer_name;
-            $eigentuemer_vorname = $wg_eigentuemer_vorname;
-            $eigentuemer_strasse = $wg_eigentuemer_strasse;
-            $eigentuemer_hausnr = $wg_eigentuemer_hausnr;
-            $eigentuemer_plz = $wg_eigentuemer_plz;
-            $eigentuemer_ort = $wg_eigentuemer_ort;
-        }
-        if($wg_besitzer = $mv_vermieterID){
-            $kreuz = "X";
-            $kreuz2 = "";
-        }else{
-            $kreuz = "";
-            $kreuz2 = "X";
-        }
         
         //Tabelle erstellen
         $pdf = new PDF_MC_Table();
@@ -374,7 +348,7 @@ if(isset($_POST['verwaltungseinheit_submit'])){
             
             PLZ / Ort:                                                         [$wg_vermieter_plz $wg_vermieter_ort]
             
-            Telefonnummer: (Angabe freiwillig)               [$wg_besitzer                                                ]
+            Telefonnummer: (Angabe freiwillig)               [                                                ]
             
             ", 1,"L",false);
         
@@ -389,12 +363,12 @@ if(isset($_POST['verwaltungseinheit_submit'])){
         
         $pdf->Cell(14);
         $pdf->MultiCell(170,4,"Familienname / Vorname oder
-            Bezeichnung bei einer juristischen Person:      [$eigentuemer_name, $eigentuemer_vorname]
+            Bezeichnung bei einer juristischen Person:      [$wg_eigentuemer_name, $wg_eigentuemer_vorname]
             
             Strasse / Hausnummer /
-            Adressierungszusaetze:                                     [$eigentuemer_strasse $eigentuemer_hausnr]
+            Adressierungszusaetze:                                     [$wg_eigentuemer_strasse $wg_eigentuemer_hausnr]
             
-            PLZ / Ort:                                                         [$eigentuemer_plz $eigentuemer_ort]
+            PLZ / Ort:                                                         [$wg_eigentuemer_plz $wg_eigentuemer_ort]
             
             ", 0,"L",false);
         
@@ -453,6 +427,56 @@ if(isset($_POST['verwaltungseinheit_submit'])){
         
     }
 
-    
+// ##############################################################################################################################
 
+    if(isset($_POST['zimmer_submit'])){
+        
+        $zm_verwID =  $_POST['zm_verwaltungseinheit'];
+        $zm_bezeichnung = $_POST['zm_bezeichnung'];
+        $rm_modell = $_POST['zm_rm_modell'];
+        $rm_wartung = $_POST['zm_rm_wartung'];
+        $rm_datum = $_POST['zm_rm_installiert'];
+        
+        if(empty($zm_verwID) || empty($zm_bezeichnung)){
+            header("Location: ../add_zimmer.php?zimmer_error=emptyfields");
+            exit();
+        }
+        
+        else{
+            $zm_sql = "INSERT INTO zimmer (VerwID, Bezeichnung) VALUES (?, ?)";
+            $stmt = mysqli_stmt_init($conn);
+            if(!mysqli_stmt_prepare($stmt, $zm_sql)){
+                header("Location: ../add_zimmer.php?error=sqlerror");
+                exit();
+            }else{
+                mysqli_stmt_bind_param($stmt, "is", $zm_verwID, $zm_bezeichnung);
+                mysqli_stmt_execute($stmt);
+            }
+            $zm_sql_select ="SELECT * FROM zimmer ORDER BY ZimmerID DESC LIMIT 1";
+            
+            $zm_rm_sql = "INSERT INTO rauchmelder (ZimmerID, Modell, Wartung, Installiert) VALUES (?, ?, ?, ?)";
+            
+            //Gerade hinzugefügte ZimmerID holen
+            $result_zm_select = mysqli_query($conn, $zm_sql_select);
+            if($row=mysqli_fetch_assoc($result_zm_select)){
+                $zimmerID_temp = $row['ZimmerID'];
+            }
+            //Mit ZimmerID in Rauchmelder einsetzen
+            if(!mysqli_stmt_prepare($stmt, $zm_rm_sql)){
+                header("Location: ../add_zimmer.php?error=add_rm_sqlerror");
+                exit();
+            }else{
+                mysqli_stmt_bind_param($stmt, "isis", $zimmerID_temp, $rm_modell, $rm_wartung, $rm_datum);
+                mysqli_stmt_execute($stmt);
+                
+            }
+            
+            
+            header("Location: ../add_zimmer.php?insert=success");
+            exit();
+            
+        }
+        
+    }
+    
 ?>
