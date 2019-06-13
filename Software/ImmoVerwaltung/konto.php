@@ -25,6 +25,6 @@ if(!mysqli_stmt_prepare($stmt, $sql)){
         $betrag+=$saldo;
         echo $text.' +'.$saldo.'';
     }
-    echo'<br><h5>Saldo:</h5><br>'.$betrag.' Euro.';
+    echo'<br><h5>Saldo:</h5><br>'.$betrag.' Euro.<br>';
     echo'<br><a href="baumstruktur.php"><button class="btn btn-primary btn-lg">Zurueck</button>';
 }
