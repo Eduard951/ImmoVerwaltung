@@ -86,8 +86,10 @@ if(isset($_POST['gruesse_submit'])){
                    
                     
                     
+                        $sql_msg = "INSERT INTO nachrichten(SenderID,EmpfaengerID,Text,Datei) VALUES(?,?,?,?)";
+                        $stmt_test = mysqli_stmt_init($conn);
                         
-                        $stmt_test = $conn->prepare("INSERT INTO nachrichten(SenderID,EmpfaengerID,Text,Datei) VALUES(?,?,?,?)"); 
+                        if(mysqli_stmt_prepare($stmt_test, $sql_msg)){
                         
                         $content = $pdf->Output("S");
                         
@@ -100,6 +102,9 @@ if(isset($_POST['gruesse_submit'])){
                         //require './pdf_templates/basic_pdf/pdf_ende.php';
                         
                         header("Location: ../gruesse.php?success");
+                        }else{
+                            header("Location: ../gruesse.php?errormsg");
+                        }
                     
                     
                     
