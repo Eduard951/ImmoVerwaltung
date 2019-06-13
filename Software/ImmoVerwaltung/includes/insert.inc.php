@@ -68,7 +68,7 @@ if(isset($_POST['hausobjekt_submit'])){
         }else{
             //Hausobjekt einfügen, wenn Kommentarfeld leer ist und Eigentümer nicht angegeben wurde
             if(empty($ho_kommentar)){
-                if(empty($ho_eigentuemer)){
+                if(empty($ho_besitzer)){
                     mysqli_stmt_bind_param($stmt, "sisbbissss", $null, $null, $ho_typ, $ho_lageplan, $ho_bauplan, $ho_versammlung, $ho_strasse, $ho_hausnr, $ho_plz, $ho_ort);
                     mysqli_stmt_execute($stmt);  
                 //Kommentar leer, Eigentümer ausgewählt
@@ -79,7 +79,7 @@ if(isset($_POST['hausobjekt_submit'])){
                     
             }else{
                 //Kommentar angegeben, Eigentümer nicht
-                if(empty($ho_eigentuemer)){
+                if(empty($ho_besitzer)){
                     mysqli_stmt_bind_param($stmt, "sisbbissss", $ho_kommentar, $null, $ho_typ, $ho_lageplan, $ho_bauplan, $ho_versammlung, $ho_strasse, $ho_hausnr, $ho_plz, $ho_ort);
                     mysqli_stmt_execute($stmt);  
                 //Kommentar und Eigentümer angegeben
@@ -94,16 +94,17 @@ if(isset($_POST['hausobjekt_submit'])){
 //                     $objektID_temp = $row['ObjektID'];
 //                 }
             $objektID_temp = mysqli_insert_id($conn);
+            $stmt = mysqli_stmt_init($conn);
                 //Mit ObjektID in Verwaltungseinheit einsetzen
                 if(!mysqli_stmt_prepare($stmt, $ho_sql_verw)){
                     header("Location: ../add_hausobjekt.php?error=add_ve_sqlerror");
                     exit();
                 }else{
-                    if(empty($ho_eigentuemer)){
+                    if(empty($ho_besitzer)){
                         mysqli_stmt_bind_param($stmt, "isidsbiiii", $objektID_temp, $ho_ve_kommentar, $null, $null, $ho_ve_typ, $ho_bauplan, $null, $null, $null, $null,);
                     mysqli_stmt_execute($stmt);
                     }else{
-                        mysqli_stmt_bind_param($stmt, "isidsbiiii", $objektID_temp, $ho_ve_kommentar, $ho_eigentuemer, $null, $ho_ve_typ, $ho_bauplan, $null, $null, $null, $null);
+                        mysqli_stmt_bind_param($stmt, "isidsbiiii", $objektID_temp, $ho_ve_kommentar, $ho_besitzer, $null, $ho_ve_typ, $ho_bauplan, $null, $null, $null, $null);
                     mysqli_stmt_execute($stmt);
                     }
                 }
