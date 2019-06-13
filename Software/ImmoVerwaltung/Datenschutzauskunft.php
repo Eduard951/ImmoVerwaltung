@@ -61,7 +61,7 @@ if(!mysqli_stmt_prepare($stmt, $sql)) {
   echo "<td>"."Ort:" ."</td>". "<td>"."$ort"." </td>";
   echo '</tr>';
   echo '<tr>';
-   echo "<td>"."Srasse:" ."</td>". "<td>"."$strasse"." </td>";
+   echo "<td>"."Strasse:" ."</td>". "<td>"."$strasse"." </td>";
    echo '</tr>';
    echo '<tr>';
   echo "<td>"."Hausnummer:" ."</td>". "<td>"."$hausnummer"." </td>";
