@@ -6,7 +6,7 @@ if(isset($_SESSION['sessionid'])){
     
     ?>
 <!-- Formular fÃ¼r Zimmer -->
-    <h2>Zimmer hinzufÃ¼gen</h2>
+    <h2>Zimmer hinzufügen</h2>
     <form enctype="multipart/form-data" action="includes/insert.inc.php" method="post">
     <p>
     <label>Verwaltungseinheit:</label>
@@ -79,7 +79,7 @@ if(isset($_SESSION['sessionid'])){
     	<label>Installiert am:</label>
       	<input type="date" name="zm_rm_installiert">
     </p>  
-    <button class="btn btn-secondary btn-lg" type="submit" name="zimmer_submit">Zimmer hinzufÃ¼gen</button>
+    <button class="btn btn-secondary btn-lg" type="submit" name="zimmer_submit">Zimmer hinzufügen</button>
 </form>
 
 <?php }

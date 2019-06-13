@@ -28,7 +28,7 @@ if(isset($_POST['hausobjekt_submit'])){
     if (move_uploaded_file($_FILES['ho_bauplan']['name'], $ho_bauplan)) {
         echo "Bauplan ist valide und wurde erfolgreich hochgeladen.\n";
     }else {
-        echo "Beim Hochladen Datei ist ein Fehler ist aufgetreten.";
+        echo "Beim Hochladen der Datei ist ein Fehler ist aufgetreten.";
     }
 
     $ho_kommentar = $_POST['ho_kommentar'];
@@ -122,21 +122,26 @@ if(isset($_POST['verwaltungseinheit_submit'])){
     $uploaddir = '../uploads/';
     $ve_bauplan = $uploaddir.basename($_FILES['ve_bauplan']['name']);
     
-    if (move_uploaded_file($_FILES['ve_bauplan']['name'], $ve_bauplan)) {
-        echo "Bauplan ist valide und wurde erfolgreich hochgeladen.\n";
-    } else {
-        echo "Beim Hochladen Datei ist ein Fehler ist aufgetreten.";
+    if(empty($ve_bauplan)){
+        $ve_bauplan = NULL;
+    }else{
+        if (move_uploaded_file($_FILES['ve_bauplan']['name'], $ve_bauplan)) {
+            echo "Bauplan ist valide und wurde erfolgreich hochgeladen.\n";
+        }else{
+            echo "Beim Hochladen der Datei ist ein Fehler ist aufgetreten.";
+        }
     }
+    
     
     $ve_objektID = $_POST['ve_hausobjekt'];
     $ve_kommentar = $_POST['ve_kommentar'];
     $ve_eigentuemer = $_POST['ve_eigentuemer'];
     $ve_typ = $_POST['ve_typ'];
-    $ve_wohnflaeche = ['ve_wohnflaeche'];
-    $ve_muell = ['ve_muell'];
-    $ve_aufzug = ['ve_aufzug'];
-    $ve_eigentumsanteil = ['ve_eigentumsanteil'];
-    $ve_verwaltergebuehr = ['ve_verwaltergebuehr'];
+    $ve_wohnflaeche = $_POST['ve_wohnflaeche'];
+    $ve_muell = $_POST['ve_muell'];
+    $ve_aufzug = $_POST['ve_aufzug'];
+    $ve_eigentumsanteil = $_POST['ve_eigentumsanteil'];
+    $ve_verwaltergebuehr = $_POST['ve_verwaltergebuehr'];
     
     $null = NULL;
     
@@ -172,7 +177,7 @@ if(isset($_POST['verwaltungseinheit_submit'])){
             
             
             
-            header("Location: ../add_verwaltungseinheit.php?insert=success");
+//             header("Location: ../add_verwaltungseinheit.php?insert=success");
             exit();
             
         }

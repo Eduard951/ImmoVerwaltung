@@ -10,7 +10,7 @@ error_reporting(E_ALL);
 ?>
 
 <!-- Formular für Hausobjekt hinzufügen  -->
-<h2>Hausobjekt hinzufügen</h2>
+<h2>Hausobjekt hinzuf�gen</h2>
 
 <form enctype="multipart/form-data" action="includes/insert.inc.php" method="post">
     <p>
@@ -25,8 +25,8 @@ error_reporting(E_ALL);
         	<option value="7">Villa</option>
         	<option value="8">Bungalow</option>
         	<option value="9">Schloss</option>
-        	<option value="10">Wohn- und Geschäftsgebäude</option>
-        	<option value="11">Geschäftsgebäude</option>
+        	<option value="10">Wohn- und Gesch�ftsgebäude</option>
+        	<option value="11">Gesch�ftsgebäude</option>
         	<option value="12">andere</option>
       	</select> 
     </p>
@@ -86,7 +86,7 @@ error_reporting(E_ALL);
                 <input type="radio" id="ja" name="ho_versammlung" value="1">
                 <label for="ja">Ja</label> 
             </fieldset>
-    <button class="btn btn-secondary btn-lg" type="submit" name="hausobjekt_submit">Hausobjekt hinzufügen</button>
+    <button class="btn btn-secondary btn-lg" type="submit" name="hausobjekt_submit">Hausobjekt hinzuf�gen</button>
 </form>
 
 <?php }
