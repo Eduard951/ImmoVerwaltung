@@ -101,7 +101,8 @@
                 <br><a href="UrteilSammlung.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="UrteilSammlung_submit">Urteilsammlung</button>
                 <br><a href="handwerkerverwaltung.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="handwerkerverwaltung_submit">Handwerkerverwaltung</button>
                 <br><a href="rauchmelderprotokoll.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="rauchmelderprotokoll_submit">Rauchmelderprotokoll</button>
-                 <br><a href="Datenschutzauskunft.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="Datenschutzauskunft_submit">Meine Daten</button>
+                <br><a href="mahnung.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="mv_submit">Mahnung versenden</button>
+		<br><a href="Datenschutzauskunft.php"><button class="btn btn-primary btn-lg btn-block" type="submit" name="Datenschutzauskunft_submit">Meine Daten</button>
                 <br><a href="baumstruktur.php"><button class="btn btn-primary btn-lg">Zurueck</button>
 ';
 	      }else if(!empty($result_mieter)&& mysqli_num_rows($result_mieter)>0){
