@@ -12,7 +12,10 @@
                 FROM benutzer 
                 JOIN mietverhaeltnis
                 ON benutzer.BenutzerID = mietverhaeltnis.Mieter
+                JOIN verwaltungseinheit 
+                ON verwaltungseinheit.VerwID=mietverhaeltnis.VerwID
                 WHERE mietverhaeltnis.Vermieter = ?
+                AND mietverhaeltnis.VerwID =?
                 ";
 	    
                // JOIN mieter
@@ -32,7 +35,7 @@
 	        exit();
 	    }else{
 	        
-	        mysqli_stmt_bind_param($stmt, "i", $_SESSION['sessionid']);
+	        mysqli_stmt_bind_param($stmt, "ii", $_SESSION['sessionid'], $_SESSION['objektid']);
 	        mysqli_stmt_execute($stmt);
 	        $result = mysqli_stmt_get_result($stmt);
 	    
@@ -48,7 +51,7 @@
 		  ';    
 		  if(!empty($result)){
 		      while($row = $result->fetch_assoc()){
-		          echo '<br><input type="checkbox" name="empfaenger[]" value="'.$row['Name']," ", $row['Vorname']," ",$row['PLZ']," ",$row['Ort']," ",$row['Strasse']," ",$row['Hausnr'].'">'.$row['Name']," ", $row['Vorname']." ".$row['PLZ']." ".$row['Ort']." ".$row['Strasse']." ".$row['Hausnr'].'</input><br>
+		          echo '<br><input type="checkbox" name="empfaenger[]" value="'.$row['Name']," ", $row['Vorname']," ",$row['PLZ']," ",$row['Ort']," ",$row['Strasse']," ",$row['Hausnr']," ",$row['Mieter'].'">'.$row['Name']," ", $row['Vorname']," ",$row['PLZ']," ",$row['Ort']," ",$row['Strasse']," ",$row['Hausnr'].'</input><br>
    
                     ';
 		      }
