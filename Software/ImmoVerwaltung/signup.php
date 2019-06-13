@@ -19,7 +19,7 @@
 			<input class="col-md-offset-1 col-md-5 form-control" type="password" name="pwd_repeat" placeholder="Wiederhole passwort...">
 			 
 			<input class="col-md-offset-1 col-md-5 form-control" type="text" name="strasse" placeholder="Strasse..">
-			
+		 	
 			<input class="col-md-offset-1 col-md-5 form-control" type="text" name="hausnr" placeholder="Hausnummer..">
 			
 			<input class="col-md-offset-1 col-md-5 form-control" type="text" name="plz" placeholder="PLZ..">
