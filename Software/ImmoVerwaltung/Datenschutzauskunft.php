@@ -10,10 +10,9 @@ session_start();
 if(isset($_SESSION['sessionid'])){
    
 
-    echo' <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="POST">
-<h3> Meine Daten Ansehen</h3></br>
-<button type="submit" class="btn btn-success" name="submi "> </button>';
-echo'';
+    echo' <form  method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" >
+<h3> Meine Daten Ansehen</h3></br>';
+//echo' <button type="submit" class="btn btn-success" name="submi "> </button>';
      
 
 
@@ -43,14 +42,15 @@ if(!mysqli_stmt_prepare($stmt, $sql)) {
         $ort = $row['Ort'];
         $plz = $row['PLZ'];
         $hausnummer = $row['Hausnr'];
+        $email = $row['Email'];
     }
-    echo "$vorname";
-    echo "$nachname";
-    echo "$strasse";
-    echo "$ort";
-    echo "$plz";
-    echo "$hausnummer";
-    echo "oui";
+    echo "Name:" . "$vorname"." <br>";
+    echo "Vorname:" ."$nachname" ."<br>" ;
+    echo "Postleitzahl:" ."$plz" ."<br>";
+    echo "Ort:" ."$ort" ."<br>";
+    echo "Strasse:" ."$strasse" ."<br>";
+    echo "Hausnummer:" ."$hausnummer" ."<br>";
+    echo "E-Mail:" ."$email" ."<br>";
      
 }
 
