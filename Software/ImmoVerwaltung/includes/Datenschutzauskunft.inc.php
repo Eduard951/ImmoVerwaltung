@@ -22,7 +22,7 @@ if(!mysqli_stmt_prepare($stmt, $sql)){
         $s=row[Strasse];
         $h=row[Hausnr];
         $p=row[PLZ];
-        $o=row[Ort];   
+        $o=row[Ort];    
     }
 
 if(isset($_POST["submit"]))
