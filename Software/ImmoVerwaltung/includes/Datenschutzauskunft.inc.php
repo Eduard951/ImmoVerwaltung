@@ -27,7 +27,7 @@ if(isset($_POST["submit"])) {
             $s=$row["Strasse"];
             $h=$row["Hausnr"];
             $p=$row["PLZ"];
-            $o=$row["Ort"];
+            $o=$row["Ort"]; 
         
 
         }
