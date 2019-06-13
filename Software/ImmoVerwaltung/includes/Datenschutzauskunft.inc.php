@@ -7,7 +7,7 @@ session_start();
 
 
 
-//if(isset($_POST["submit"])) {
+if(isset($_POST["submi"])) {
     
     $id=$_SESSION['sessionid'];
     $sql = "SELECT * FROM benutzer WHERE BenuzterID=?;";
@@ -36,5 +36,5 @@ session_start();
         echo "<h4> E-Mail:</h4> ". $_SESSION["sessionmail"]." <br>";
         echo "<h4> Adresse:</h4> ".$s.$h.$p.$o."<br>";
 }
-//}
+}
      echo "meine";?>
