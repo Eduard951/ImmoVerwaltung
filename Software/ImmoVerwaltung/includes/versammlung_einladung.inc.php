@@ -30,8 +30,8 @@ if(isset($_POST['versammlung_einladung_submit'])){
         $sql = "SELECT * FROM verwalter JOIN firma ON verwalter.FirmaID=firma.FirmaID WHERE BenutzerID=?;";
         
         //eingeladen
-        $sql_besitzer_verwaltungseinheit = "SELECT benutzer.BenutzerID,benutzer.PLZ,benutzer.Ort,benutzer.Strasse,benutzer.Hausnr,benutzer.Name,benutzer.Vorname,verwaltungseinheit.Kommentar FROM benutzer JOIN verwaltungseinheit ON benutzer.BenutzerID=verwaltungseinheit.Besitzer WHERE verwaltungseinheit.ObjektID=?";
-        $sql_vermieter_verwaltungseinheit = "SELECT benutzer.BenutzerID,benutzer.PLZ,benutzer.Ort,benutzer.Strasse,benutzer.Hausnr,benutzer.Name,benutzer.Vorname,verwaltungseinheit.Kommentar FROM benutzer JOIN mietverhaeltnis ON benutzer.BenutzerID=mietverhaeltnis.Vermieter JOIN verwaltungseinheit ON verwaltungseinheit.VerwID=mietverhaeltnis.VerwID WHERE verwaltungseinheit.VerwID=?";
+        $sql_besitzer_verwaltungseinheit = "SELECT benutzer.BenutzerID,benutzer.PLZ,benutzer.Ort,benutzer.Strasse,benutzer.Hausnr,benutzer.Name,benutzer.Vorname,verwaltungseinheit.Kommentar,verwaltungseinheit.VS_Eigentumsanteil FROM benutzer JOIN verwaltungseinheit ON benutzer.BenutzerID=verwaltungseinheit.Besitzer WHERE verwaltungseinheit.ObjektID=?";
+        $sql_vermieter_verwaltungseinheit = "SELECT benutzer.BenutzerID,benutzer.PLZ,benutzer.Ort,benutzer.Strasse,benutzer.Hausnr,benutzer.Name,benutzer.Vorname,verwaltungseinheit.Kommentar,verwaltungseinheit.VS_Eigentumsanteil FROM benutzer JOIN mietverhaeltnis ON benutzer.BenutzerID=mietverhaeltnis.Vermieter JOIN verwaltungseinheit ON verwaltungseinheit.VerwID=mietverhaeltnis.VerwID WHERE verwaltungseinheit.VerwID=?";
         
         
         $stmt_hausobjekt= mysqli_stmt_init($conn);
@@ -171,8 +171,9 @@ if(isset($_POST['versammlung_einladung_submit'])){
                     $besitzer_strasse=$row_besitzer['Strasse'];
                     $besitzer_nr=$row_besitzer['Hausnr'];
                     $besitzer_id=$row_besitzer['BenutzerID'];
+                    $besitzer_anteil = $row_besitzer['VS_Eigentumsanteil'];
                     
-                    $emp = array($besitzer_nachname,$besitzer_vorname,$besitzer_kommentar,$besitzer_plz,$besitzer_ort,$besitzer_strasse,$besitzer_nr,$besitzer_id);
+                    $emp = array($besitzer_nachname,$besitzer_vorname,$besitzer_kommentar,$besitzer_plz,$besitzer_ort,$besitzer_strasse,$besitzer_nr,$besitzer_id,$besitzer_anteil);
                     
                     $empfaenger = array($emp);
                 }
@@ -201,8 +202,9 @@ if(isset($_POST['versammlung_einladung_submit'])){
                     $vermieter_strasse=$row_vermieter['Strasse'];
                     $vermieter_nr=$row_vermieter['Hausnr'];
                     $vermieter_id=$row_vermieter['BenutzerID'];
+                    $vermieter_anteil = $row_vermieter['VS_Eigentumsanteil'];
                     
-                    $emp2 = array($vermieter_nachname,$vermieter_vorname,$vermieter_kommentar,$vermieter_plz,$vermieter_ort,$vermieter_strasse,$vermieter_nr,$vermieter_id);
+                    $emp2 = array($vermieter_nachname,$vermieter_vorname,$vermieter_kommentar,$vermieter_plz,$vermieter_ort,$vermieter_strasse,$vermieter_nr,$vermieter_id,$vermieter_anteil);
                     
                     array_push($empfaenger,$emp2);
                 }
