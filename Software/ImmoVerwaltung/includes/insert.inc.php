@@ -116,9 +116,7 @@ if(isset($_POST['hausobjekt_submit'])){
 // ##############################################################################################################################
 
 if(isset($_POST['verwaltungseinheit_submit'])){
-    
-//     require 'dbh.inc.php';
-    
+      
     $uploaddir = '../uploads/';
     $ve_bauplan = $uploaddir.basename($_FILES['ve_bauplan']['name']);
     
@@ -145,11 +143,6 @@ if(isset($_POST['verwaltungseinheit_submit'])){
     
     $null = NULL;
     
-//     if(empty($ve_kommentar) || empty($ve_wohnflaeche)){
-//         header("Location: ../insert.php?verwaltungseinheit_error=emptyfields");
-//         exit();
-//     }
-//     else{
         $ve_sql = "INSERT INTO verwaltungseinheit (ObjektID, Kommentar, Besitzer, Wohnflaeche, Typ, Bauplan, VS_Muell, VS_Aufzug, VS_Eigentumsanteil, VS_Verwaltergebuehr) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         $stmt = mysqli_stmt_init($conn);
         if(!mysqli_stmt_prepare($stmt, $ve_sql)){
@@ -177,12 +170,12 @@ if(isset($_POST['verwaltungseinheit_submit'])){
             
             
             
-//             header("Location: ../add_verwaltungseinheit.php?insert=success");
+            header("Location: ../add_verwaltungseinheit.php?insert=success");
             exit();
             
         }
     }
-// }
+
 // ##############################################################################################################################
 
     if(isset($_POST['mietverhaeltnis_submit'])){
@@ -194,25 +187,21 @@ if(isset($_POST['verwaltungseinheit_submit'])){
         $mv_mieterID = $_POST['mv_mieter'];
         $mv_beginn = $_POST['mv_beginn'];
         $mv_ende = $_POST['mv_ende'];
-        //     $bauplan =  NULL; //$_POST['bauplan'];
         $null = NULL;
         
         if(empty($mv_verwID) || empty($mv_mieterID) || empty($mv_vermieterID) || empty($mv_beginn) || empty($mv_ende)){
                 header("Location: ../add_mietverhaeltnis.php?mietverhaeltnis_error=emptyfields");
                 exit();
-            }
-        
-            else{
-        $mv_sql = "INSERT INTO mietverhaeltnis (VerwID, Vermieter, Mieter, Beginn, Ende) VALUES (?, ?, ?, ?, ?)";
-        $stmt = mysqli_stmt_init($conn);
-        if(!mysqli_stmt_prepare($stmt, $mv_sql)){
-            header("Location: ../add_mietverhaeltnis.php?error=sqlerror");
-            exit();
         }else{
-            mysqli_stmt_bind_param($stmt, "iiiss", $mv_verwID, $mv_vermieterID, $mv_mieterID, $mv_beginn, $mv_ende);
-                mysqli_stmt_execute($stmt);
+            $mv_sql = "INSERT INTO mietverhaeltnis (VerwID, Vermieter, Mieter, Beginn, Ende) VALUES (?, ?, ?, ?, ?)";
+            $stmt = mysqli_stmt_init($conn);
+            if(!mysqli_stmt_prepare($stmt, $mv_sql)){
+                header("Location: ../add_mietverhaeltnis.php?error=sqlerror");
+                exit();
+            }else{
+                mysqli_stmt_bind_param($stmt, "iiiss", $mv_verwID, $mv_vermieterID, $mv_mieterID, $mv_beginn, $mv_ende);
+                    mysqli_stmt_execute($stmt);
             }
-
         }
         
         //Wohnungsgeberbescheinigung im Anschluss erstellen

@@ -10,7 +10,7 @@ error_reporting(E_ALL);
 ?>
 
 <!-- Formular für Hausobjekt hinzufügen  -->
-<h2>Hausobjekt hinzuf�gen</h2>
+<h2>Hausobjekt hinzuf�gen</h2>
 
 <form enctype="multipart/form-data" action="includes/insert.inc.php" method="post">
     <p>
@@ -25,30 +25,30 @@ error_reporting(E_ALL);
         	<option value="6">Villa</option>
         	<option value="7">Bungalow</option>
         	<option value="8">Schloss</option>
-        	<option value="9">Wohn- und Gesch�ftsgebäude</option>
-        	<option value="10">Gesch�ftsgebäude</option>
+        	<option value="9">Wohn- und Gesch�ftsgebäude</option>
+        	<option value="10">Gesch�ftsgebäude</option>
         	<option value="11">andere</option>
       	</select> 
     </p>
     <p>
     <!-- Eigentümer auswählen aus Benutzertabelle  -->
     <label>Eigentümer:</label>
-    <select name="ho_eigentuemer">
+    	<select name="ho_eigentuemer">
     	<!-- "NULL", wenn kein Benutzer ausgewählt wurde --> 
-    	<option value="">-kein Eigentümer-</option>
-    <?php 
-    
+    		<option value="">-kein Eigentümer-</option>
+            <?php 
+                
             $sql = 'SELECT BenutzerID, Vorname, Name FROM benutzer';
             $result = mysqli_query($conn, $sql);
-            
+                        
             if (mysqli_num_rows($result) > 0) {
-                while($row = mysqli_fetch_assoc($result)) {
-                    echo '<option value="'.$row['BenutzerID'].'">'.$row['Vorname'].' '.$row['Name'].'</option>';
+              while($row = mysqli_fetch_assoc($result)) {
+                echo '<option value="'.$row['BenutzerID'].'">'.$row['Vorname'].' '.$row['Name'].'</option>';
                 }
             }
             ?>
-            </select>
-            </p>
+    	</select>
+    </p>
     <p>
         <label>Strasse:</label>
         <input type="text" name="ho_strasse" required>
@@ -86,9 +86,11 @@ error_reporting(E_ALL);
                 <input type="radio" id="ja" name="ho_versammlung" value="1">
                 <label for="ja">Ja</label> 
             </fieldset>
-    <button class="btn btn-secondary btn-lg" type="submit" name="hausobjekt_submit">Hausobjekt hinzuf�gen</button>
+    <button class="btn btn-secondary btn-lg" type="submit" name="hausobjekt_submit">Hausobjekt hinzuf�gen</button>
 </form>
 
-<?php }
+<?php 
 
+    }
+    
 ?>

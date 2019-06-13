@@ -6,42 +6,12 @@ if(isset($_SESSION['sessionid'])){
     
     ?>
 <!-- Formular fÃ¼r Zimmer -->
-    <h2>Zimmer hinzufügen</h2>
+    <h2>Zimmer hinzufï¿½gen</h2>
     <form enctype="multipart/form-data" action="includes/insert.inc.php" method="post">
     <p>
     <label>Verwaltungseinheit:</label>
     <input type="text" name="zm_verwaltungseinheit" value="<?php echo $_SESSION['objektid'] ?>" readonly>
     </p>
-    <!-- <p>
-      <label>Verwaltungseinheit auswÃ¤hlen:</label>
-    <select name="zm_verwaltungseinheit">
-            <?php 
-    
-//             $sql7 = "SELECT VerwID FROM verwaltungseinheit WHERE ObjektID = ?";
-//             $stmt = mysqli_stmt_init($conn);
-            
-//             if(!mysqli_stmt_prepare($stmt, $sql7)){
-//                 header("Location: ../add_zimmer.php?error=sqlerror");
-//                 exit();
-//             }else{
-//                 mysqli_stmt_bind_param($stmt, "i", $objektID_session);
-//                 mysqli_stmt_execute($stmt);
-//                 $result7 = mysqli_stmt_get_result($stmt);
-//                 if($row=mysqli_fetch_assoc($result7) > 0){
-//                     while($row = mysqli_fetch_assoc($result7)) {
-//                        echo '<option value="'.$row['VerwID'].'">'.$row['VerwID'].'</option>';
-//                     }
-//                 }
-//             }
-                
-//                 if (mysqli_num_rows($result7) > 0) {
-//                     while($row = mysqli_fetch_assoc($result7)) {
-//                         echo '<option value="'.$row['VerwID'].'">'.$row['VerwID'].'</option>';
-//                     }
-
-            ?>
-        </select>
-    </p> -->
     <p>
     	<label>Bezeichnung:</label>
       	<input type="text" name="zm_bezeichnung">
@@ -79,9 +49,11 @@ if(isset($_SESSION['sessionid'])){
     	<label>Installiert am:</label>
       	<input type="date" name="zm_rm_installiert">
     </p>  
-    <button class="btn btn-secondary btn-lg" type="submit" name="zimmer_submit">Zimmer hinzufügen</button>
+    <button class="btn btn-secondary btn-lg" type="submit" name="zimmer_submit">Zimmer hinzufï¿½gen</button>
 </form>
 
-<?php }
+<?php 
+
+    }
 
 ?>

@@ -114,6 +114,8 @@ if(!mysqli_stmt_prepare($stmt, $ve_objektID_sql)){
     <button class="btn btn-secondary btn-lg" type="submit" name="verwaltungseinheit_submit">Verwaltungseinheit hinzufügen</button>
 </form>
 
-<?php }
+<?php 
+    
+    }
 
 ?>
