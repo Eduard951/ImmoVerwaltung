@@ -297,7 +297,28 @@ if(isset($_POST['versammlung_einladung_submit'])){
                    
                     require 'vollmacht.php';
                     require '../versammlung_vorabptotokoll.php';
-                    $pdf->Output();
+                    //$pdf->Output();
+                   
+                    $sql_msg = "INSERT INTO nachrichten(SenderID,EmpfaengerID,Text,Datei) VALUES(?,?,?,?)";
+                    $stmt_test = mysqli_stmt_init($conn);
+                    
+                    if(mysqli_stmt_prepare($stmt_test, $sql_msg)){
+                        
+                        $content = $pdf->Output("S");
+                        
+                        $gruese = "Einladung Versammlung";
+                        //$l=1001;
+                        
+                        mysqli_stmt_bind_param($stmt_test, "iiss", $_SESSION['sessionid'],$empfaenger[$t][7],$gruese,$content);
+                        
+                        mysqli_stmt_execute($stmt_test);
+                        //require './pdf_templates/basic_pdf/pdf_ende.php';
+                        
+                        header("Location: ../versammlung_einladung.php?success");
+                    }else{
+                        header("Location: ../versammlung_einladung.php?errormsg");
+                    }
+                   
                 }else{
                     
                     
