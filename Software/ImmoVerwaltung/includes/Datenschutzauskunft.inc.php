@@ -37,4 +37,7 @@ if(isset($_POST["submi"])) {
         echo "<h4> Adresse:</h4> ".$s.$h.$p.$o."<br>";
 }
 }
-     echo "meine";?>
+     echo "meine";
+     echo" $n";
+     echo "$o";
+    ?>
