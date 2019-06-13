@@ -8,7 +8,7 @@
 	<div class=row>	<div class="col-md-offset-8 col-md-4 "><h2>Registrierung<span class="badge badge-secondary"></span></h2></div></div>
 		<form action="includes/signup.inc.php" method="post" class="col-md-offset-4 col-md-8">
 			
-			<input class="form-control " type="text" name="name" placeholder="Name..">
+			<input class="form-control " type="text" name="name" placeholder="Name.."> 
 			<br>
 			<input class="form-control  " type="text" name="nachname" placeholder="Nachname..">
 			<br>
