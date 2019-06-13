@@ -8,10 +8,10 @@ require "includes/dbh.inc.php";
 <?php  
 session_start();
 if(isset($_SESSION['sessionid'])){
-   
+ echo" <div class='container'>";  
 
-    echo' <form  method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" >
-<h3> Meine Daten Ansehen</h3></br>';
+    echo' <form   method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" >
+<div class="row"><h3 col-md-offset-2 col-md-5> Meine Daten Ansehen</h3></br></div>';
 //echo' <button type="submit" class="btn btn-success" name="submi "> </button>';
      
 
@@ -44,17 +44,38 @@ if(!mysqli_stmt_prepare($stmt, $sql)) {
         $hausnummer = $row['Hausnr'];
         $email = $row['Email'];
     }
-    echo "Name:" . "$vorname"." <br>";
-    echo "Vorname:" ."$nachname" ."<br>" ;
-    echo "Postleitzahl:" ."$plz" ."<br>";
-    echo "Ort:" ."$ort" ."<br>";
-    echo "Strasse:" ."$strasse" ."<br>";
-    echo "Hausnummer:" ."$hausnummer" ."<br>";
-    echo "E-Mail:" ."$email" ."<br>";
-     
+    echo '<div class="row">';
+   echo' <table class="table table-bordered table-striped table-condensed col-md-offset-2 col-md-5">';
+  echo' <caption>';
+   echo '<h4>Meine Daten</h4>';
+ echo'  </caption>';
+   echo '<tbody>';
+   echo '<tr>';
+   echo "<td>"."Name:" ."</td>". "<td>"."$vorname"." </td>";
+   echo '</tr>';
+   echo '<tr>';
+   echo "<td>"."Nachame:" ."</td>". "<td>"."$nachname"." </td>";
+   echo '</tr>';
+   echo '<tr>';
+   echo "<td>"."Postleitzahl:" ."</td>". "<td>"."$plz"." </td>";
+   echo '</tr>';
+   echo '<tr>';
+  echo "<td>"."Ort:" ."</td>". "<td>"."$ort"." </td>";
+  echo '</tr>';
+  echo '<tr>';
+   echo "<td>"."Srasse:" ."</td>". "<td>"."$strasse"." </td>";
+   echo '</tr>';
+   echo '<tr>';
+  echo "<td>"."Hausnummer:" ."</td>". "<td>"."$hausnummer"." </td>";
+  echo '</tr>';
+  echo '<tr>';
+  echo "<td>"."E-Mail:" ."</td>". "<td>"."$email"." </td>";
+  echo '</tr>';
+     echo '</table>';
+     echo '</div>';
 }
 
 echo'</form>';
-    
+echo'</div>';
 }
 ?>
