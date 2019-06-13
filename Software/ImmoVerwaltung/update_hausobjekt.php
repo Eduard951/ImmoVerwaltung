@@ -48,42 +48,174 @@
             }
         }
         
-        if ($ho_typ == 0) {
+        if ($ho_typ == "Einfamilienhaus") {
             $enum = 0;
-            $enum_text = "Einfamilienhaus"; 
-        } elseif ($ho_typ == 1) {
+            $enum_text = '<option selected="selected" value="1">Einfamilienhaus</option>
+        	<option value="2">Zweifamilienhaus</option>
+        	<option value="3">Doppelhaus</option>
+        	<option value="4">Reihenhaus</option>
+        	<option value="5">Mehrfamilienhaus</option>
+        	<option value="6">Wohnhochhaus</option>
+        	<option value="7">Villa</option>
+        	<option value="8">Bungalow</option>
+        	<option value="9">Schloss</option>
+        	<option value="10">Wohn- und Geschäftsgebäude</option>
+        	<option value="11">Geschäftsgebäude</option>
+        	<option value="12">andere</option>'; 
+        } elseif ($ho_typ == "Zweifamilienhaus") {
             $enum = 1;
-            $enum_text = "Zweifamilienhaus"; 
-        } elseif ($ho_typ == 2) {
+            $enum_text = '<option value="0">Einfamilienhaus</option>
+        	<option selected="selected" value="2">Zweifamilienhaus</option>
+        	<option value="3">Doppelhaus</option>
+        	<option value="4">Reihenhaus</option>
+        	<option value="5">Mehrfamilienhaus</option>
+        	<option value="6">Wohnhochhaus</option>
+        	<option value="7">Villa</option>
+        	<option value="8">Bungalow</option>
+        	<option value="9">Schloss</option>
+        	<option value="10">Wohn- und Geschäftsgebäude</option>
+        	<option value="11">Geschäftsgebäude</option>
+        	<option value="12">andere</option>'; 
+        } elseif ($ho_typ == "Doppelhaus") {
             $enum = 2;
-            $enum_text = "Doppelhaus"; 
-        } elseif ($ho_typ == 3) {
+            $enum_text = '<option value="0">Einfamilienhaus</option>
+        	<option value="2">Zweifamilienhaus</option>
+        	<option selected="selected" value="3">Doppelhaus</option>
+        	<option value="4">Reihenhaus</option>
+        	<option value="5">Mehrfamilienhaus</option>
+        	<option value="6">Wohnhochhaus</option>
+        	<option value="7">Villa</option>
+        	<option value="8">Bungalow</option>
+        	<option value="9">Schloss</option>
+        	<option value="10">Wohn- und Geschäftsgebäude</option>
+        	<option value="11">Geschäftsgebäude</option>
+        	<option value="12">andere</option>';
+        } elseif ($ho_typ == "Reihenhaus") {
             $enum = 3;
-            $enum_text = "Reihenhaus";
-        } elseif ($ho_typ == 4) {
+            $enum_text = '<option value="0">Einfamilienhaus</option>
+        	<option value="2">Zweifamilienhaus</option>
+        	<option value="3">Doppelhaus</option>
+        	<option selected="selected" value="4">Reihenhaus</option>
+        	<option value="5">Mehrfamilienhaus</option>
+        	<option value="6">Wohnhochhaus</option>
+        	<option value="7">Villa</option>
+        	<option value="8">Bungalow</option>
+        	<option value="9">Schloss</option>
+        	<option value="10">Wohn- und Geschäftsgebäude</option>
+        	<option value="11">Geschäftsgebäude</option>
+        	<option value="12">andere</option>';
+        } elseif ($ho_typ == "Mehrfamilienhaus") {
             $enum = 4;
-            $enum_text = "Mehrfamilienhaus";
-        } elseif ($ho_typ == 5) {
+            $enum_text = '<option value="0">Einfamilienhaus</option>
+        	<option value="2">Zweifamilienhaus</option>
+        	<option value="3">Doppelhaus</option>
+        	<option value="4">Reihenhaus</option>
+        	<option selected="selected" value="5">Mehrfamilienhaus</option>
+        	<option value="6">Wohnhochhaus</option>
+        	<option value="7">Villa</option>
+        	<option value="8">Bungalow</option>
+        	<option value="9">Schloss</option>
+        	<option value="10">Wohn- und Geschäftsgebäude</option>
+        	<option value="11">Geschäftsgebäude</option>
+        	<option value="12">andere</option>';
+        } elseif ($ho_typ == "Wohnhochhaus") {
             $enum = 5;
-            $enum_text = "Wohnhochhaus";
-        } elseif ($ho_typ == 6) {
+            $enum_text = '<option value="0">Einfamilienhaus</option>
+        	<option value="2">Zweifamilienhaus</option>
+        	<option value="3">Doppelhaus</option>
+        	<option value="4">Reihenhaus</option>
+        	<option value="5">Mehrfamilienhaus</option>
+        	<option selected="selected" value="6">Wohnhochhaus</option>
+        	<option value="7">Villa</option>
+        	<option value="8">Bungalow</option>
+        	<option value="9">Schloss</option>
+        	<option value="10">Wohn- und Geschäftsgebäude</option>
+        	<option value="11">Geschäftsgebäude</option>
+        	<option value="12">andere</option>';
+        } elseif ($ho_typ == "Villa") {
             $enum = 6;
-            $enum_text = "Villa";
-        } elseif ($ho_typ == 7) {
+            $enum_text = '<option value="0">Einfamilienhaus</option>
+        	<option value="2">Zweifamilienhaus</option>
+        	<option value="3">Doppelhaus</option>
+        	<option value="4">Reihenhaus</option>
+        	<option value="5">Mehrfamilienhaus</option>
+        	<option value="6">Wohnhochhaus</option>
+        	<option selected="selected" value="7">Villa</option>
+        	<option value="8">Bungalow</option>
+        	<option value="9">Schloss</option>
+        	<option value="10">Wohn- und Geschäftsgebäude</option>
+        	<option value="11">Geschäftsgebäude</option>
+        	<option value="12">andere</option>';
+        } elseif ($ho_typ == "Bungalow") {
             $enum = 7;
-            $enum_text = "Bungalow";
-        } elseif ($ho_typ == 8) {
+            $enum_text = '<option value="0">Einfamilienhaus</option>
+        	<option value="2">Zweifamilienhaus</option>
+        	<option value="3">Doppelhaus</option>
+        	<option value="4">Reihenhaus</option>
+        	<option value="5">Mehrfamilienhaus</option>
+        	<option value="6">Wohnhochhaus</option>
+        	<option value="7">Villa</option>
+        	<option selected="selected" value="8">Bungalow</option>
+        	<option value="9">Schloss</option>
+        	<option value="10">Wohn- und Geschäftsgebäude</option>
+        	<option value="11">Geschäftsgebäude</option>
+        	<option value="12">andere</option>';
+        } elseif ($ho_typ == "Schloss") {
             $enum = 8;
-            $enum_text = "Schloss";
-        } elseif ($ho_typ == 9) {
+            $enum_text = '<option value="0">Einfamilienhaus</option>
+        	<option value="2">Zweifamilienhaus</option>
+        	<option value="3">Doppelhaus</option>
+        	<option value="4">Reihenhaus</option>
+        	<option value="5">Mehrfamilienhaus</option>
+        	<option value="6">Wohnhochhaus</option>
+        	<option value="7">Villa</option>
+        	<option value="8">Bungalow</option>
+        	<option selected="selected" value="9">Schloss</option>
+        	<option value="10">Wohn- und Geschäftsgebäude</option>
+        	<option value="11">Geschäftsgebäude</option>
+        	<option value="12">andere</option>';
+        } elseif ($ho_typ == "Wohn- und Geschäftsgebäude") {
             $enum = 9;
-            $enum_text = "Wohn- und Geschäftsgebäude";
-        } elseif ($ho_typ == 10) {
+            $enum_text = '<option value="0">Einfamilienhaus</option>
+        	<option value="2">Zweifamilienhaus</option>
+        	<option value="3">Doppelhaus</option>
+        	<option value="4">Reihenhaus</option>
+        	<option value="5">Mehrfamilienhaus</option>
+        	<option value="6">Wohnhochhaus</option>
+        	<option value="7">Villa</option>
+        	<option value="8">Bungalow</option>
+        	<option value="9">Schloss</option>
+        	<option selected="selected" value="10">Wohn- und Geschäftsgebäude</option>
+        	<option value="11">Geschäftsgebäude</option>
+        	<option value="12">andere</option>';
+        } elseif ($ho_typ == "Geschäftsgebäude") {
             $enum = 10;
-            $enum_text = "Geschäftsgebäude";
-        } elseif ($ho_typ == 11) {
+            $enum_text = '<option value="0">Einfamilienhaus</option>
+        	<option value="2">Zweifamilienhaus</option>
+        	<option value="3">Doppelhaus</option>
+        	<option value="4">Reihenhaus</option>
+        	<option value="5">Mehrfamilienhaus</option>
+        	<option value="6">Wohnhochhaus</option>
+        	<option value="7">Villa</option>
+        	<option value="8">Bungalow</option>
+        	<option value="9">Schloss</option>
+        	<option value="10">Wohn- und Geschäftsgebäude</option>
+        	<option selected="selected" value="11">Geschäftsgebäude</option>
+        	<option value="12">andere</option>';
+        } elseif ($ho_typ == "andere") {
             $enum = 11;
-            $enum_text = "andere";
+            $enum_text = '<option value="0">Einfamilienhaus</option>
+        	<option value="2">Zweifamilienhaus</option>
+        	<option value="3">Doppelhaus</option>
+        	<option value="4">Reihenhaus</option>
+        	<option value="5">Mehrfamilienhaus</option>
+        	<option value="6">Wohnhochhaus</option>
+        	<option value="7">Villa</option>
+        	<option value="8">Bungalow</option>
+        	<option value="9">Schloss</option>
+        	<option value="10">Wohn- und Geschäftsgebäude</option>
+        	<option value="11">Geschäftsgebäude</option>
+        	<option selected="selected" value="12">andere</option>';
         }
         
 ?>
@@ -91,22 +223,15 @@
 <h2>Hausobjekt bearbeiten</h2>
 
 <form enctype="multipart/form-data" action="includes/update.inc.php" method="post">
+	<p>
+	<label>ID:</label>
+	<input type="text" name="ho_objektid" value="<?php echo $ve_objektID; ?>" readonly>
+	</p>
     <p>
     	<label>Typ:</label>
       	<select name="ho_typ">
-            <option selected="selected" value="<?php echo $enum; ?>"><?php echo $enum_text; ?></option>
-            <option value="0">Einfamilienhaus</option>
-        	<option value="1">Zweifamilienhaus</option>
-        	<option value="2">Doppelhaus</option>
-        	<option value="3">Reihenhaus</option>
-        	<option value="4">Mehrfamilienhaus</option>
-        	<option value="5">Wohnhochhaus</option>
-        	<option value="6">Villa</option>
-        	<option value="7">Bungalow</option>
-        	<option value="8">Schloss</option>
-        	<option value="9">Wohn- und Geschäftsgebäude</option>
-        	<option value="10">Geschäftsgebäude</option>
-        	<option value="11">andere</option>
+            <?php echo $enum_text; ?>
+            
       	</select> 
     </p>
     <p>

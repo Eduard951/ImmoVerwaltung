@@ -13,7 +13,7 @@ error_reporting(E_ALL);
 session_start();
 
 //Hausobjekt einfügen
-if(isset($_POST['hausobjekt_submit'])){
+if(isset($_POST['ho_update_submit'])){
     
     //Hochgeladene Dateien speichern und verschieben
     $uploaddir = '../uploads/';
@@ -39,6 +39,7 @@ if(isset($_POST['hausobjekt_submit'])){
         }
     }
 
+    $ho_objektid = $_POST['ho_objektid'];
     $ho_kommentar = $_POST['ho_kommentar'];
     $ho_besitzer = $_POST['ho_eigentuemer'];
     $ho_typ = $_POST['ho_typ'];
@@ -48,80 +49,54 @@ if(isset($_POST['hausobjekt_submit'])){
     $ho_plz = $_POST['ho_plz'];
     $ho_ort = $_POST['ho_ort'];
 
-    $ho_ve_kommentar = "Hauptverwaltungseinheit";
-    $ho_ve_typ = 10;
     $null = NULL;
     
     //Adresse muss ausgefüllt sein
-//     if(empty($ho_strasse) || empty($ho_hausnr) || empty($ho_plz) || empty($ho_ort)){
-//         header("Location: ../add_hausobjekt.php?error=emptyfields");
-//         exit();
-//     }
+    if(empty($ho_strasse) || empty($ho_hausnr) || empty($ho_plz) || empty($ho_ort)){
+        header("Location: ../update_hausobjekt.php?error=emptyfields");
+        exit();
+    }
     
-//     else{
+    else{
         //Hauptbefehl
-        $ho_sql = "INSERT INTO hausobjekt (Kommentar, Besitzer, Typ, Lageplan, Bauplan, Versammlung, Strasse, Hausnr, PLZ, Ort) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-        //Hole letzte ObjektID
-        $ho_sql_select ="SELECT * FROM hausobjekt ORDER BY ObjektID DESC LIMIT 1";
-        //Füge zusätzlich in die Tabelle verwaltungseinheit eine übergeordnete VE ein
-        $ho_sql_verw ="INSERT INTO verwaltungseinheit (ObjektID, Kommentar, Besitzer, Wohnflaeche, Typ, Bauplan, VS_Muell, VS_Aufzug, VS_Eigentumsanteil, VS_Verwaltergebuehr) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $ho_update_sql = "UPDATE hausobjekt SET Kommentar = ?, Besitzer= ?, Typ = ?, Lageplan = ?, Bauplan = ?, Versammlung = ?, Strasse = ?, Hausnr = ?, PLZ = ?, Ort = ? WHERE ObjektID = ?";
         
         $stmt = mysqli_stmt_init($conn);
         
         //TODO: es kommt nie ein SQL-Error (?)
-        if(!mysqli_stmt_prepare($stmt, $ho_sql)){
-            header("Location: ../add_hausobjekt.php?error=sqlerror");
+        if(!mysqli_stmt_prepare($stmt, $ho_update_sql)){
+            header("Location: ../update_hausobjekt.php?error=update_sqlerror");
             exit();
             
         }else{
             //Hausobjekt einfügen, wenn Kommentarfeld leer ist und Eigentümer nicht angegeben wurde
             if(empty($ho_kommentar)){
                 if(empty($ho_besitzer)){
-                    mysqli_stmt_bind_param($stmt, "sisbbissss", $null, $null, $ho_typ, $ho_lageplan, $ho_bauplan, $ho_versammlung, $ho_strasse, $ho_hausnr, $ho_plz, $ho_ort);
+                    mysqli_stmt_bind_param($stmt, "sisbbissssi", $null, $null, $ho_typ, $ho_lageplan, $ho_bauplan, $ho_versammlung, $ho_strasse, $ho_hausnr, $ho_plz, $ho_ort, $ho_objektid);
                     mysqli_stmt_execute($stmt);  
                 //Kommentar leer, Eigentümer ausgewählt
                 }else{
-                    mysqli_stmt_bind_param($stmt, "sisbbissss", $null, $ho_besitzer, $ho_typ, $ho_lageplan, $ho_bauplan, $ho_versammlung, $ho_strasse, $ho_hausnr, $ho_plz, $ho_ort);
+                    mysqli_stmt_bind_param($stmt, "sisbbissssi", $null, $ho_besitzer, $ho_typ, $ho_lageplan, $ho_bauplan, $ho_versammlung, $ho_strasse, $ho_hausnr, $ho_plz, $ho_ort, $ho_objektid);
                     mysqli_stmt_execute($stmt);
                 }
                     
             }else{
                 //Kommentar angegeben, Eigentümer nicht
                 if(empty($ho_besitzer)){
-                    mysqli_stmt_bind_param($stmt, "sisbbissss", $ho_kommentar, $null, $ho_typ, $ho_lageplan, $ho_bauplan, $ho_versammlung, $ho_strasse, $ho_hausnr, $ho_plz, $ho_ort);
+                    mysqli_stmt_bind_param($stmt, "sisbbissssi", $ho_kommentar, $null, $ho_typ, $ho_lageplan, $ho_bauplan, $ho_versammlung, $ho_strasse, $ho_hausnr, $ho_plz, $ho_ort, $ho_objektid);
                     mysqli_stmt_execute($stmt);  
                 //Kommentar und Eigentümer angegeben
                 }else{
-                    mysqli_stmt_bind_param($stmt, "sisbbissss", $ho_kommentar, $ho_besitzer, $ho_typ, $ho_lageplan, $ho_bauplan, $ho_versammlung, $ho_strasse, $ho_hausnr, $ho_plz, $ho_ort);
+                    mysqli_stmt_bind_param($stmt, "sisbbissssi", $ho_kommentar, $ho_besitzer, $ho_typ, $ho_lageplan, $ho_bauplan, $ho_versammlung, $ho_strasse, $ho_hausnr, $ho_plz, $ho_ort, $ho_objektid);
                     mysqli_stmt_execute($stmt); 
                 }
             }
-            //Gerade hinzugefügte ObjektID holen
-//             $result_select = mysqli_query($conn, $ho_sql_select);
-//             if($row=mysqli_fetch_assoc($result_select)){  
-//                     $objektID_temp = $row['ObjektID'];
-//                 }
-            $objektID_temp = mysqli_insert_id($conn);
-            $stmt = mysqli_stmt_init($conn);
-                //Mit ObjektID in Verwaltungseinheit einsetzen
-                if(!mysqli_stmt_prepare($stmt, $ho_sql_verw)){
-                    header("Location: ../add_hausobjekt.php?error=add_ve_sqlerror");
-                    exit();
-                }else{
-                    if(empty($ho_besitzer)){
-                        mysqli_stmt_bind_param($stmt, "isidsbiiii", $objektID_temp, $ho_ve_kommentar, $null, $null, $ho_ve_typ, $ho_bauplan, $null, $null, $null, $null,);
-                    mysqli_stmt_execute($stmt);
-                    }else{
-                        mysqli_stmt_bind_param($stmt, "isidsbiiii", $objektID_temp, $ho_ve_kommentar, $ho_besitzer, $null, $ho_ve_typ, $ho_bauplan, $null, $null, $null, $null);
-                    mysqli_stmt_execute($stmt);
-                    }
-                }
                
-            header("Location: ../add_hausobjekt.php?insert=success");
+            header("Location: ../update_hausobjekt.php?insert=success");
             exit();
         }
     }
-// }
+}
 // ##############################################################################################################################
 
 if(isset($_POST['verwaltungseinheit_submit'])){
