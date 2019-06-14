@@ -50,6 +50,7 @@ if(isset($_POST["submitt"]))
         
     }
     echo '<div class="container">';
+    echo '<form>';
     echo '<div class="row">';
     echo' <table class="table table-bordered table-striped table-condensed col-md-offset-2 col-md-8">';
     
@@ -57,13 +58,11 @@ if(isset($_POST["submitt"]))
     echo '<tr>';
     echo "<td>"."$p" ."</td>". "<td>"."$a"." </td>";
     echo '</tr>';
-    echo '<tr>';
-    echo "<td>"."$p" ."</td>". "<td>"."$a"." </td>";
-    echo '</tr>';
+   
     echo '</tbody>';
     echo '</table>';
     echo '</div>';
-    
+    echo '</form>';
     echo '</div>';
 }
 
