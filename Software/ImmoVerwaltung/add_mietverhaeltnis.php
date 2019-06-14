@@ -2,26 +2,17 @@
     require 'header.php';
     require 'includes/dbh.inc.php';
     if(isset($_SESSION['sessionid'])){
+        
+        $verwID = $_SESSION['objektid'];
+        
 ?>
 
 <!-- Mietverhältnis Formular -->
 <h2>Mietverhältnis hinzufügen</h2>
 <form enctype="multipart/form-data" action="includes/insert.inc.php" method="post">
 	<p>
-        <label>Verwaltungseinheit auswählen:</label>
-        <select name="mv_verwaltungseinheit">
-            <?php 
-    
-            $sql4 = 'SELECT VerwID FROM verwaltungseinheit';
-            $result4 = mysqli_query($conn, $sql4);
-            
-            if (mysqli_num_rows($result4) > 0) {
-                while($row = mysqli_fetch_assoc($result4)) {
-                    echo '<option value="'.$row['VerwID'].'">'.$row['VerwID'].'</option>';
-                }
-            }
-            ?>
-        </select>
+        <label>Verwaltungseinheit:</label>
+        <input type="text" name="mv_verwaltungseinheit" value="<?php echo $verwID;?>" readonly>  
     </p>
     <p>
     	<label>Vermieter auswählen:</label>
