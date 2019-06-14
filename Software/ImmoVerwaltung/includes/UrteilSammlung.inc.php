@@ -56,7 +56,7 @@ if(isset($_POST["submitt"]))
     
     echo '<tbody>';
     echo '<tr>';
-    echo "<td>"."$p" ."</td>". "<td>"."$a"." </td>";
+    echo "<td>"."<h4>"."$p" ."</h4>"."</td>". "<td>"."<h5>"."$a"."</h5>"." </td>";
     echo '</tr>';
    
     echo '</tbody>';
