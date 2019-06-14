@@ -113,7 +113,7 @@ if(isset($_POST['mahnung_submit'])){
 						
                         
 							header("Location: ../mahnung.php?success");
-							
+			}
 							else{
 								$sql_update ="UPDATE mahnung SET Aktiv = false WHERE AnBenutzerID = $empfaenger_id";
 								$stmt_update = mysqli_stmt_init($conn);
