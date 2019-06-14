@@ -43,14 +43,24 @@ if(isset($_POST["submitt"]))
    
     while ($row=mysqli_fetch_array($query ) )
     {
-        echo $row["Text"]    ;
+     
+        $a= $row["Text"]    ;
        
         
     }
+    echo '<div class="container>';
+    echo '<div class="row">';
+    echo' <table class="table table-bordered table-striped table-condensed col-md-offset-2 col-md-8">';
     
+    echo '<tbody>';
+    echo '<tr>';
+    echo "<td>"."$p" ."</td>". "<td>"."$a"." </td>";
+    echo '</tr>';
+    echo '</tbody>';
+    echo '</table>';
+    echo '</div>';
     
-    
-   
+    echo '</div>';
 }
 
 
