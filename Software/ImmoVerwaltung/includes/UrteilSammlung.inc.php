@@ -62,7 +62,7 @@ if(isset($_POST["submitt"]))
     echo '</tbody>';
     echo '</table>';
     echo '</div>';
-    echo '</form>';
+    echo '</form>'; 
     echo '</div>';
 }
 
