@@ -34,6 +34,7 @@ if(isset($_POST["submit"]))
 if(isset($_POST["submitt"]))
 
 {
+    echo '<div class="container">';
     $p=$_POST["non"];
    
     $query=mysqli_query($conn," select * from urteilsammlung where stichwort='$p'");
@@ -48,7 +49,7 @@ if(isset($_POST["submitt"]))
        
         
     }
-    echo '<div class="container>';
+   
     echo '<div class="row">';
     echo' <table class="table table-bordered table-striped table-condensed col-md-offset-2 col-md-8">';
     
